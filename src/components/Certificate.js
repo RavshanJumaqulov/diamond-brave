@@ -22,7 +22,7 @@ export default function Certificate() {
             fontSize: 14,
             fontWeight: 700,
             fontFamily: "Nunito, sans-serif",
-            textAlign: { xs: "center", md: "left" },
+            textAlign: 'left',
           }}
           color="text.secondary"
         >
@@ -34,7 +34,7 @@ export default function Certificate() {
             flexDirection: { xs: "column", md: "row" },
             width: "100%",
             alignItems: {
-              xs: "center",
+              xs: "start",
               md: "center",
             },
             justifyContent: { xs: "space-between", md: "space-between" },
@@ -42,11 +42,12 @@ export default function Certificate() {
         >
           <Typography
             sx={{
-              fontSize: { xs: 32, sm: 40, md: 44, lg: 48 },
+              fontSize: { xs: 'calc(1.3125rem + 0.75vw)', lg: 30 },
               fontWeight: 700,
               fontFamily: "Nunito, sans-serif",
               color: "#011a41",
-              my: 3,
+              mb: 3,
+              mt: 2
             }}
           >
             Bizning sertefikatlarimiz

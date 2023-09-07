@@ -5,8 +5,9 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import ProductsSlider from "./ProductsSlider";
 import CreativeCarausel from "./CreativeCarausel";
+import BestNewsSlider from "./BestNewsSlider";
 
-export default function ProductsContainer() {
+export default function BestNewsContainer() {
   const [sort, setSort] = useState("latest");
   return (
     <Box
@@ -123,7 +124,7 @@ export default function ProductsContainer() {
       </Stack>
       <Grid2 container sx={{ mt: 2, width: "100%", height: "100%" }}>
         <Grid2 xs={12} sm={7} md={9} lg={10} >
-          <ProductsSlider />
+          <BestNewsSlider />
         </Grid2>
         <Grid2 xs={12} sm={5} md={3} lg={2} >
           <Box  sx={{ width: "100%", height: "100%", p: 1 }}>

@@ -4,8 +4,10 @@ import Slider from "react-slick/lib/slider";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CarauselItem from "./CarauselItem";
 import ProductSliderItem from "./ProductSliderItem";
+import BestNewsSliderItem from "./BestNewsSliderItem";
 
-export default function ProductsSlider() {
+export default function BestNewsSlider
+() {
   const [width, setWidth] = useState(window.innerWidth);
   const [height, setHeight] = useState(window.innerHeight);
   const [img, setImg] = useState("");
@@ -157,11 +159,11 @@ export default function ProductsSlider() {
         </Fab>
       </Box>
       <Slider ref={arrowRef} {...settings} style={{ width: "100%" }}>
-        <ProductSliderItem width={width} setImg={setImg} />
-        <ProductSliderItem width={width} setImg={setImg} />
-        <ProductSliderItem width={width} setImg={setImg} />
-        <ProductSliderItem width={width} setImg={setImg} />
-        <ProductSliderItem width={width} setImg={setImg} />
+        <BestNewsSliderItem width={width} setImg={setImg} />
+        <BestNewsSliderItem width={width} setImg={setImg} />
+        <BestNewsSliderItem width={width} setImg={setImg} />
+        <BestNewsSliderItem width={width} setImg={setImg} />
+        <BestNewsSliderItem width={width} setImg={setImg} />
       </Slider>
     </Box>
   );

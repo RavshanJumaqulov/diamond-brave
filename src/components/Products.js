@@ -22,7 +22,7 @@ export default function Products() {
             fontSize: 14,
             fontWeight: 700,
             fontFamily: "Nunito, sans-serif",
-            textAlign: { xs: "center", md: "left" },
+            textAlign: "left",
           }}
           color="text.secondary"
         >

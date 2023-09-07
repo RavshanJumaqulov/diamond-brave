@@ -30,7 +30,7 @@ export default function CarauselItem(props) {
         <Typography
           sx={{
             fontFamily: "Nunito, sans-serif",
-            fontSize: { sm: 24, md: 40 },
+            fontSize: { xs: 'calc(1.3125rem + 0.75vw)', lg: 30 },
             fontWeight: 700,
             maxWidth: { xs: 0, sm: 370, md: 500, lg: 600 },
             textAlign: props.index % 2 == 1 ? "left" : "right",

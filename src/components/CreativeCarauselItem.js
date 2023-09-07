@@ -19,7 +19,7 @@ export default function CreativeCarauselItem(props) {
         sx={{
           width: "100%",
           minHeight: "100%",
-          maxHeight: "100%",
+          maxHeight: 350,
           objectFit: "cover",
           borderRadius: 3
         }}
