@@ -11,10 +11,9 @@ import {
 import React, { useEffect, useRef, useState } from "react";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
-import StarIcon from '@mui/icons-material/Star';
+import StarIcon from "@mui/icons-material/Star";
 
-
-export default function ProductSliderItem({ width, setImg }) {
+export default function ProductSliderItem({ width, setImg, img, title }) {
   const [open, setOpen] = React.useState(true);
   const imgRef = useRef(null);
   const [imgWidth, setImgWidth] = useState(0);
@@ -52,7 +51,7 @@ export default function ProductSliderItem({ width, setImg }) {
         >
           <Box
             component={"img"}
-            src="/products/1.png"
+            src={img}
             sx={{
               width: "100%",
               minHeight: imgWidth,
@@ -65,8 +64,8 @@ export default function ProductSliderItem({ width, setImg }) {
               width: "100%",
               position: "absolute",
               bottom: 0,
-              transform: {xs: "translateY(0px)", md: "translateY(50px)"},
-              opacity: {xs: 1, md: 0},
+              transform: { xs: "translateY(0px)", md: "translateY(50px)" },
+              opacity: { xs: 1, md: 0 },
               transition: "0.3s all",
               display: "flex",
               justifyContent: "center",
@@ -78,22 +77,17 @@ export default function ProductSliderItem({ width, setImg }) {
                 width: "90%",
                 height: 50,
                 borderRadius: 3,
-                background: {xs: "rgba(0, 0, 0, 0.1)", md: "rgba(0, 0, 0, 0.2)"},
+                background: {
+                  xs: "rgba(0, 0, 0, 0.1)",
+                  md: "rgba(0, 0, 0, 0.2)",
+                },
                 display: "flex",
                 flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "space-around",
               }}
             >
-              <Fab
-                onClick={() =>
-                  setImg(
-                    "https://wp.alithemes.com/html/nest/demo-rtl/assets/imgs/shop/product-2-2.jpg"
-                  )
-                }
-                size="small"
-                elevation={0}
-              >
+              <Fab onClick={() => setImg(img)} size="small" elevation={0}>
                 <FullscreenIcon
                   sx={{
                     width: 35,
@@ -108,15 +102,7 @@ export default function ProductSliderItem({ width, setImg }) {
                   }}
                 />
               </Fab>
-              <Fab
-                onClick={() =>
-                  setImg(
-                    "https://wp.alithemes.com/html/nest/demo-rtl/assets/imgs/shop/product-2-2.jpg"
-                  )
-                }
-                size="small"
-                elevation={0}
-              >
+              <Fab onClick={() => setImg(img)} size="small" elevation={0}>
                 <AssignmentOutlinedIcon
                   sx={{
                     width: 35,
@@ -148,16 +134,17 @@ export default function ProductSliderItem({ width, setImg }) {
               WebkitBoxOrient: "vertical",
             }}
           >
-            Fortress
+            {title}
           </Typography>
-          <Stack direction={"row"} sx={{alignItems: 'center', justifyContent: 'space-between'}}>
+          <Stack
+            direction={"row"}
+            sx={{ alignItems: "center", justifyContent: "space-between" }}
+          >
             <Rating
               defaultValue={4.7}
               precision={0.1}
               readOnly
-              emptyIcon={
-                <StarIcon style={{ opacity: 0.55 }} fontSize="16px" />
-              }
+              emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="16px" />}
             />
             <Typography
               sx={{
@@ -188,9 +175,9 @@ export default function ProductSliderItem({ width, setImg }) {
             textTransform: "capitalize",
             fontSize: 16,
             fontWeight: 700,
-            '&:hover': {
-              background: '#00aa67'
-            }
+            "&:hover": {
+              background: "#00aa67",
+            },
           }}
         >
           Batafsil

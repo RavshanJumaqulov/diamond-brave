@@ -4,8 +4,10 @@ import Slider from "react-slick/lib/slider";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CarauselItem from "./CarauselItem";
 import ProductSliderItem from "./ProductSliderItem";
+import { useSelector } from "react-redux";
 
 export default function ProductsSlider() {
+  const products = useSelector(state => state.products)
   const [width, setWidth] = useState(window.innerWidth);
   const [height, setHeight] = useState(window.innerHeight);
   const [img, setImg] = useState("");
@@ -16,11 +18,9 @@ export default function ProductsSlider() {
     setWidth(window.innerWidth);
     setHeight(window.innerHeight);
   });
-  console.log(width);
 
   const settings = {
     dots: true,
-    // fade: true,
     infinite: true,
     speed: 1000,
     autoplay: true,
@@ -98,7 +98,7 @@ export default function ProductsSlider() {
         >
           <Box
             component={"img"}
-            src="https://wp.alithemes.com/html/nest/demo-rtl/assets/imgs/shop/product-2-2.jpg"
+            src={img}
             sx={{
               width: height > width ? "90%" : "auto",
               height: height < width ? "90%" : "auto",
@@ -157,11 +157,13 @@ export default function ProductsSlider() {
         </Fab>
       </Box>
       <Slider ref={arrowRef} {...settings} style={{ width: "100%" }}>
-        <ProductSliderItem width={width} setImg={setImg} />
-        <ProductSliderItem width={width} setImg={setImg} />
-        <ProductSliderItem width={width} setImg={setImg} />
-        <ProductSliderItem width={width} setImg={setImg} />
-        <ProductSliderItem width={width} setImg={setImg} />
+        {
+          products.map(el => {
+            return (
+              <ProductSliderItem width={width} setImg={setImg} title={el.name} img={el.img} />
+            )
+          })
+        }
       </Slider>
     </Box>
   );

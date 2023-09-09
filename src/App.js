@@ -1,57 +1,41 @@
-import {
-  AppBar,
-  Box,
-  Button,
-  Container,
-  CssBaseline,
-  IconButton,
-  ThemeProvider,
-  Toolbar,
-  Typography,
-  createTheme,
-} from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import React from "react";
+import { Box, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import React, { useState } from "react";
 import Header from "./components/Header";
-import Carausel from "./components/Carausel";
-import { BrowserRouter, Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import AllRoutes from "./AllRoutes";
 import { Provider } from "react-redux";
 import Context from "./Context";
 import Footer from "./components/Footer";
+import store from "./redux/store";
 
-
-const theme = () => createTheme({
-  palette: {
-    yashil: {
-      main: '#3bb77e'
-    }
-  }
-})
-const navItems = ["Home", "About", "Contact"];
+const theme = () =>
+  createTheme({
+    palette: {
+      yashil: {
+        main: "#3bb77e",
+      },
+    },
+  });
 function App() {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen((prevState) => !prevState);
-  };
-  
+  const [width, setWidth] = useState(window.innerWidth);
+  window.addEventListener("resize", () => {
+    setWidth(window.innerWidth);
+  });
   return (
-    <ThemeProvider theme={theme}>
-
-    <Context.Provider value={{
-      
-    }}>
-      <Box>
-        <BrowserRouter>
-          <CssBaseline />
-          <Header />
-          <AllRoutes />
-          <Footer />
-        </BrowserRouter>
-      </Box>
+    <Context.Provider value={{ width }}>
+      <Provider store={store}>
+        <ThemeProvider theme={theme()}>
+          <Box>
+            <BrowserRouter>
+              <CssBaseline />
+              <Header />
+              <AllRoutes />
+              <Footer />
+            </BrowserRouter>
+          </Box>
+        </ThemeProvider>
+      </Provider>
     </Context.Provider>
-      </ThemeProvider>
   );
 }
 

@@ -10,10 +10,10 @@ import Certificate from "../components/Certificate";
 export default function Home() {
   return (
     <Box sx={{ position: "relative" }}>
-      <Carausel />
       <Background />
       <Container maxWidth="xl">
-        <About />
+        <Carausel />
+        {/* <About /> */}
         <Products />
         <Blog />
         <Certificate />

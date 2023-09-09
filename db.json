@@ -1,0 +1,74 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "name": "Alleran DB",
+            "img": "/products/alleran.png"
+        },
+        {
+            "id": 2,
+            "name": "Laktopik DB",
+            "img": "/products/laktopik.png"
+        },
+        {
+            "id": 3,
+            "name": "Detriakso kids",
+            "img": "/products/detriakso.png"
+        },
+        {
+            "id": 4,
+            "name": "Diafort D3",
+            "img": "/products/diafort.png"
+        },
+        {
+            "id": 5,
+            "name": "Florin DB",
+            "img": "/products/florin.png"
+        },
+        {
+            "id": 6,
+            "name": "Florsink",
+            "img": "/products/florsink.png"
+        },
+        {
+            "id": 7,
+            "name": "Fortres",
+            "img": "/products/fortres.png"
+        },
+        {
+            "id": 8,
+            "name": "Livarsen",
+            "img": "/products/livarsen.png"
+        },
+        {
+            "id": 9,
+            "name": "Maksvit",
+            "img": "/products/maksvit.png"
+        },
+        {
+            "id": 10,
+            "name": "MigsonBEST",
+            "img": "/products/migsonbest.png"
+        },
+        {
+            "id": 11,
+            "name": "Oksimag",
+            "img": "/products/oksimag.png"
+        },
+        {
+            "id": 12,
+            "name": "Okumiks",
+            "img": "/products/okumiks.png"
+        },
+        {
+            "id": 13,
+            "name": "Orlan",
+            "img": "/products/orlan.png"
+        },
+        {
+            "id": 14,
+            "name": "Strolang",
+            "img": "/products/strolang.png"
+        }
+    ]
+}

@@ -28,7 +28,7 @@ export default function Footer() {
     >
       <Container maxWidth="xl">
         <Grid2 container spacing={2}>
-          <Grid2 sx={12} sm={6} md={3}>
+          <Grid2 xs={12} sm={6} md={3}>
             <Box
               component="img"
               src="/img/logo.png"
@@ -99,7 +99,7 @@ export default function Footer() {
               All rights reserved
             </Box>
           </Grid2>
-          <Grid2 sx={12} sm={6} md={3}>
+          <Grid2 xs={12} sm={6} md={3}>
             <Typography
               sx={{
                 mb: 2,
@@ -119,8 +119,9 @@ export default function Footer() {
                   "Yangiliklar",
                   "Kataloglar",
                   "Biz haqimizda",
-                ].map((el) => (
+                ].map((el, index) => (
                   <Typography
+                  key={index}
                     sx={{
                       mb: 1,
                       fontSize: 16,
@@ -145,8 +146,9 @@ export default function Footer() {
                   "Yangiliklar",
                   "Kataloglar",
                   "Biz haqimizda",
-                ].map((el) => (
+                ].map((el, index) => (
                   <Typography
+                  key={index}
                     sx={{
                       mb: 1,
                       fontSize: 16,
@@ -166,7 +168,7 @@ export default function Footer() {
               </Grid2>
             </Grid2>
           </Grid2>
-          <Grid2 sx={12} sm={6} md={3}>
+          <Grid2 xs={12} sm={6} md={3}>
             <Typography
               sx={{
                 mb: 2,
@@ -243,7 +245,7 @@ export default function Footer() {
               </a>
             </Box>
           </Grid2>
-          <Grid2 sx={12} sm={6} md={3}>
+          <Grid2 xs={12} sm={6} md={3}>
             <Typography
               sx={{
                 mb: 2,
@@ -282,7 +284,6 @@ export default function Footer() {
                 src="https://yandex.uz/map-widget/v1/?l=pht&ll=66.902450%2C39.674180&mode=poi&poi%5Bpoint%5D=66.905725%2C39.678236&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D5541203078&z=16"
                 width="100%"
                 height="200px"
-                allowfullscreen={false}
                 style={{
                   position: "relative",
                   border: "none",
