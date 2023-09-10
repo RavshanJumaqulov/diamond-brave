@@ -1,13 +1,16 @@
 import { Box, Button, Fab } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import Slider from "react-slick/lib/slider";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CarauselItem from "./CarauselItem";
 import ProductSliderItem from "./ProductSliderItem";
 import { useSelector } from "react-redux";
+import ProductsItemLoading from "./ProductsItemLoading";
+import Context from "../Context";
 
 export default function ProductsSlider() {
-  const products = useSelector(state => state.products)
+  const { productsLoading } = useContext(Context);
+  const products = useSelector((state) => state.products);
   const [width, setWidth] = useState(window.innerWidth);
   const [height, setHeight] = useState(window.innerHeight);
   const [img, setImg] = useState("");
@@ -157,13 +160,34 @@ export default function ProductsSlider() {
         </Fab>
       </Box>
       <Slider ref={arrowRef} {...settings} style={{ width: "100%" }}>
-        {
-          products.map((el, index) => {
-            return (
-              <ProductSliderItem key={index} width={width} setImg={setImg} title={el.name} img={el.img} />
-            )
-          })
-        }
+        {!productsLoading.status ? (
+          <Slider ref={arrowRef} {...settings} style={{ width: "100%" }}>
+            <ProductsItemLoading />
+            <ProductsItemLoading />
+            <ProductsItemLoading />
+            <ProductsItemLoading />
+            <ProductsItemLoading />
+            <ProductsItemLoading />
+            <ProductsItemLoading />
+            <ProductsItemLoading />
+          </Slider>
+        ) : productsLoading.status && !productsLoading.error ? (
+          <Slider ref={arrowRef} {...settings} style={{ width: "100%" }}>
+            {products.map((el, index) => {
+              return (
+                <ProductSliderItem
+                  key={index}
+                  width={width}
+                  setImg={setImg}
+                  title={el.name}
+                  img={el.img}
+                />
+              );
+            })}
+          </Slider>
+        ) : (
+          ""
+        )}
       </Slider>
     </Box>
   );

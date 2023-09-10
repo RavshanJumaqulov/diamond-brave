@@ -18,11 +18,22 @@ const theme = () =>
   });
 function App() {
   const [width, setWidth] = useState(window.innerWidth);
+  const [productsLoading, setProductsLoading] = useState({
+    status: true,
+    error: false,
+    message: "",
+  });
+  const [newsLoading, setNewsLoading] = useState({
+    status: true,
+    error: false,
+    message: "",
+  });
+
   window.addEventListener("resize", () => {
     setWidth(window.innerWidth);
   });
   return (
-    <Context.Provider value={{ width }}>
+    <Context.Provider value={{ width, productsLoading, setProductsLoading, newsLoading, setNewsLoading }}>
       <Provider store={store}>
         <ThemeProvider theme={theme()}>
           <Box>

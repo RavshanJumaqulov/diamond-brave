@@ -12,7 +12,7 @@ const getProducts = async () => {
     });
     return data
   } catch (error) {
-    console.log(error)
+    return error
   }
 };
 
@@ -28,7 +28,7 @@ const getCatalog = async () => {
     });
     return data
   } catch (error) {
-    console.log(error)
+    return error
   }
 };
 
