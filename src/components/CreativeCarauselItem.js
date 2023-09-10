@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React from "react";
 
 export default function CreativeCarauselItem(props) {
@@ -24,6 +24,9 @@ export default function CreativeCarauselItem(props) {
           borderRadius: 3
         }}
       />
+      <Typography sx={{position: 'absolute', bottom: 50, left: 10, zIndex: 1, fontSize: 18, fontWeight: 700, fontFamily: 'Nunito, sans-serif', color: '#fff'}}>
+        {props.title}
+      </Typography>
     </Box>
   );
 }

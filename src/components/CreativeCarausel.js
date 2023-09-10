@@ -3,8 +3,10 @@ import React, { useRef } from "react";
 import Slider from "react-slick";
 import CarauselItem from "./CarauselItem";
 import CreativeCarauselItem from "./CreativeCarauselItem";
+import { useSelector } from "react-redux";
 
 export default function CreativeCarausel(props) {
+  const catalogs = useSelector((state) => state.catalogs);
   const arrowRef = useRef(null);
   const settings = {
     dots: true,
@@ -18,6 +20,8 @@ export default function CreativeCarausel(props) {
     dots: false,
     arrows: false,
   };
+  console.log(catalogs);
+
   return (
     <Box
       sx={{
@@ -37,9 +41,9 @@ export default function CreativeCarausel(props) {
       }}
     >
       <Slider ref={arrowRef} {...settings}>
-        <CreativeCarauselItem img='https://wp.alithemes.com/html/nest/demo/assets/imgs/banner/banner-11.png' />
-        <CreativeCarauselItem img='https://wp.alithemes.com/html/nest/demo/assets/imgs/banner/banner-4.png' />
-        <CreativeCarauselItem img='https://wp.alithemes.com/html/nest/demo-rtl/assets/imgs/blog/blog-3.png' />
+        {catalogs.map((el, index) => {
+          return <CreativeCarauselItem img={el.img} title={el.name} key={index} />;
+        })}
       </Slider>
     </Box>
   );

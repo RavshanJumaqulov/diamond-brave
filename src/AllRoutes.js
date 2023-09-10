@@ -6,17 +6,25 @@ import News from './pages/News'
 import NewsId from './pages/NewsId'
 import Products from './pages/Products'
 import { useDispatch } from 'react-redux'
-import { getProducts } from './api'
-import { GET_PRODUCTS } from './redux/action'
+import { getCatalog, getProducts } from './api'
+import { GET_CATALOGS, GET_PRODUCTS } from './redux/action'
 
 export default function AllRoutes() {
   const dispatch = useDispatch()
-
   useEffect(()=>{
     const res = async () => {
       const data = await getProducts()
       console.log(data.data)
       dispatch({type: GET_PRODUCTS, payload: data.data})
+    }
+    res()
+  },[])
+
+  useEffect(()=>{
+    const res = async () => {
+      const data = await getCatalog()
+      console.log(data.data)
+      dispatch({type: GET_CATALOGS, payload: data.data})
     }
     res()
   },[])

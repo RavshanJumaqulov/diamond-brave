@@ -70,5 +70,59 @@
             "name": "Strolang",
             "img": "/products/strolang.png"
         }
+    ],
+    "catalogs": [
+        {
+            "id": 1,
+            "name": "Dermotologiya",
+            "img": "https://dermacenter.uz/files/original/products/91.jpg"
+        },
+        {
+            "id": 2,
+            "name": "Gastoentrologiya",
+            "img": "https://spbmedika.ru/upload/delight.webpconverter/upload/resize_cache/iblock/670/375_500_2/gastroenterologiya.jpeg.webp?166875948436216"
+        },
+        {
+            "id": 3,
+            "name": "Kardiologiya",
+            "img": "https://img.freepik.com/free-photo/view-anatomical-human-heart-model_52683-101203.jpg?w=740&t=st=1694238254~exp=1694238854~hmac=fb79a0f2bd19f047d315d9f49905050774c12584ba804e51e1fb2e94f41e37ec"
+        },
+        {
+            "id": 4,
+            "name": "Nevrologiya",
+            "img": "https://img.freepik.com/premium-photo/photo-close-up-blue-yellow-brain_822108-5114.jpg?w=740"
+        },
+        {
+            "id": 5,
+            "name": "Otorinolaringologiya",
+            "img": "https://img.freepik.com/premium-photo/evaluate-potential-impact-ai-medical-diagnosis-treatment_968517-5002.jpg?w=740"
+        },
+        {
+            "id": 6,
+            "name": "Pulmonologiya",
+            "img": "https://img.freepik.com/premium-photo/human-lungs-anatomy-with-tree-branches-as-veins-vessels-vertical_210545-3893.jpg?w=740"
+        },
+        {
+            "id": 7,
+            "name": "Urologiya",
+            "img": "https://dermacenter.uz/files/original/products/91.jpg"
+        },
+        {
+            "id": 8,
+            "name": "Ginekologiya",
+            "img": "https://img.freepik.com/premium-photo/generative-ai-illustration-pregnant-muslim-young-woman-hospital-room_58460-17742.jpg?w=740"
+        },
+        {
+            "id": 9,
+            "name": "Endokrinologiya",
+            "img": "https://img.freepik.com/premium-photo/woman-chief-put-her-hand-abdomen-having-stomach-ache-nausea_118631-4713.jpg?w=740"
+        },
+        {
+            "id": 10,
+            "name": "Oftalmologiya",
+            "img": "https://img.freepik.com/premium-photo/there-is-close-up-persons-eye-generative-ai_901275-809.jpg?w=740"
+        }
+        
     ]
+    
 }

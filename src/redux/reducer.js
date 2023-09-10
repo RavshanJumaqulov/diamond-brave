@@ -1,7 +1,8 @@
-import { GET_PRODUCTS } from "./action";
+import { GET_CATALOGS, GET_PRODUCTS } from "./action";
 
 const initialState = {
   products: [],
+  catalogs: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -10,6 +11,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         products: action.payload,
+      }
+    }
+    case GET_CATALOGS: {
+      return {
+        ...state,
+        catalogs: action.payload,
       }
     }
     default: {

@@ -6,30 +6,26 @@ export default function CatalogsItem(props) {
     <Box
       sx={{
         mb: 2,
-        // background: `url(${props.url})`,
-        // backgroundPosition: "center center",
-        // backgroundSize: "cover",
         py: 1,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         borderRadius: 3,
-        // boxShadow:
-        //   "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
-        // background: "#ffffff3f !important",
-        // backdropFilter: "blur(20px)",
         position: "relative",
         overflow: "hidden",
         border: "1px solid rgba(0, 0, 0, 0.23)",
         transition: "0.3s all",
         boxSizing: "border-box",
         "&:hover": {
-          border: "2px solid #1976d2",
+          border: "1px solid #3bb77f",
           "& img": {
             background: `url(${props.url})`,
             backgroundPosition: "center center",
             transform: "scale(1.1)",
-            // filter: "blur(10px)",
+          },
+          "& .MuiTypography-root": {
+            backgroundSize: "100% 6%",
+            color: "#3bb77f",
           },
         },
       }}
@@ -71,7 +67,7 @@ export default function CatalogsItem(props) {
           cursor: "pointer",
           "&:hover": {
             backgroundSize: "100% 6%",
-            color: "#1976d2",
+            color: "#3bb77f",
           },
         }}
       >

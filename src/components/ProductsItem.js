@@ -26,7 +26,7 @@ export default function ProductsItem(props) {
   }, [width, imgRef]);
   console.log(open);
   return (
-    <Box sx={{ p: 1, width: "100%" }}>
+    <Box sx={{  width: "100%" }}>
       {open ? (
         <Box
           sx={{

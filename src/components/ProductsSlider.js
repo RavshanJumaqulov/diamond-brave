@@ -158,9 +158,9 @@ export default function ProductsSlider() {
       </Box>
       <Slider ref={arrowRef} {...settings} style={{ width: "100%" }}>
         {
-          products.map(el => {
+          products.map((el, index) => {
             return (
-              <ProductSliderItem width={width} setImg={setImg} title={el.name} img={el.img} />
+              <ProductSliderItem key={index} width={width} setImg={setImg} title={el.name} img={el.img} />
             )
           })
         }

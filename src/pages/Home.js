@@ -13,7 +13,7 @@ export default function Home() {
       <Background />
       <Container maxWidth="xl">
         <Carausel />
-        {/* <About /> */}
+        <About />
         <Products />
         <Blog />
         <Certificate />
