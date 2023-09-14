@@ -1,7 +1,12 @@
 import { Box, Stack, Typography } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import moment from "moment";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Context from "../Context";
 
 export default function BlogItemMD(props) {
+  const { lan } = useContext(Context)
+  const navigate = useNavigate()
   const [imgWidth, setImgWidth] = useState(0);
   const imgRef = useRef(null);
 
@@ -10,6 +15,7 @@ export default function BlogItemMD(props) {
   }, []);
   return (
     <Stack
+    onClick={()=>navigate(`/news/${props.item.id}`)}
       direction="column"
       order={props.order}
       sx={{
@@ -24,7 +30,7 @@ export default function BlogItemMD(props) {
       <Box
         component="img"
         ref={imgRef}
-        src="https://zone-ui.vercel.app/assets/images/career/career_2.jpg"
+        src={props.item.img}
         sx={{
           borderRadius: 4,
           maxHeight:
@@ -32,7 +38,6 @@ export default function BlogItemMD(props) {
           minHeight:
             props.order % 2 == 0 ? `${(imgWidth * 9) / 16}px` : `${imgWidth}px`,
           objectFit: "cover",
-          //   minWidth: "100%",
         }}
       ></Box>
       <Stack
@@ -46,7 +51,7 @@ export default function BlogItemMD(props) {
           cursor: 'default',
         }}
       >
-        25 Avg 2023
+        {moment(props.item.created_at).fromNow()}
         <Box
           sx={{
             mx: 2,
@@ -55,9 +60,10 @@ export default function BlogItemMD(props) {
             borderRadius: "50%",
             backgroundColor: "currentColor",
             cursor: 'default',
+            textTransform: 'lowercase'
           }}
         ></Box>
-        21 user read
+        {lan == 'uz' ? `${props.item.views} marta o'qildi` : lan == 'en' ? `Read ${props.item.views} times` : `Прочтите ${props.item.views} раз`}
       </Stack>
       <Typography
         sx={{
@@ -73,7 +79,7 @@ export default function BlogItemMD(props) {
           cursor: 'default',
         }}
       >
-        The Ultimate Guide to Productivity Hacks adafdsefwadsxz Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque consectetur quidem iusto reiciendis tempora earum veniam a. Odio consequatur nulla quas cumque, alias, magnam ratione excepturi, mo
+        {props['item'][`title_${lan}`]}
       </Typography>
     </Stack>
   );

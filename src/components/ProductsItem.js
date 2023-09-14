@@ -1,8 +1,6 @@
 import {
-  Backdrop,
   Box,
   Button,
-  CircularProgress,
   Fab,
   Rating,
   Stack,
@@ -10,13 +8,14 @@ import {
 } from "@mui/material";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
-import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
 import StarIcon from "@mui/icons-material/Star";
 import CloseIcon from "@mui/icons-material/Close";
 import Context from "../Context";
 import { Fade } from "react-awesome-reveal";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductsItem(props) {
+  const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const imgRef = useRef(null);
   const [imgWidth, setImgWidth] = useState(0);
@@ -24,9 +23,8 @@ export default function ProductsItem(props) {
   useEffect(() => {
     setImgWidth(imgRef.current.clientWidth);
   }, [width, imgRef]);
-  console.log(open);
   return (
-    <Box sx={{  width: "100%" }}>
+    <Box sx={{ width: "100%" }}>
       {open ? (
         <Box
           sx={{
@@ -94,6 +92,7 @@ export default function ProductsItem(props) {
             p: 1,
             background: "#ffffff3f",
             backdropFilter: "blur(18px)",
+            overflow: "hidden",
           }}
         >
           <Box
@@ -101,7 +100,6 @@ export default function ProductsItem(props) {
             sx={{
               position: "relative",
               bottom: 0,
-              overflow: "hidden",
               "&:hover": {
                 "& .MuiStack-root": {
                   transform: "translateY(0)",
@@ -110,6 +108,21 @@ export default function ProductsItem(props) {
               },
             }}
           >
+            <Typography
+              sx={{
+                position: "absolute",
+                top: -8,
+                left: -8,
+                background: "#3bb77f",
+                px: 0.5,
+                py: 0.2,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                color: "#fff",
+              }}
+            >
+              {props.category}
+            </Typography>
             <Box
               component={"img"}
               src={props.img}
@@ -167,14 +180,14 @@ export default function ProductsItem(props) {
                 WebkitBoxOrient: "vertical",
               }}
             >
-              {props.name}
+              {props.title}
             </Typography>
             <Stack
               direction={"row"}
               sx={{ alignItems: "center", justifyContent: "space-between" }}
             >
               <Rating
-                defaultValue={4.7}
+                defaultValue={5}
                 precision={0.1}
                 readOnly
                 emptyIcon={
@@ -200,6 +213,7 @@ export default function ProductsItem(props) {
             </Stack>
           </Box>
           <Button
+            onClick={() => navigate(`/products/${props.id}`)}
             variant={"contained"}
             disableElevation
             sx={{

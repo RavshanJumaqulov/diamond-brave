@@ -8,20 +8,31 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
 import StarIcon from "@mui/icons-material/Star";
+import Context from "../Context";
+import moment from "moment";
+import { useNavigate } from "react-router-dom";
 
-export default function BestNewsSliderItem({ width, setImg }) {
-  const [open, setOpen] = React.useState(true);
+export default function BestNewsSliderItem({
+  width,
+  setImg,
+  id,
+  img,
+  title,
+  date,
+  views,
+}) {
+  const navigate = useNavigate();
+  const { lan } = useContext(Context);
   const imgRef = useRef(null);
   const [imgWidth, setImgWidth] = useState(0);
-
   useEffect(() => {
-    console.log(imgRef.current.clientWidth);
     setImgWidth(imgRef.current.clientWidth);
   }, [width, imgRef]);
+
   return (
     <Box
       sx={{
@@ -61,90 +72,48 @@ export default function BestNewsSliderItem({ width, setImg }) {
         >
           <Box
             component={"img"}
-            src="/products/1.png"
+            src={img}
             sx={{
               width: "100%",
-              minHeight: imgWidth,
-              maxHeight: imgWidth,
-              objectFit: "contain",
+              minHeight: (imgWidth * 9) / 16,
+              maxHeight: (imgWidth * 9) / 16,
+              objectFit: "cover",
+              borderRadius: 3,
             }}
           />
-          <Stack
+          <Fab
+            onClick={() => setImg(img)}
+            size="small"
+            elevation={3}
             sx={{
-              width: "100%",
               position: "absolute",
-              bottom: 0,
-              transform: { xs: "translateY(0px)", md: "translateY(50px)" },
-              opacity: { xs: 1, md: 0 },
+              boxShadow: "none",
+              bottom: 10,
+              right: 10,
+              background: "none",
               transition: "0.3s all",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
+              "&:hover": {
+                background: "#e0e0e0",
+                "& svg": {
+                  color: "#3BB77E",
+                  transform: "scale(1.1)",
+                },
+              },
             }}
           >
-            <Box
+            <FullscreenIcon
               sx={{
-                width: "90%",
-                height: 50,
-                borderRadius: 3,
-                background: {
-                  xs: "rgba(0, 0, 0, 0.1)",
-                  md: "rgba(0, 0, 0, 0.2)",
-                },
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-around",
+                width: 35,
+                height: 35,
+                fontSize: 35,
+                color: "text.primary",
+                transition: "0.3s all",
+                bottom: 10,
+                right: 10,
+                color: "#fff",
               }}
-            >
-              <Fab
-                onClick={() =>
-                  setImg(
-                    "https://wp.alithemes.com/html/nest/demo-rtl/assets/imgs/shop/product-2-2.jpg"
-                  )
-                }
-                size="small"
-                elevation={0}
-              >
-                <FullscreenIcon
-                  sx={{
-                    width: 35,
-                    height: 35,
-                    fontSize: 35,
-                    color: "text.primary",
-                    transition: "0.3s all",
-                    "&:hover": {
-                      color: "#3BB77E",
-                      transform: "scale(1.1)",
-                    },
-                  }}
-                />
-              </Fab>
-              <Fab
-                onClick={() =>
-                  setImg(
-                    "https://wp.alithemes.com/html/nest/demo-rtl/assets/imgs/shop/product-2-2.jpg"
-                  )
-                }
-                size="small"
-                elevation={0}
-              >
-                <AssignmentOutlinedIcon
-                  sx={{
-                    width: 35,
-                    height: 35,
-                    fontSize: 35,
-                    color: "text.primary",
-                    transition: "0.3s all",
-                    "&:hover": {
-                      color: "#3BB77E",
-                      transform: "scale(1.1)",
-                    },
-                  }}
-                />
-              </Fab>
-            </Box>
-          </Stack>
+            />
+          </Fab>
         </Box>
         <Box sx={{ my: 2 }}>
           <Typography
@@ -158,21 +127,12 @@ export default function BestNewsSliderItem({ width, setImg }) {
               display: "-webkit-box",
               WebkitLineClamp: 2,
               WebkitBoxOrient: "vertical",
-              background:
-                "-webkit-gradient(linear, left top, right top, from(#3bb77e), to(#3bb77e))",
-              background: "linear-gradient(to right, #3bb77e 0%, #3bb77e 100%)",
-              backgroundSize: "100px 6%",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "left 100%",
               WebkitTransitionDuration: "0.5s",
               transitionDuration: "0.5s",
-              cursor: "pointer",
-              "&:hover": {
-                backgroundSize: "100% 6%",
-              },
+              cursor: "default",
             }}
           >
-            The pros and const of busines agency
+            {title}
           </Typography>
           <Box
             sx={{
@@ -191,7 +151,7 @@ export default function BestNewsSliderItem({ width, setImg }) {
                 cursor: "default",
               }}
             >
-              102 users read
+              {date}
             </Typography>
             <Box
               sx={{
@@ -211,11 +171,16 @@ export default function BestNewsSliderItem({ width, setImg }) {
                 cursor: "default",
               }}
             >
-              1022 users read
+              {lan == "uz"
+                ? `${views} marta o'qildi`
+                : lan == "en"
+                ? `Read ${views} times`
+                : `Прочтите ${views} раз`}
             </Typography>
           </Box>
         </Box>
         <Button
+        onClick={() => navigate(`/news/${id}`)}
           variant={"contained"}
           disableElevation
           sx={{
@@ -231,7 +196,7 @@ export default function BestNewsSliderItem({ width, setImg }) {
             },
           }}
         >
-          Batafsil
+          {lan == "uz" ? "Batafsil" : lan == "en" ? "Read more" : "Более"}
         </Button>
       </Box>
     </Box>

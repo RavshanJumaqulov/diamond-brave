@@ -1,193 +1,74 @@
-import { Box, Container, Stack, Typography } from "@mui/material";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import React, { useEffect, useRef, useState } from "react";
-import NewsIdLatestNews from "../components/NewsIdLatestNews";
+import { Box, Typography } from "@mui/material";
+import React, { useContext, useEffect, useState } from "react";
+import Context from "../Context";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import NewsIdLoading from "../loading/NewsIdLoading";
+import New from "../components/New";
+import { getNewsWithId } from "../api";
+import { GET_NEW_WITH_ID } from "../redux/action";
 
 export default function NewsId() {
-  const [boxWidth, setBoxWidth] = useState(0);
-  const relativeBoxRef = useRef(null);
-
-  window.addEventListener("resize", () => {
-    if (relativeBoxRef.current !== null) {
-      setBoxWidth(relativeBoxRef.current.clientWidth);
-    }
+  const params = useParams();
+  const dispatch = useDispatch();
+  const { lan } = useContext(Context);
+  const news = useSelector((state) => state.news);
+  const [loading, setLoading] = useState({
+    status: false,
+    error: false,
+    message: "",
   });
+
   useEffect(() => {
-    setBoxWidth(relativeBoxRef.current.clientWidth);
+    const res = async () => {
+      const data = await getNewsWithId(1);
+      if (Object.keys(data).includes("code")) {
+        setLoading({
+          status: true,
+          error: true,
+          message: data.message,
+        });
+      } else if (Object.keys(data.data).length > 0) {
+        setLoading({
+          status: true,
+          error: false,
+          message: "",
+        });
+        dispatch({ type: GET_NEW_WITH_ID, payload: data.data });
+      }
+    };
+    res();
   }, []);
-  return (
-    <Container maxWidth="xl">
-      <Box sx={{ mt: 10, width: "100%" }}>
-        <Grid2 container spacing={2}>
-          <Grid2 xs={12} md={8}>
-            <Typography
-              sx={{
-                display: "inline",
-                whiteSpace: "pre-wrap",
-                mt: 1,
-                fontSize: { xs: 20, sm: 24, md: 32, lg: 32 },
-                fontWeight: 700,
-                fontFamily: "Nunito, sans-serif",
-              }}
-            >
-              The pros and const of busines agency Lorem ipsum dolor sit, amet
-              consectetur adipisicing elit.
-            </Typography>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                mt: { sm: 2, md: 1, lg: 1 },
-                mb: 3,
-              }}
-            >
-              <Typography
-                sx={{
-                  fontSize: { xs: 14, sm: 16, md: 14, lg: 16 },
-                  fontWeight: "400",
-                  color: "text.secondary",
-                  fontFamily: "Nunito, sans-serif",
-                  cursor: "defalut",
-                }}
-              >
-                102 users read
-              </Typography>
-              <Box
-                sx={{
-                  borderRadius: "50%",
-                  width: 4,
-                  height: 4,
-                  background: "#00000099",
-                  mx: 1,
-                }}
-              ></Box>
-              <Typography
-                sx={{
-                  fontSize: { xs: 14, sm: 16, md: 14, lg: 16 },
-                  fontWeight: "400",
-                  color: "text.secondary",
-                  fontFamily: "Nunito, sans-serif",
-                  cursor: "defalut",
-                }}
-              >
-                1022 users read
-              </Typography>
-            </Box>
-            <Box sx={{}}>
-              <Box
-                component="img"
-                src="https://tsue.uz/media/news/8A8A9432.jpeg"
-                sx={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  borderRadius: 3,
-                  maxHeight: 600,
-                  display: "block",
-                  mx: "auto",
-                  mb: 2,
-                }}
-              />
-              <Box sx={{}}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Pariatur hic cumque esse. Repellendus aperiam, non assumenda,
-                earum odio ipsa iure tenetur quod exercitationem explicabo
-                molestias rerum quaerat corrupti officiis quo?
-              </Box>
-            </Box>
-          </Grid2>
-          <Grid2
-            xs={12}
-            md={4}
-            ref={relativeBoxRef}
-            sx={{
-              position: { xs: "static", md: "relative" },
-              overflow: "hidden",
-              mb: 2,
-            }}
-          >
-            <Box
-              sx={{
-                width: boxWidth - 16,
-                maxWidth: "100%",
-                position: { xs: "static", md: "fixed" },
-              }}
-            >
-              <Stack
-                direction="column"
-                sx={{
-                  justifyContent: "space-between",
-                  mb: 2,
-                }}
-              >
-                <Stack
-                  sx={{
-                    display: "flex",
-                    flexDirection: { xs: "column", md: "row" },
-                    width: "100%",
-                    alignItems: {
-                      xs: "center",
-                      md: "center",
-                    },
-                    justifyContent: {
-                      xs: "space-between",
-                      md: "space-between",
-                    },
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      fontSize: { xs: "calc(1.3125rem + 0.75vw)", lg: 30 },
-                      fontWeight: 700,
-                      fontFamily: "Nunito, sans-serif",
-                      color: "#011a41",
-                      mb: 1,
-                    }}
-                  >
-                    So'nggi yangiliklar
-                  </Typography>
-                </Stack>
-              </Stack>
-              <Box
-                sx={{
-                  width: "100%",
-                  maxHeight: 400,
-                  overflow: "hidden",
-                  overflowY: "auto",
-                }}
-              >
-                <Grid2 container spacing={2} sx={{ width: "100%" }}>
-                  <Grid2 xs={12} sm={6} md={12}>
-                    <NewsIdLatestNews />
-                  </Grid2>
-                  <Grid2 xs={12} sm={6} md={12}>
-                    <NewsIdLatestNews />
-                  </Grid2>
-                  <Grid2 xs={12} sm={6} md={12}>
-                    <NewsIdLatestNews />
-                  </Grid2>
-                  <Grid2 xs={12} sm={6} md={12}>
-                    <NewsIdLatestNews />
-                  </Grid2>
-                  <Grid2 xs={12} sm={6} md={12}>
-                    <NewsIdLatestNews />
-                  </Grid2>
-                  <Grid2 xs={12} sm={6} md={12}>
-                    <NewsIdLatestNews />
-                  </Grid2>
-                  <Grid2 xs={12} sm={6} md={12}>
-                    <NewsIdLatestNews />
-                  </Grid2>
-                  <Grid2 xs={12} sm={6} md={12}>
-                    <NewsIdLatestNews />
-                  </Grid2>
-                </Grid2>
-              </Box>
-            </Box>
-          </Grid2>
-        </Grid2>
-      </Box>
-    </Container>
-  );
+
+  if (
+    news.length > 0 &&
+    news.filter((el) => el.id == +params.new).length == 1
+  ) {
+    return <New data={news.find((el) => el.id == +params.new)} />;
+  } else if (news.filter((el) => el.id == +params.new).length == 0) {
+    if (loading.status && !loading.error) {
+      return <New data={news.find((el) => el.id == +params.new)} />;
+    } else if (loading.status && loading.error) {
+      return (
+        <Typography
+          sx={{
+            fontSize: 14,
+            fontWeight: 700,
+            fontFamily: "Nunito, sans-serif",
+            textAlign: "left",
+          }}
+          color="error.main"
+        >
+          {loading.message + " "}
+          {lan == "uz"
+            ? "Serverda xatolik sodir bo'ldi!"
+            : lan == "en"
+            ? "A server error has occurred!"
+            : "Произошла ошибка сервера!"}
+        </Typography>
+      );
+    } else {
+      return <NewsIdLoading />;
+    }
+  }
 }

@@ -18,7 +18,6 @@ export default function CertificateItem(props) {
     <Grid2 xs={12} sm={6} md={3} sx={{ p: 1 }}>
       <Box
         sx={{
-          
           position: show ? "fixed" : "static",
           width: show ? "100%" : "auto",
           height: show ? "100vh" : "auto",
@@ -33,7 +32,6 @@ export default function CertificateItem(props) {
         }}
       >
         <Box
-          onClick={() => setShow(false)}
           sx={{
             background: show ? "rgba(0, 0, 0, 0.2)" : "none",
             display: show ? "block" : "none",
@@ -57,32 +55,8 @@ export default function CertificateItem(props) {
               right: 0,
             }}
           >
-            {/* <Box
-            onClick={openFullscreen}
-              sx={{
-                width: 50,
-                height: 30,
-                background: "rgba(0, 0, 0, 0.4)",
-                borderBottomLeftRadius: 2,
-                transition: "0.3s all !important",
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-                "&:hover": {
-                  '& svg':{
-                    transition: '0.3s all !important',
-                    transform: 'scale(1.05)'
-                  }
-                },
-                "& svg": {
-                  color: "#fff",
-                },
-              }}
-            >
-              <FullscreenIcon />
-            </Box> */}
             <Box
+              onClick={() => setShow(false)}
               sx={{
                 width: 50,
                 height: 30,
@@ -114,7 +88,7 @@ export default function CertificateItem(props) {
           src={props.img}
           sx={{
             boxShadow:
-            "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 10px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
+              "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 10px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
             width: show
               ? windowHeight / windowWidth < 16 / 9
                 ? "auto"
@@ -144,7 +118,7 @@ export default function CertificateItem(props) {
             color: show ? "#fff" : "text.primary",
           }}
         >
-          Lorem, ipsum dolor.
+          {props.title}
         </Typography>
       </Box>
     </Grid2>

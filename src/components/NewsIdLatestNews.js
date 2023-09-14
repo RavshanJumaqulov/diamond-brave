@@ -69,8 +69,6 @@ export default function NewsIdLatestNews() {
             display: "-webkit-box",
             WebkitLineClamp: 2,
             WebkitBoxOrient: "vertical",
-            // background:
-            //   "-webkit-gradient(linear, left top, right top, from(#3bb77e), to(#3bb77e))",
             background: "linear-gradient(to right, #3bb77e 0%, #3bb77e 100%)",
             backgroundSize: "100px 6%",
             backgroundRepeat: "no-repeat",

@@ -1,28 +1,21 @@
-import { Box, Button, Fab } from "@mui/material";
-import React, { useRef, useState } from "react";
+import { Box, Fab } from "@mui/material";
+import React, { useContext, useRef, useState } from "react";
 import Slider from "react-slick/lib/slider";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import CarauselItem from "./CarauselItem";
-import ProductSliderItem from "./ProductSliderItem";
 import BestNewsSliderItem from "./BestNewsSliderItem";
+import Context from "../Context";
+import { useSelector } from "react-redux";
+import CloseIcon from "@mui/icons-material/Close";
+import moment from "moment";
 
-export default function BestNewsSlider
-() {
-  const [width, setWidth] = useState(window.innerWidth);
-  const [height, setHeight] = useState(window.innerHeight);
+export default function BestNewsSlider() {
+  const news = useSelector((state) => state.news);
+  const { width, height, lan } = useContext(Context);
   const [img, setImg] = useState("");
-
   const arrowRef = useRef(null);
-
-  window.addEventListener("resize", () => {
-    setWidth(window.innerWidth);
-    setHeight(window.innerHeight);
-  });
-  console.log(width);
 
   const settings = {
     dots: true,
-    // fade: true,
     infinite: true,
     speed: 1000,
     autoplay: true,
@@ -99,12 +92,51 @@ export default function BestNewsSlider
           }}
         >
           <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              position: "absolute",
+              zIndex: 1,
+              top: 0,
+              right: 0,
+            }}
+          >
+            <Box
+              onClick={() => setImg("")}
+              sx={{
+                width: 50,
+                height: 30,
+                background: "rgba(0, 0, 0, 0.4)",
+                transition: "0.3s all !important",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                "&:hover": {
+                  background: "red",
+                  "& svg": {
+                    transition: "0.3s all !important",
+                    transform: "scale(1.05)",
+                  },
+                },
+                "& svg": {
+                  color: "#fff",
+                },
+              }}
+            >
+              <CloseIcon />
+            </Box>
+          </Box>
+          <Box
             component={"img"}
-            src="https://wp.alithemes.com/html/nest/demo-rtl/assets/imgs/shop/product-2-2.jpg"
+            src={img}
             sx={{
               width: height > width ? "90%" : "auto",
               height: height < width ? "90%" : "auto",
               objectFit: "cover",
+              borderRadius: 3
             }}
           />
         </Box>
@@ -159,11 +191,20 @@ export default function BestNewsSlider
         </Fab>
       </Box>
       <Slider ref={arrowRef} {...settings} style={{ width: "100%" }}>
-        <BestNewsSliderItem width={width} setImg={setImg} />
-        <BestNewsSliderItem width={width} setImg={setImg} />
-        <BestNewsSliderItem width={width} setImg={setImg} />
-        <BestNewsSliderItem width={width} setImg={setImg} />
-        <BestNewsSliderItem width={width} setImg={setImg} />
+        {news.map((el, index) => {
+          return (
+            <BestNewsSliderItem
+              width={width}
+              setImg={setImg}
+              key={index}
+              id={el.id}
+              img={el.img}
+              title={el[`title_${lan}`]}
+              date={moment(el.created_at).fromNow()}
+              views={el.views}
+            />
+          );
+        })}
       </Slider>
     </Box>
   );

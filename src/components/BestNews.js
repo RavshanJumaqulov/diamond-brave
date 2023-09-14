@@ -1,8 +1,12 @@
 import { Box, Stack, Typography } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import BestNewsContainer from "./BestNewsContainer";
+import Context from "../Context";
 
 export default function BestNews() {
+  
+  const { lan } = useContext(Context);
+
   return (
     <Box
       sx={{
@@ -37,7 +41,11 @@ export default function BestNews() {
               mb: 1,
             }}
           >
-            Ko'p o'qilgan yangiliklar
+            {lan == "uz"
+              ? "Ko'p o'qilgan yangiliklar"
+              : lan == "en"
+              ? "Most read news"
+              : "Самые читаемые новости"}
           </Typography>
         </Stack>
         <Typography
@@ -49,7 +57,14 @@ export default function BestNews() {
           }}
           color="text.secondary"
         >
-          DIAMOND BRAVE WORLD PHARM kompaniyasining arxiviga muhrlangan lahzalari.
+          {lan == "uz"
+            ? `DIAMOND BRAVE WORLD PHARM kompaniyasining arxiviga muhrlangan
+              lahzalari.`
+            : lan == "en"
+            ? `Sealed in the archives of DIAMOND BRAVE WORLD PHARM
+              moments.`
+            : `Запечатано в архиве DIAMOND BRAVE WORLD PHARM.
+              моменты.`}
         </Typography>
       </Stack>
       <BestNewsContainer />

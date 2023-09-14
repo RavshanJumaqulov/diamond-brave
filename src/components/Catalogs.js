@@ -1,9 +1,11 @@
 import { Box, Typography } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import CatalogsItem from "./CatalogsItem";
 import { useSelector } from "react-redux";
+import Context from "../Context";
 
-export default function Catalogs() {
+export default function Catalogs({ sortByCatalogs, setSortByCatalogs }) {
+  const { lan } = useContext(Context);
   const catalogs = useSelector((state) => state.catalogs);
   return (
     <Box
@@ -11,31 +13,27 @@ export default function Catalogs() {
         width: "100%",
         borderRadius: 3,
         transition: "0.3s all",
-        mt: 2
+        mt: 2,
       }}
     >
-      {/* <Typography
-        sx={{
-          fontSize: { xs: "calc(1.3125rem + 0.75vw)", lg: 30 },
-          fontWeight: 700,
-          fontFamily: "Nunito, sans-serif",
-          color: "#011a41",
-          mb: 3,
-          mt: 2,
-        }}
-      >
-        Kataloglar
-      </Typography> */}
+      <CatalogsItem
+        value={"Barchasi"}
+        sortByCatalogs={sortByCatalogs}
+        title="Barchasi"
+        setSortByCatalogs={setSortByCatalogs}
+      />
       {catalogs.map((el, index) => {
         return (
           <CatalogsItem
-            title={el.name}
+            value={el.id}
+            title={el[`title_${lan}`]}
             url={el.img}
+            key={index}
+            setSortByCatalogs={setSortByCatalogs}
+            sortByCatalogs={sortByCatalogs}
           />
         );
       })}
-
-      
     </Box>
   );
 }

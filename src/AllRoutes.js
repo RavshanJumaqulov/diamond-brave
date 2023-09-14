@@ -6,30 +6,36 @@ import News from "./pages/News";
 import NewsId from "./pages/NewsId";
 import Products from "./pages/Products";
 import { useDispatch } from "react-redux";
-import { getCatalog, getProducts } from "./api";
-import { GET_CATALOGS, GET_PRODUCTS } from "./redux/action";
+import { getCatalogs, getNews, getProducts } from "./api";
+import { GET_CATALOGS, GET_NEWS, GET_PRODUCTS } from "./redux/action";
 import Context from "./Context";
 
 export default function AllRoutes() {
   const dispatch = useDispatch();
-  const { setProductsLoading, setNewsLoading } = useContext(Context);
+  const { setProductsLoading, setNewsLoading, setCatalogsLoading } =
+    useContext(Context);
   useEffect(() => {
     const res = async () => {
       const data = await getProducts();
       if (Object.keys(data).includes("code")) {
         setProductsLoading({
-          status: false,
+          status: true,
           error: true,
           message: data.message,
         });
       } else {
         if (data.data.length == 0) {
           setProductsLoading({
-            status: false,
+            status: true,
             error: true,
             message: "Mahsulotlar mavjud emas",
           });
         } else {
+          setProductsLoading({
+            status: true,
+            error: false,
+            message: "",
+          });
           dispatch({ type: GET_PRODUCTS, payload: data.data });
         }
       }
@@ -39,22 +45,56 @@ export default function AllRoutes() {
 
   useEffect(() => {
     const res = async () => {
-      const data = await getCatalog();
+      const data = await getCatalogs();
       if (Object.keys(data).includes("code")) {
-        setNewsLoading({
-          status: false,
+        setCatalogsLoading({
+          status: true,
           error: true,
           message: data.message,
         });
       } else {
         if (data.data.length == 0) {
+          setCatalogsLoading({
+            status: true,
+            error: true,
+            message: "Kataloglar mavjud emas",
+          });
+        } else {
+          setCatalogsLoading({
+            status: true,
+            error: false,
+            message: "",
+          });
+          dispatch({ type: GET_CATALOGS, payload: data.data });
+        }
+      }
+    };
+    res();
+  }, []);
+
+  useEffect(() => {
+    const res = async () => {
+      const data = await getNews(1);
+      if (Object.keys(data).includes("code")) {
+        setNewsLoading({
+          status: true,
+          error: true,
+          message: data.message,
+        });
+      } else {
+        if (data.data.results.length == 0) {
           setNewsLoading({
-            status: false,
+            status: true,
             error: true,
             message: "Yangiliklar mavjud emas",
           });
-        } else {
-          dispatch({ type: GET_CATALOGS, payload: data.data });
+        } else if (data.data.results.length > 0) {
+          setNewsLoading({
+            status: true,
+            error: false,
+            message: "",
+          });
+          dispatch({ type: GET_NEWS, payload: data.data.results });
         }
       }
     };
@@ -63,10 +103,10 @@ export default function AllRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/product" element={<Product />} />
       <Route path="/products" element={<Products />} />
+      <Route path="/products/:product" element={<Product />} />
       <Route path="/news" element={<News />} />
-      <Route path="/news_id" element={<NewsId />} />
+      <Route path="/news/:new" element={<NewsId />} />
     </Routes>
   );
 }

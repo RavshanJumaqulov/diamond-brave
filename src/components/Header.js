@@ -3,17 +3,31 @@ import {
   Box,
   Button,
   Container,
-  CssBaseline,
+  Fab,
+  FormControl,
   IconButton,
+  MenuItem,
+  Select,
   Toolbar,
   Typography,
+  createSvgIcon,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
+import Context from "../Context";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+const FacebookIcon = createSvgIcon(
+  <svg height="1em" viewBox="0 0 320 512">
+    <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" />
+  </svg>,
+  "FacebookIcon"
+);
 
 const navItems = ["Home", "About", "Contact"];
 export default function Header() {
+  const { lan, setLan, width } = useContext(Context);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [scrollY, setScrollY] = useState(window.scrollY);
 
@@ -24,6 +38,10 @@ export default function Header() {
   window.addEventListener("scroll", () => {
     setScrollY(window.scrollY);
   });
+
+  const handleLanguage = (event) => {
+    setLan(event.target.value);
+  };
 
   return (
     <AppBar
@@ -81,7 +99,7 @@ export default function Header() {
               width: { xs: "100%", md: "auto" },
               display: "flex",
               flexDirection: { xs: "column", md: "row" },
-              justifyContent: { xs: "center", md: "flex-end" },
+              justifyContent: { xs: "center", md: "flex-start" },
               alignItems: { xs: "center" },
               height: { xs: mobileOpen ? 500 : 0, md: "auto" },
               transition: "all 0.3s linear",
@@ -116,84 +134,321 @@ export default function Header() {
               <Typography
                 sx={{
                   fontSize: { xs: 18, md: 16 },
-                  fontWeight: 506,
                   display: { xs: "block", md: "block" },
                   color: "text.primary",
                 }}
               >
-                Bosh sahifa
+                {lan == "uz" ? "Bosh sahifa" : lan == "en" ? "Home" : "Главный"}
               </Typography>
               <Typography
                 sx={{
                   fontSize: { xs: 18, md: 16 },
-                  fontWeight: 506,
                   display: { xs: "block", md: "inline-block" },
                   color: "text.primary",
                 }}
               >
-                Bosh sahifa
+                {lan == "uz" ? "Bosh sahifa" : lan == "en" ? "Home" : "Главный"}
               </Typography>
             </NavLink>
             <NavLink to="/products">
               <Typography
                 sx={{
                   fontSize: { xs: 18, md: 16 },
-                  fontWeight: 500,
                   color: "text.primary",
                 }}
               >
-                Mahsulotlar
+                {lan == "uz"
+                  ? "Mahsulotlar"
+                  : lan == "en"
+                  ? "Products"
+                  : "Продукты"}
               </Typography>
               <Typography
                 sx={{
                   fontSize: { xs: 18, md: 16 },
-                  fontWeight: 500,
                   color: "text.primary",
                 }}
               >
-                Mahsulotlar
+                {lan == "uz"
+                  ? "Mahsulotlar"
+                  : lan == "en"
+                  ? "Products"
+                  : "Продукты"}
               </Typography>
             </NavLink>
             <NavLink to="/news">
               <Typography
                 sx={{
                   fontSize: { xs: 18, md: 16 },
-                  fontWeight: 500,
                   color: "text.primary",
                 }}
               >
-                Yangiliklar
+                {lan == "uz" ? "Yangiliklar" : lan == "en" ? "News" : "Новости"}
               </Typography>
               <Typography
                 sx={{
                   fontSize: { xs: 18, md: 16 },
-                  fontWeight: 500,
                   color: "text.primary",
                 }}
               >
-                Yangiliklar
+                {lan == "uz" ? "Yangiliklar" : lan == "en" ? "News" : "Новости"}
               </Typography>
             </NavLink>
             <NavLink to="/about">
               <Typography
                 sx={{
                   fontSize: { xs: 18, md: 16 },
-                  fontWeight: 500,
                   color: "text.primary",
                 }}
               >
-                Biz haqimizda
+                {lan == "uz"
+                  ? "Biz haqimizda"
+                  : lan == "en"
+                  ? "About"
+                  : "О нас"}
               </Typography>
               <Typography
                 sx={{
                   fontSize: { xs: 18, md: 16 },
-                  fontWeight: 500,
                   color: "text.primary",
                 }}
               >
-                Biz haqimizda
+                {lan == "uz"
+                  ? "Biz haqimizda"
+                  : lan == "en"
+                  ? "About"
+                  : "О нас"}
               </Typography>
             </NavLink>
+
+            {width < 900 ? (
+              mobileOpen ? (
+                <>
+                  <FormControl
+                    sx={{
+                      ml: 1,
+                      minWidth: 100,
+                      "& .MuiSelect-select": {
+                        fontFamily: "Nunito, sans-serif",
+                        fontSize: { xs: 18, md: 16 },
+                        fontWeight: 700,
+                        color: "#011a41",
+                      },
+                      "& fieldset": {
+                        borderRadius: 3,
+                        border: "none !important",
+                      },
+                      "& .Mui-focused": {
+                        "& fieldset": {
+                          border: "none !important",
+                        },
+                      },
+                    }}
+                  >
+                    <Select value={lan} onChange={handleLanguage}>
+                      <MenuItem
+                        sx={{ fontSize: { xs: 18, md: 16 } }}
+                        value={"uz"}
+                      >
+                        O'zbek
+                      </MenuItem>
+                      <MenuItem sx={{ fontWeight: 500 }} value={"ru"}>
+                        Русский
+                      </MenuItem>
+                      <MenuItem sx={{ color: "text.primary" }} value={"en"}>
+                        English
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
+                  <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    width: 150,
+                  }}
+                >
+                  <Fab
+                    component="a"
+                    target="_blank"
+                    href="tel:+998997565684"
+                    elevation="0"
+                    size="small"
+                    sx={{ boxShadow: "none", background: 'none',  }}
+                  >
+                    <FacebookIcon
+                      sx={{
+                        fontSize: 24,
+                        height: 24,
+                        color: "#3bb77e",
+                        fill: "#3bb77e",
+                      }}
+                    />
+                  </Fab>
+                  <Fab
+                    component="a"
+                    target="_blank"
+                    elevation="0"
+                    size="small"
+                    sx={{ boxShadow: "none", background: 'none',  }}
+                  >
+                    <InstagramIcon
+                      sx={{ fontSize: 24, height: 24, color: "#3bb77e" }}
+                    />
+                  </Fab>
+                  <Fab
+                    component="a"
+                    target="_blank"
+                    elevation="0"
+                    size="small"
+                    sx={{ boxShadow: "none", background: 'none',  }}
+                  >
+                    <YouTubeIcon
+                      sx={{ fontSize: 24, height: 24, color: "#3bb77e" }}
+                    />
+                  </Fab>
+                </Box>
+                  <Button
+                    component="a"
+                    target="_blank"
+                    variant={"contained"}
+                    disableElevation
+                    sx={{
+                      py: 2,
+                      background: "#3BB77E",
+                      borderRadius: 3,
+                      fontFamily: "Nunito, sans-serif",
+                      textTransform: "uppercase !important",
+                      fontSize: 16,
+                      fontWeight: 700,
+                      "&:hover": {
+                        background: "#00aa67",
+                      },
+                    }}
+                  >
+                    {lan == "uz"
+                      ? "QO'NG'IROQ"
+                      : lan == "en"
+                      ? "CALL PHONE"
+                      : "Звоните"}
+                  </Button>
+                </>
+              ) : (
+                ""
+              )
+            ) : (
+              <>
+                <FormControl
+                  sx={{
+                    ml: 1,
+                    minWidth: 100,
+                    "& .MuiSelect-select": {
+                      fontFamily: "Nunito, sans-serif",
+                      fontSize: { xs: 18, md: 16 },
+                      fontWeight: 700,
+                      color: "#011a41",
+                    },
+                    "& fieldset": {
+                      borderRadius: 3,
+                      border: "none !important",
+                    },
+                    "& .Mui-focused": {
+                      "& fieldset": {
+                        border: "none !important",
+                      },
+                    },
+                  }}
+                >
+                  <Select value={lan} onChange={handleLanguage}>
+                    <MenuItem
+                      sx={{ fontSize: { xs: 18, md: 16 } }}
+                      value={"uz"}
+                    >
+                      O'zbek
+                    </MenuItem>
+                    <MenuItem sx={{ fontWeight: 500 }} value={"ru"}>
+                      Русский
+                    </MenuItem>
+                    <MenuItem sx={{ color: "text.primary" }} value={"en"}>
+                      English
+                    </MenuItem>
+                  </Select>
+                </FormControl>
+
+                {/* <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    width: 150,
+                  }}
+                >
+                  <Fab
+                    component="a"
+                    target="_blank"
+                    href="tel:+998997565684"
+                    elevation="0"
+                    size="small"
+                    sx={{ boxShadow: "none", background: 'none',  }}
+                  >
+                    <FacebookIcon
+                      sx={{
+                        fontSize: 24,
+                        height: 24,
+                        color: "#3bb77e",
+                        fill: "#3bb77e",
+                      }}
+                    />
+                  </Fab>
+                  <Fab
+                    component="a"
+                    target="_blank"
+                    elevation="0"
+                    size="small"
+                    sx={{ boxShadow: "none", background: 'none',  }}
+                  >
+                    <InstagramIcon
+                      sx={{ fontSize: 24, height: 24, color: "#3bb77e" }}
+                    />
+                  </Fab>
+                  <Fab
+                    component="a"
+                    target="_blank"
+                    elevation="0"
+                    size="small"
+                    sx={{ boxShadow: "none", background: 'none',  }}
+                  >
+                    <YouTubeIcon
+                      sx={{ fontSize: 24, height: 24, color: "#3bb77e" }}
+                    />
+                  </Fab>
+                </Box> */}
+                <Button
+                  component="a"
+                  target="_blank"
+                  variant={"contained"}
+                  disableElevation
+                  sx={{
+                    py: 2,
+                    background: "#3BB77E",
+                    borderRadius: 3,
+                    fontFamily: "Nunito, sans-serif",
+                    textTransform: "capitalize",
+                    fontSize: 16,
+                    fontWeight: 700,
+                    "&:hover": {
+                      background: "#00aa67",
+                    },
+                  }}
+                >
+                  {lan == "uz"
+                    ? "Qo'ng'iroq"
+                    : lan == "en"
+                    ? "Call phone"
+                    : "ЗВОНИТЕ"}
+                </Button>
+              </>
+            )}
           </Box>
         </Toolbar>
       </Container>

@@ -4,6 +4,7 @@ import React from "react";
 export default function CatalogsItem(props) {
   return (
     <Box
+      onClick={() => props.setSortByCatalogs(props.value)}
       sx={{
         mb: 2,
         py: 1,
@@ -13,9 +14,19 @@ export default function CatalogsItem(props) {
         borderRadius: 3,
         position: "relative",
         overflow: "hidden",
-        border: "1px solid rgba(0, 0, 0, 0.23)",
         transition: "0.3s all",
         boxSizing: "border-box",
+        border:
+          props.value == props.sortByCatalogs
+            ? "1px solid #3bb77f"
+            : "1px solid rgba(0, 0, 0, 0.23)",
+
+        "& .MuiTypography-root": {
+          backgroundSize:
+            props.value == props.sortByCatalogs ? "100% 6%" : "0% 6%",
+          color:
+            props.value == props.sortByCatalogs ? "#3bb77f" : "currentcolor",
+        },
         "&:hover": {
           border: "1px solid #3bb77f",
           "& img": {

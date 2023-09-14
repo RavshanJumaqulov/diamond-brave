@@ -1,18 +1,14 @@
 import { Box, Typography } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import Context from "../Context";
+import { useNavigate } from "react-router-dom";
 
-export default function TopNewsItem() {
-  const [width, setWidth] = useState(0);
-
-  window.addEventListener("resize", () => {
-    setWidth(window.innerWidth);
-  });
-  useEffect(() => {
-    setWidth(window.innerWidth);
-  }, []);
-  const imgRef = useRef(null);
+export default function TopNewsItem(props) {
+  const {width, lan} = useContext(Context)
+  const navigate = useNavigate()
   return (
     <Box
+    onClick={()=> navigate(`/news/${props.id}`)}
       sx={{
         display: "flex",
         flexDirection: "row",
@@ -26,8 +22,7 @@ export default function TopNewsItem() {
     >
       <Box
         component={"img"}
-        ref={imgRef}
-        src="https://blogzine.webestica.com/assets/images/blog/4by3/01.jpg"
+        src={props.img}
         sx={{
           width: {
             xs: width > 450 ? 150 : 120,
@@ -72,7 +67,7 @@ export default function TopNewsItem() {
             background:
               "-webkit-gradient(linear, left top, right top, from(#3bb77e), to(#3bb77e))",
             background: "linear-gradient(to right, #3bb77e 0%, #3bb77e 100%)",
-            backgroundSize: "100px 6%",
+            backgroundSize: "0px 6%",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "left 100%",
             WebkitTransitionDuration: "0.5s",
@@ -83,7 +78,7 @@ export default function TopNewsItem() {
             },
           }}
         >
-          The pros and const of busines agency lorem
+          {props.title}
         </Typography>
         <Box
           sx={{
@@ -102,7 +97,7 @@ export default function TopNewsItem() {
               cursor: 'default'
             }}
           >
-            102 users read
+            {props.date}
           </Typography>
           <Box
             sx={{
@@ -119,10 +114,11 @@ export default function TopNewsItem() {
               fontWeight: "400",
               color: "text.secondary",
               fontFamily: "Nunito, sans-serif",
-              cursor: 'default'
+              cursor: 'default',
+              textTransform: 'lowercase'
             }}
           >
-            1022 users read
+            {lan == 'uz' ? `${props.views} marta o'qildi` : lan == 'en' ? `Read ${props.views} times` : `Прочтите ${props.views} раз`}
           </Typography>
         </Box>
       </Box>

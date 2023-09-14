@@ -1,9 +1,16 @@
 import { Box, Stack, Typography } from "@mui/material";
-import React from "react";
-
-export default function BlogFirstItem() {
+import moment from "moment";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import Context from "../Context"
+export default function BlogFirstItem({ el }) {
+  moment.locale('uz-latn')
+  console.log(moment(el.created_at).fromNow())
+  const { lan } = useContext(Context)
+  const navigate = useNavigate()
   return (
     <Stack
+    onClick = {() => navigate(`/news/${el.id}`)}
       direction="column"
       sx={{
         borderRadius: 4,
@@ -34,7 +41,7 @@ export default function BlogFirstItem() {
           transition: "opacity 0.3s",
         }}
         component="img"
-        src="https://zone-ui.vercel.app/assets/images/career/career_1.jpg"
+        src={el.img}
       ></Box>
       <Box
         sx={{
@@ -59,10 +66,10 @@ export default function BlogFirstItem() {
             alignItems: "center",
             fontSize: 12,
             fontFamily: "Nunito, sans-serif",
-            cursor: 'default',
+            cursor: "default",
           }}
         >
-          25 Avg 2023
+          {moment(el.created_at).fromNow()}
           <Box
             sx={{
               mx: 2,
@@ -70,22 +77,30 @@ export default function BlogFirstItem() {
               height: 4,
               borderRadius: "50%",
               backgroundColor: "currentColor",
-              cursor: 'default',
+              cursor: "default",
+              textTransform: 'lowercase'
             }}
           ></Box>
-          21 user read
+           {lan == 'uz' ? `${el.views} marta o'qildi` : lan == 'en' ? `Read ${el.views} times` : `Прочтите ${el.views} раз`}
         </Stack>
         <Typography
           sx={{
             fontFamily: "Barlow, sans-serif",
             fontWeight: 700,
             fontSize: { xs: 24, sm: 26, md: 30, lg: 32 },
-            cursor: 'default',
+            cursor: "default",
+            width: "auto",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            display: "-webkit-box !important",
+            WebkitLineClamp: '2 !important',
+            WebkitBoxOrient: "vertical",
           }}
         >
-          10 Essential Tips for Healthy Living
+          {el[`title_${lan}`]}
         </Typography>
         <Typography
+        dangerouslySetInnerHTML={{ __html: el[`text_${lan}`] }}
           sx={{
             fontSize: 16,
             fontWeight: 400,
@@ -94,16 +109,13 @@ export default function BlogFirstItem() {
             width: "auto",
             overflow: "hidden",
             textOverflow: "ellipsis",
-            display: "-webkit-box",
-            WebkitLineClamp: 2,
+            display: "-webkit-box !important",
+            WebkitLineClamp: '2 !important',
             WebkitBoxOrient: "vertical",
-            cursor: 'default',
+            cursor: "default",
           }}
         >
-          Occaecati est et illo quibusdam accusamus qui. Incidunt aut et
-          molestiae ut facere aut. Est quidem iusto praesentium excepturi harum
-          nihil tenetur facilis. Ut omnis voluptates nihil accusantium doloribus
-          eaque debitis.
+          
         </Typography>
       </Box>
     </Stack>

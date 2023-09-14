@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Container, Fab, Typography, createSvgIcon } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import YouTubeIcon from "@mui/icons-material/YouTube";
+import Context from "../Context";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import YouTubeIcon from "@mui/icons-material/YouTube";
 const FacebookIcon = createSvgIcon(
   <svg height="1em" viewBox="0 0 320 512">
     <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" />
@@ -14,6 +15,8 @@ const FacebookIcon = createSvgIcon(
 );
 
 export default function Footer() {
+  const { lan } = useContext(Context);
+
   return (
     <Box
       sx={{
@@ -34,6 +37,19 @@ export default function Footer() {
               src="/img/logo.png"
               sx={{ width: 100, objectFit: "contain", mb: 2 }}
             />
+
+            <Typography
+              color="text.secondary"
+              sx={{
+                mt: 1,
+                fontSize: 16,
+                fontWeight: 400,
+                fontFamily: "Nunito, sans-serif",
+              }}
+            >
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad
+              voluptatibus deleniti officiis rem maiores,.
+            </Typography>
             <Box
               sx={{
                 display: "flex",
@@ -64,18 +80,6 @@ export default function Footer() {
                 />
               </Fab>
             </Box>
-            <Typography
-              color="text.secondary"
-              sx={{
-                mt: 2,
-                fontSize: 16,
-                fontWeight: 400,
-                fontFamily: "Nunito, sans-serif",
-              }}
-            >
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad
-              voluptatibus deleniti officiis rem maiores,.
-            </Typography>
             <Box
               sx={{
                 mt: 2,
@@ -121,7 +125,7 @@ export default function Footer() {
                   "Biz haqimizda",
                 ].map((el, index) => (
                   <Typography
-                  key={index}
+                    key={index}
                     sx={{
                       mb: 1,
                       fontSize: 16,
@@ -148,7 +152,7 @@ export default function Footer() {
                   "Biz haqimizda",
                 ].map((el, index) => (
                   <Typography
-                  key={index}
+                    key={index}
                     sx={{
                       mb: 1,
                       fontSize: 16,

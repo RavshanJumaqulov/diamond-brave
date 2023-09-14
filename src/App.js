@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import Context from "./Context";
 import Footer from "./components/Footer";
 import store from "./redux/store";
+import Background from "./components/Background";
 
 const theme = () =>
   createTheme({
@@ -18,25 +19,47 @@ const theme = () =>
   });
 function App() {
   const [width, setWidth] = useState(window.innerWidth);
+  const [height, setHeight] = useState(window.innerHeight);
+  const [lan, setLan] = useState("uz");
   const [productsLoading, setProductsLoading] = useState({
-    status: true,
+    status: false,
+    error: false,
+    message: "",
+  });
+  const [catalogsLoading, setCatalogsLoading] = useState({
+    status: false,
     error: false,
     message: "",
   });
   const [newsLoading, setNewsLoading] = useState({
-    status: true,
+    status: false,
     error: false,
     message: "",
   });
 
   window.addEventListener("resize", () => {
     setWidth(window.innerWidth);
+    setHeight(window.innerHeight);
   });
   return (
-    <Context.Provider value={{ width, productsLoading, setProductsLoading, newsLoading, setNewsLoading }}>
+    <Context.Provider
+      value={{
+        lan,
+        setLan,
+        width,
+        height,
+        productsLoading,
+        setProductsLoading,
+        catalogsLoading,
+        setCatalogsLoading,
+        newsLoading,
+        setNewsLoading,
+      }}
+    >
       <Provider store={store}>
         <ThemeProvider theme={theme()}>
-          <Box>
+          <Box sx={{ position: "relative" }}>
+            <Background />
             <BrowserRouter>
               <CssBaseline />
               <Header />

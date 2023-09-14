@@ -18,7 +18,7 @@ export default function ProductsItemLoading() {
         variant="rectangular"
         width={"100%"}
         ref={skeletRef}
-        sx={{ borderRadius: 3, height: (skeletWidth * 9) / 16 }}
+        sx={{ borderRadius: 3, height: skeletWidth }}
       />
       <Skeleton sx={{}} />
       <Skeleton width="60%" />

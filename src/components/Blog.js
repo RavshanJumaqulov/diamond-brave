@@ -1,18 +1,18 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import BlogFirstItem from "./BlogFirstItem";
 import { Masonry } from "@mui/lab";
-import BlogItem from "./BlogItemMD";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import BlogItemSM from "./BlogItemSM";
 import BlogItemMD from "./BlogItemMD";
+import Context from "../Context";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 export default function Blog() {
-  const [width, setWidth] = useState(window.innerWidth);
-  console.log(width);
-  window.addEventListener("resize", () => {
-    setWidth(window.innerWidth);
-  });
+  const navigate = useNavigate()
+  const { lan } = useContext(Context);
+  const news = useSelector((state) => state.news);
   return (
     <Box
       sx={{
@@ -23,7 +23,6 @@ export default function Blog() {
         direction="column"
         sx={{
           justifyContent: "space-between",
-          // mb: { xs: 8, md: 10 },
         }}
       >
         <Typography
@@ -31,7 +30,7 @@ export default function Blog() {
             fontSize: 14,
             fontWeight: 700,
             fontFamily: "Nunito, sans-serif",
-            textAlign: 'left',
+            textAlign: "left",
           }}
           color="text.secondary"
         >
@@ -51,17 +50,18 @@ export default function Blog() {
         >
           <Typography
             sx={{
-              fontSize: { xs: 'calc(1.3125rem + 0.75vw)', lg: 30 },
+              fontSize: { xs: "calc(1.3125rem + 0.75vw)", lg: 30 },
               fontWeight: 700,
               fontFamily: "Nunito, sans-serif",
               color: "#011a41",
               mb: 3,
-              mt: 2
+              mt: 2,
             }}
           >
-            So'nggi yangiliklar
+            {lan == 'uz' ? "So'nggi yangiliklar" : lan == 'en' ?  "Latest news" : "Последние новости"}
           </Typography>
           <Button
+          onClick={()=>navigate('/news')}
             variant="light"
             disableElevation
             endIcon={<KeyboardArrowRightIcon />}
@@ -72,46 +72,45 @@ export default function Blog() {
               fontSize: 16,
             }}
           >
-            Barchasi
+            {lan == 'uz' ? "Barchasi" : lan == 'en' ?  "All news" : "Все новости"}
+            
           </Button>
         </Stack>
       </Stack>
       <Box
         sx={{
           display: "grid",
-          gap: { xs: "24px", md: "32px" },
+          gap: { xs: "16px", md: "32px" },
           minWidth: "100%",
         }}
       >
-          <Grid2 container sx={{display: {xs: 'none', md: 'flex'}}}>
-            <Grid2 xs={12} sm={6}>
-              <BlogFirstItem />
-            </Grid2>
-            <Grid2 sm={12} md={6}>
-              <Masonry
-                columns={2}
-                sx={{
-                  width: "100%",
-                  display: "flex",
-                  flexFlow: "column wrap",
-                  alignContent: "flex-start",
-                  boxSizing: "border-box",
-                  mt: "-8px !important",
-                }}
-              >
-                <BlogItemMD order={1} />
-                <BlogItemMD order={2} />
-                <BlogItemMD order={3} />
-                <BlogItemMD order={4} />
-              </Masonry>
-            </Grid2>
+        <Grid2 container sx={{ display: { xs: "none", md: "flex" } }}>
+          <Grid2 xs={12} sm={6}>
+            <BlogFirstItem el={news[0]} />
           </Grid2>
-          <Grid2 container sx={{display: {xs: 'flex', md: 'none'}}}>
-            <BlogItemSM index={1} />
-            <BlogItemSM index={2} />
-            <BlogItemSM index={3} />
-            <BlogItemSM index={4} />
+          <Grid2 sm={12} md={6}>
+            <Masonry
+              columns={2}
+              sx={{
+                width: "100%",
+                display: "flex",
+                flexFlow: "column wrap",
+                alignContent: "flex-start",
+                boxSizing: "border-box",
+                mt: "-8px !important",
+              }}
+            >
+              {news.slice(1, 5).map((el, index) => {
+                return <BlogItemMD order={index + 1} key={index} item={el} />;
+              })}
+            </Masonry>
           </Grid2>
+        </Grid2>
+        <Grid2 container sx={{ display: { xs: "flex", md: "none" } }}>
+          {news.slice(0, 4).map((el, index) => {
+            return <BlogItemSM index={index + 1} key={index} item={el} />;
+          })}
+        </Grid2>
         <Box
           sx={{
             width: "100%",
@@ -128,7 +127,7 @@ export default function Blog() {
             endIcon={<KeyboardArrowRightIcon />}
             sx={{ display: { xs: "flex", md: "none" } }}
           >
-            Barchasi
+            {lan == 'uz' ? "Barchasi" : lan == 'en' ?  "All news" : "Все новости"}
           </Button>
         </Box>
       </Box>

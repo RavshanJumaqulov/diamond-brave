@@ -1,11 +1,17 @@
 import { Box, Stack, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import React from "react";
+import moment from "moment";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import Context from "../Context";
 
-export default function BlogItemSM({index}) {
+export default function BlogItemSM({index, item}) {
+  const navigate = useNavigate()
+  const { lan } = useContext(Context)
   return (
     <Grid2 xs={12} sm={6}>
       <Box
+      onClick={()=>navigate(`/news/${item.id}`)}
         sx={{
           width: "100%",
           pl: {xs: 0, sm: index%2 == 0 ? 1.5 : 0},
@@ -19,7 +25,7 @@ export default function BlogItemSM({index}) {
       >
         <Box
           component={"img"}
-          src="https://zone-ui.vercel.app/assets/images/career/career_1.jpg"
+          src={item.img}
           sx={{
             width: "80px",
             height: "80px",
@@ -43,7 +49,7 @@ export default function BlogItemSM({index}) {
               cursor: 'default',
             }}
           >
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit.dddddd
+            {item[`title_${'uz'}`]}
           </Typography>
           <Stack
             direction={"row"}
@@ -56,7 +62,7 @@ export default function BlogItemSM({index}) {
               cursor: 'default',
             }}
           >
-            25 Avg 2023
+            {moment(item.created_at).fromNow()}
             <Box
               sx={{
                 mx: 2,
@@ -64,9 +70,10 @@ export default function BlogItemSM({index}) {
                 height: 4,
                 borderRadius: "50%",
                 backgroundColor: "currentColor",
+                textTransform: 'lowercase'
               }}
             ></Box>
-            21 user read
+            {lan == 'uz' ? `${item.views} marta o'qildi` : lan == 'en' ? `Read ${item.views} times` : `Прочтите ${item.views} раз`}
           </Stack>
         </Box>
       </Box>

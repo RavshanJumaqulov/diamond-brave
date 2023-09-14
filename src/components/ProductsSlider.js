@@ -2,25 +2,18 @@ import { Box, Button, Fab } from "@mui/material";
 import React, { useContext, useRef, useState } from "react";
 import Slider from "react-slick/lib/slider";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import CarauselItem from "./CarauselItem";
 import ProductSliderItem from "./ProductSliderItem";
 import { useSelector } from "react-redux";
-import ProductsItemLoading from "./ProductsItemLoading";
+import CloseIcon from "@mui/icons-material/Close";
 import Context from "../Context";
 
 export default function ProductsSlider() {
   const { productsLoading } = useContext(Context);
   const products = useSelector((state) => state.products);
-  const [width, setWidth] = useState(window.innerWidth);
-  const [height, setHeight] = useState(window.innerHeight);
+  const { width, height } = useContext(Context);
   const [img, setImg] = useState("");
 
   const arrowRef = useRef(null);
-
-  window.addEventListener("resize", () => {
-    setWidth(window.innerWidth);
-    setHeight(window.innerHeight);
-  });
 
   const settings = {
     dots: true,
@@ -85,7 +78,6 @@ export default function ProductsSlider() {
     >
       {img.length > 0 ? (
         <Box
-          onClick={() => setImg("")}
           sx={{
             width: "100%",
             height: "100vh",
@@ -99,6 +91,59 @@ export default function ProductsSlider() {
             alignItems: "center",
           }}
         >
+          <Box
+            sx={{
+              position: "fixed",
+              width: "100%",
+              height: "100vh",
+              top: 0,
+              left: 0,
+              background: img.length ? "rgba(0, 0, 0, 0.2)" : "none",
+              zIndex: 1000000,
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Box
+              onClick={() => setImg("")}
+              sx={{
+                position: "absolute",
+                top: 0,
+                right: 0,
+                width: 50,
+                height: 30,
+                background: "rgba(0, 0, 0, 0.4)",
+                transition: "0.3s all !important",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                "&:hover": {
+                  background: "red",
+                  "& svg": {
+                    transition: "0.3s all !important",
+                    transform: "scale(1.05)",
+                  },
+                },
+                "& svg": {
+                  color: "#fff",
+                },
+              }}
+            >
+              <CloseIcon />
+            </Box>
+            <Box
+              component="img"
+              src={img}
+              sx={{
+                width: { xs: "100%", sm: "90%" },
+                height: { xs: "100%", sm: "90%" },
+                objectFit: "contain",
+              }}
+            />
+          </Box>
           <Box
             component={"img"}
             src={img}
@@ -160,34 +205,16 @@ export default function ProductsSlider() {
         </Fab>
       </Box>
       <Slider ref={arrowRef} {...settings} style={{ width: "100%" }}>
-        {!productsLoading.status ? (
-          <Slider ref={arrowRef} {...settings} style={{ width: "100%" }}>
-            <ProductsItemLoading />
-            <ProductsItemLoading />
-            <ProductsItemLoading />
-            <ProductsItemLoading />
-            <ProductsItemLoading />
-            <ProductsItemLoading />
-            <ProductsItemLoading />
-            <ProductsItemLoading />
-          </Slider>
-        ) : productsLoading.status && !productsLoading.error ? (
-          <Slider ref={arrowRef} {...settings} style={{ width: "100%" }}>
-            {products.map((el, index) => {
-              return (
-                <ProductSliderItem
-                  key={index}
-                  width={width}
-                  setImg={setImg}
-                  title={el.name}
-                  img={el.img}
-                />
-              );
-            })}
-          </Slider>
-        ) : (
-          ""
-        )}
+        {products.map((el, index) => {
+          return (
+            <ProductSliderItem
+              key={index}
+              width={width}
+              setImg={setImg}
+              el={el}
+            />
+          );
+        })}
       </Slider>
     </Box>
   );

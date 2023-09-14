@@ -8,18 +8,19 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
-import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
 import StarIcon from "@mui/icons-material/Star";
+import { useNavigate } from "react-router-dom";
+import Context from "../Context";
 
-export default function ProductSliderItem({ width, setImg, img, title }) {
-  const [open, setOpen] = React.useState(true);
+export default function ProductSliderItem({ width, setImg, el }) {
+  const { lan } = useContext(Context);
+  const navigate = useNavigate();
   const imgRef = useRef(null);
   const [imgWidth, setImgWidth] = useState(0);
 
   useEffect(() => {
-    console.log(imgRef.current.clientWidth);
     setImgWidth(imgRef.current.clientWidth);
   }, [width, imgRef]);
   return (
@@ -33,6 +34,7 @@ export default function ProductSliderItem({ width, setImg, img, title }) {
           p: 1,
           background: "#ffffff3f",
           backdropFilter: "blur(18px)",
+          overflow: "hidden",
         }}
       >
         <Box
@@ -40,7 +42,7 @@ export default function ProductSliderItem({ width, setImg, img, title }) {
           sx={{
             position: "relative",
             bottom: 0,
-            overflow: "hidden",
+            // overflow: "hidden",
             "&:hover": {
               "& .MuiStack-root": {
                 transform: "translateY(0)",
@@ -49,9 +51,24 @@ export default function ProductSliderItem({ width, setImg, img, title }) {
             },
           }}
         >
+          <Typography
+            sx={{
+              position: "absolute",
+              top: -8,
+              left: -8,
+              background: "#3bb77f",
+              px: 0.5,
+              py: 0.2,
+              borderTopLeftRadius: 12,
+              borderBottomRightRadius: 12,
+              color: "#fff",
+            }}
+          >
+            {el["category"][`title_${lan}`]}
+          </Typography>
           <Box
             component={"img"}
-            src={img}
+            src={el.img}
             sx={{
               width: "100%",
               minHeight: imgWidth,
@@ -59,66 +76,38 @@ export default function ProductSliderItem({ width, setImg, img, title }) {
               objectFit: "contain",
             }}
           />
-          <Stack
+          <Fab
+            onClick={() => setImg(el.img)}
+            size="small"
+            elevation={3}
             sx={{
-              width: "100%",
               position: "absolute",
-              bottom: 0,
-              transform: { xs: "translateY(0px)", md: "translateY(50px)" },
-              opacity: { xs: 1, md: 0 },
+              boxShadow: "none",
+              bottom: 10,
+              right: 10,
+              background: "none",
               transition: "0.3s all",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
+              "&:hover": {
+                background: "#e0e0e0",
+                "& svg": {
+                  color: "#3BB77E",
+                  transform: "scale(1.1)",
+                },
+              },
             }}
           >
-            <Box
+            <FullscreenIcon
               sx={{
-                width: "90%",
-                height: 50,
-                borderRadius: 3,
-                background: {
-                  xs: "rgba(0, 0, 0, 0.1)",
-                  md: "rgba(0, 0, 0, 0.2)",
-                },
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-around",
+                width: 35,
+                height: 35,
+                fontSize: 35,
+                color: "text.primary",
+                transition: "0.3s all",
+                bottom: 10,
+                right: 10,
               }}
-            >
-              <Fab onClick={() => setImg(img)} size="small" elevation={0}>
-                <FullscreenIcon
-                  sx={{
-                    width: 35,
-                    height: 35,
-                    fontSize: 35,
-                    color: "text.primary",
-                    transition: "0.3s all",
-                    "&:hover": {
-                      color: "#3BB77E",
-                      transform: "scale(1.1)",
-                    },
-                  }}
-                />
-              </Fab>
-              <Fab onClick={() => setImg(img)} size="small" elevation={0}>
-                <AssignmentOutlinedIcon
-                  sx={{
-                    width: 35,
-                    height: 35,
-                    fontSize: 35,
-                    color: "text.primary",
-                    transition: "0.3s all",
-                    "&:hover": {
-                      color: "#3BB77E",
-                      transform: "scale(1.1)",
-                    },
-                  }}
-                />
-              </Fab>
-            </Box>
-          </Stack>
+            />
+          </Fab>
         </Box>
         <Box sx={{ my: 2 }}>
           <Typography
@@ -134,11 +123,15 @@ export default function ProductSliderItem({ width, setImg, img, title }) {
               WebkitBoxOrient: "vertical",
             }}
           >
-            {title}
+            {el[`title_${lan}`]}
           </Typography>
           <Stack
             direction={"row"}
-            sx={{ alignItems: "center", justifyContent: "space-between" }}
+            sx={{
+              mt: 1,
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
           >
             <Rating
               defaultValue={4.7}
@@ -160,11 +153,12 @@ export default function ProductSliderItem({ width, setImg, img, title }) {
                 textAlign: "right",
               }}
             >
-              10 Tabletka
+              {el[`miqdori${lan}`]}
             </Typography>
           </Stack>
         </Box>
         <Button
+          onClick={() => navigate(`/products/${el.id}`)}
           variant={"contained"}
           disableElevation
           sx={{
@@ -180,7 +174,7 @@ export default function ProductSliderItem({ width, setImg, img, title }) {
             },
           }}
         >
-          Batafsil
+          {lan == "uz" ? "Batafsil" : lan == "en" ? "Read more" : "Более"}
         </Button>
       </Box>
     </Box>

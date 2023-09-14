@@ -20,7 +20,7 @@ export default function CreativeCarausel(props) {
     dots: false,
     arrows: false,
   };
-  console.log(catalogs);
+  // console.log(catalogs);
 
   return (
     <Box

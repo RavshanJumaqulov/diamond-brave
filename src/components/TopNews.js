@@ -1,11 +1,17 @@
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useContext } from "react";
 import TopNewsItem from "./TopNewsItem";
 import { Stack, Typography } from "@mui/material";
-import CampaignIcon from '@mui/icons-material/Campaign';
+import CampaignIcon from "@mui/icons-material/Campaign";
+import { useSelector } from "react-redux";
+import moment from "moment";
+import Context from "../Context";
+import { useNavigate } from "react-router-dom";
 
-export default function TopNews() {
+export default function TopNews({ items }) {
+  const navigate = useNavigate()
+  const { lan } = useContext(Context);
   return (
     <Box sx={{ width: "100%" }}>
       <Stack
@@ -18,12 +24,9 @@ export default function TopNews() {
         <Stack
           sx={{
             display: "flex",
-            flexDirection: { xs: "column", md: "row" },
+            flexDirection: "row",
             width: "100%",
-            alignItems: {
-              xs: "center",
-              md: "center",
-            },
+            alignItems: "center",
             justifyContent: { xs: "space-between", md: "space-between" },
           }}
         >
@@ -36,7 +39,11 @@ export default function TopNews() {
               mb: 1,
             }}
           >
-             So'nggi yangiliklar
+            {lan == "uz"
+              ? "So'nggi yangiliklar"
+              : lan == "en"
+              ? "Latest news"
+              : "Последние новости"}
           </Typography>
         </Stack>
         <Typography
@@ -44,31 +51,36 @@ export default function TopNews() {
             fontSize: 14,
             fontWeight: 700,
             fontFamily: "Nunito, sans-serif",
-            textAlign: { xs: "center", md: "left" },
+            textAlign: "left",
           }}
           color="text.secondary"
         >
-          DIAMOND BRAVE WORLD PHARM kompaniyasida sodir bo'lib kelayotgan
-          so'nggi yangiliklar
+          {lan == "uz"
+            ? `DIAMOND BRAVE WORLD PHARM kompaniyasida sodir bo'lib kelayotgan
+            so'nggi yangiliklar.`
+            : lan == "en"
+            ? `What is happening at DIAMOND BRAVE WORLD PHARM
+            latest news.`
+            : `Что происходит в DIAMOND BRAVE WORLD PHARM
+            последние новости.`}
         </Typography>
       </Stack>
-      <Grid2 container>
+      <Grid2 container spacing={2}>
         <Grid2
           xs={12}
           md={6}
           lg={7}
           sx={{
-            px: 1,
             mb: { xs: 2, md: 0 },
             minHeight: { xs: "300px", sm: 400, md: "100%" },
           }}
         >
           <Box
+          onClick={()=> navigate(`/news/${items[0].id}`)}
             sx={{
               display: "block",
               overflow: "hidden",
-              background:
-                "url(https://blogzine.webestica.com/assets/images/blog/16by9/05.jpg)",
+              background: `url(${items[0].img})`,
               backgroundSize: "cover",
               backgroundPosition: "center center",
               borderRadius: 3,
@@ -87,11 +99,11 @@ export default function TopNews() {
                 backgroundImage: "linear-gradient(180deg, transparent, black)",
                 zIndex: 1,
               },
-              "&:hover":{
+              "&:hover": {
                 "& .MuiTypography-root": {
-                    backgroundSize: "100% 3%",
-                  },
-              }
+                  backgroundSize: "100% 3%",
+                },
+              },
             }}
           >
             <Box
@@ -122,10 +134,10 @@ export default function TopNews() {
                     fontWeight: "400",
                     color: "#fff",
                     fontFamily: "Nunito, sans-serif",
-                    cursor: 'defalut'
+                    cursor: "defalut",
                   }}
                 >
-                  102 users read
+                  {moment(items[0].created_at).fromNow()}
                 </Typography>
                 <Box
                   sx={{
@@ -142,10 +154,15 @@ export default function TopNews() {
                     fontWeight: "400",
                     color: "#fff",
                     fontFamily: "Nunito, sans-serif",
-                    cursor: 'defalut'
+                    cursor: "defalut",
+                    textTransform: "lowercase",
                   }}
                 >
-                  1022 users read
+                  {lan == "uz"
+                    ? `${items[0].views} marta o'qildi`
+                    : lan == "en"
+                    ? `read ${items[0].views} times`
+                    : `Прочтите ${items[0].views} раз`}
                 </Typography>
               </Box>
               <Typography
@@ -175,29 +192,35 @@ export default function TopNews() {
                   WebkitTransitionDuration: "0.5s",
                   transitionDuration: "0.5s",
                   cursor: "pointer",
-                  wordWrap:'break-word',
+                  wordWrap: "break-word",
                   "&:hover": {
                     backgroundSize: "100% 3%",
                   },
                 }}
               >
-                The pros and const of busines agency Lorem ipsum dolor sit, amet
-                consectetur adipisicing elit.
+                {items[0][`title_${lan}`]}
               </Typography>
             </Box>
           </Box>
         </Grid2>
-        <Grid2 xs={12} md={6} lg={5} sx={{ px: 1 }}>
+        <Grid2 xs={12} md={6} lg={5}>
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-            <TopNewsItem />
-            <TopNewsItem />
-            <TopNewsItem />
-            <TopNewsItem />
+            {items.slice(1, 5).map((el, index) => {
+              return (
+                <TopNewsItem
+                  id={el.id}
+                  key={index}
+                  item={el}
+                  img={el.img}
+                  title={el[`title_${lan}`]}
+                  date={moment(el.created_at).fromNow()}
+                  views={el.views}
+                />
+              );
+            })}
           </Box>
         </Grid2>
-        <Grid2 xs={12} md={6} lg={5} sx={{ px: 1 }}>
-
-        </Grid2>
+        <Grid2 xs={12} md={6} lg={5} sx={{ px: 1 }}></Grid2>
       </Grid2>
     </Box>
   );

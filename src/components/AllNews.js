@@ -1,10 +1,15 @@
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useContext } from "react";
 import TopNewsItem from "./TopNewsItem";
 import { Stack, Typography } from "@mui/material";
+import { useSelector } from "react-redux";
+import moment from "moment";
+import Context from "../Context";
 
 export default function AllNews() {
+  const news = useSelector((state) => state.news);
+  const { lan } = useContext(Context);
   return (
     <Box sx={{ width: "100%" }}>
       <Stack
@@ -35,7 +40,11 @@ export default function AllNews() {
               mb: 1,
             }}
           >
-            Barcha yangiliklar
+            {lan == "uz"
+              ? "Barcha yangiliklar"
+              : lan == "en"
+              ? "All news"
+              : "Все новости"}
           </Typography>
         </Stack>
         <Typography
@@ -47,36 +56,30 @@ export default function AllNews() {
           }}
           color="text.secondary"
         >
-          DIAMOND BRAVE WORLD PHARM kompaniyasida sodir bo'lib kelayotgan
-          so'nggi yangiliklar
+          {lan == "uz"
+            ? "DIAMOND BRAVE WORLD PHARM kompaniyasida sodir bo'lib kelayotgan yangiliklar bilan tanishing."
+            : lan == "en"
+            ? "Find out what's happening at DIAMOND BRAVE WORLD PHARM."
+            : "Узнайте, что происходит в DIAMOND BRAVE WORLD PHARM."}
         </Typography>
       </Stack>
-      <Grid2 container>
-        <Grid2 xs={12} md={6} sx={{ px: 1, mb: 2 }}>
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <TopNewsItem />
-          </Box>
-        </Grid2>
-        <Grid2 xs={12} md={6} sx={{ px: 1, mb: 2 }}>
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <TopNewsItem />
-          </Box>
-        </Grid2>
-        <Grid2 xs={12} md={6} sx={{ px: 1, mb: 2 }}>
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <TopNewsItem />
-          </Box>
-        </Grid2>
-        <Grid2 xs={12} md={6} sx={{ px: 1, mb: 2 }}>
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <TopNewsItem />
-          </Box>
-        </Grid2>
-        <Grid2 xs={12} md={6} sx={{ px: 1, mb: 2 }}>
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <TopNewsItem />
-          </Box>
-        </Grid2>
+      <Grid2 container spacing={2}>
+        {news.map((el, index) => {
+          return (
+            <Grid2 xs={12} md={6} key={index}>
+              <Box sx={{ display: "flex", flexDirection: "column" }}>
+                <TopNewsItem
+                  id={el.id}
+                  item={el}
+                  img={el.img}
+                  title={el[`title_${lan}`]}
+                  date={moment(el.created_at).fromNow()}
+                  views={el.views}
+                />
+              </Box>
+            </Grid2>
+          );
+        })}
       </Grid2>
     </Box>
   );
