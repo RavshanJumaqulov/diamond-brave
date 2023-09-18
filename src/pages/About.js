@@ -19,6 +19,7 @@ export default function About() {
     pauseOnHover: false,
     vertical: true,
     verticalSwiping: true,
+    swipeToSlide: true,
   };
   return (
     <Container maxWidth="xl">
@@ -251,86 +252,18 @@ export default function About() {
           justifyContent: "center",
           mt: 2,
         }}
-      >
-        {/* <Grid2 container spacing={2} sx={{ maxWidth: 900 }}>
-          <Grid2 xs={12} sm={4} md={3}>
-            <Slider {...settings}>
-              <Box sx={{ width: "100%" }}>
-                <Typography
-                  sx={{
-                    fontSize: { xs: "calc(1.3125rem + 0.75vw)", lg: 30 },
-                    fontWeight: 700,
-                    fontFamily: "Nunito, sans-serif",
-                    color: "#011a41",
-                  }}
-                >
-                  {lan == "uz"
-                    ? "Bizning maqsadimiz"
-                    : lan == "en"
-                    ? "About us"
-                    : "О нас"}
-                </Typography>
-              </Box>
-              <Box sx={{ width: "100%" }}>
-                <Typography
-                  sx={{
-                    fontSize: { xs: "calc(1.3125rem + 0.75vw)", lg: 30 },
-                    fontWeight: 700,
-                    fontFamily: "Nunito, sans-serif",
-                    color: "#011a41",
-                  }}
-                >
-                  {lan == "uz"
-                    ? "Bizning vazifamiz"
-                    : lan == "en"
-                    ? "About us"
-                    : "О нас"}
-                </Typography>
-              </Box>
-            </Slider>
-          </Grid2>
-          <Grid2 xs={12} sm={8} md={9}>
-            <Slider {...settings}>
-              <Box sx={{ width: "100%" }}>
-                <Typography
-                  sx={{
-                    fontSize: 16,
-                    fontWeight: 500,
-                    fontFamily: "Nunito, sans-serif",
-                    color: "#011a41",
-                  }}
-                >
-                  {lan == "uz"
-                    ? "Dorivor o`simliklar xom ashyo bazasidan samarali foydalanish, qayta ishlashni qo`llab-quvvatlash orqali qo`shimcha qiymat zanjirini yaratish va davolashda ulardan keng foydalanishni tashkil etish."
-                    : lan == "en"
-                    ? "About us"
-                    : "О нас"}
-                </Typography>
-              </Box>
-              <Box sx={{ width: "100%" }}>
-                <Typography
-                  sx={{
-                    fontSize: 16,
-                    fontWeight: 500,
-                    fontFamily: "Nunito, sans-serif",
-                    color: "#011a41",
-                  }}
-                >
-                  {lan == "uz"
-                    ? "Insonlarni yanada sog'lomroq yashashlari uchun innovatsion bio-faol mahsulotlarini taklif qilish hamda mas'uliyat, tezlik, jamoaviy mehnat orqali mahsulotlarimizni hamyonbob narxlarda yetqazib berishdir."
-                    : lan == "en"
-                    ? "About us"
-                    : "О нас"}
-                </Typography>
-              </Box>
-            </Slider>
-          </Grid2>
-        </Grid2> */}
-      </Box>
-      <Grid2 container spacing={2} sx={{border: '1px solid red'}}>
-        <Grid2 xs={12} md={6} sx={{display: 'flex', flexDirection: 'column' , justifyContent: 'center'}}>
+      ></Box>
+      <Grid2 container spacing={2}>
+        <Grid2 xs={12} md={6} sx={{ alignSelf: "center" }}>
           <Slider {...settings}>
-            <Box sx={{ border: '1px solid red', }}>
+            <Box
+              sx={{
+                height: 150,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
               <Typography
                 sx={{
                   fontSize: { xs: "calc(1.3125rem + 0.75vw)", lg: 30 },
@@ -342,8 +275,8 @@ export default function About() {
                 {lan == "uz"
                   ? "Bizning maqsadimiz"
                   : lan == "en"
-                  ? "About us"
-                  : "О нас"}
+                  ? "Our goal"
+                  : "Наша цель"}
               </Typography>
               <Typography
                 sx={{
@@ -356,11 +289,18 @@ export default function About() {
                 {lan == "uz"
                   ? "Dorivor o`simliklar xom ashyo bazasidan samarali foydalanish, qayta ishlashni qo`llab-quvvatlash orqali qo`shimcha qiymat zanjirini yaratish va davolashda ulardan keng foydalanishni tashkil etish."
                   : lan == "en"
-                  ? "About us"
-                  : "О нас"}
+                  ? "Эффективное использование сырьевой базы лекарственных растений, создание цепочки добавленной стоимости за счет поддержки переработки и организации их широкого использования в лечении."
+                  : "Effective use of raw material base of medicinal plants, creation of added value chain by supporting processing and organizing their wide use in treatment."}
               </Typography>
             </Box>
-            <Box sx={{ border: '1px solid red', }}>
+            <Box
+              sx={{
+                height: 150,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
               <Typography
                 sx={{
                   fontSize: { xs: "calc(1.3125rem + 0.75vw)", lg: 30 },
@@ -370,10 +310,10 @@ export default function About() {
                 }}
               >
                 {lan == "uz"
-                  ? "Bizning Vazifamiz"
+                  ? "Bizning vazifamiz"
                   : lan == "en"
-                  ? "About us"
-                  : "О нас"}
+                  ? "Our mission"
+                  : "Наша миссия"}
               </Typography>
               <Typography
                 sx={{
@@ -386,28 +326,100 @@ export default function About() {
                 {lan == "uz"
                   ? "Insonlarni yanada sog'lomroq yashashlari uchun innovatsion bio-faol mahsulotlarini taklif qilish hamda mas'uliyat, tezlik, jamoaviy mehnat orqali mahsulotlarimizni hamyonbob narxlarda yetqazib berishdir."
                   : lan == "en"
-                  ? "About us"
-                  : "О нас"}
+                  ? "It is to offer innovative bio-active products for people to live healthier and to deliver our products at affordable prices through responsibility, speed and teamwork."
+                  : "Целью нашей компании является предложение инновационных биоактивных продуктов, позволяющих людям вести более здоровый образ жизни, и поставка нашей продукции по доступным ценам благодаря ответственности, скорости и командной работе."}
               </Typography>
             </Box>
           </Slider>
         </Grid2>
-        <Grid2 xs={12} md={6}>
-          <Slider {...settings} style={{border: '1px solid blue'}}>
+        <Grid2 xs={12} md={6} sx={{ alignSelf: "center" }}>
+          <Slider {...settings} style={{ maxHeight: 400, minHeight: 400 }}>
             <Box sx={{ width: "50%" }}>
-              <Box component='img' src='/maqsad.svg' sx={{width: '100%', maxHeight: 400, objectFit: 'contain'}} />
+              <Box
+                component="img"
+                src="/maqsad.svg"
+                sx={{ width: "100%", maxHeight: 400, objectFit: "contain" }}
+              />
+            </Box>
+            <Box sx={{ width: "50%" }}>
+              <Box
+                component="img"
+                src="/vazifa.svg"
+                sx={{ width: "100%", maxHeight: 400, objectFit: "contain" }}
+              />
             </Box>
           </Slider>
         </Grid2>
       </Grid2>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: { xs: "column", md: "row" },
-          alignItems: "center",
-          gap: 2,
-        }}
-      ></Box>
+      <Grid2 container spacing={2}>
+        <Grid2 xs={12} md={6} sx={{ alignSelf: "center" }}>
+          <Box
+            component="img"
+            src="/company.svg"
+            sx={{ width: "100%", maxHeight: 400, objectFit: "contain" }}
+          />
+        </Grid2>
+        <Grid2 xs={12} md={6} sx={{ alignSelf: "center" }}>
+          {lan == "uz" ? (
+            <Box
+              sx={{
+                fontSize: 16,
+                fontWeight: 400,
+                fontFamily: "Nunito, sans-serif",
+                textAlign: "justify",
+                textJustify: "inter-word",
+              }}
+            >
+              <Typography sx={{ fontWeight: 700, display: "inline" }}>
+                «DIAMOND BRAVE WORLD PHARM»{" "}
+              </Typography>
+              sifatli hamda samarali davolashni ta’minlovchi zamonaviy biologik
+              faol qo’shimchalarning keng turini taklif etadi. Bugungi kunda{" "}
+              <Typography sx={{ fontWeight: 700, display: "inline" }}>
+                «DIAMOND BRAVE WORLD PHARM»
+              </Typography>
+              ning mahsulot portfeli 30 dan ortiq. Mahsulotlarni O’zbekiston
+              respublikasining barcha hududlarida marketingi tashkil etilgan.
+            </Box>
+          ) : lan == "en" ? (
+            <Box
+              sx={{
+                fontSize: 16,
+                fontWeight: 400,
+                fontFamily: "Nunito, sans-serif",
+                textAlign: "justify",
+              }}
+            >
+              <Typography sx={{ fontWeight: 700, display: "inline" }}>
+                «DIAMOND BRAVE WORLD PHARM»
+              </Typography>{" "}
+              offers a wide range of modern biologically active supplements that provide high-quality and effective treatment. Today, the product portfolio of{" "}
+              <Typography sx={{ fontWeight: 700, display: "inline" }}>
+                «DIAMOND BRAVE WORLD PHARM»
+              </Typography>{" "}
+              is more than 30. Marketing of products is organized in all regions of the Republic of Uzbekistan.
+            </Box>
+          ) : (
+            <Box
+              sx={{
+                fontSize: 16,
+                fontWeight: 400,
+                fontFamily: "Nunito, sans-serif",
+                textAlign: "justify",
+              }}
+            >
+              <Typography sx={{ fontWeight: 700, display: "inline" }}>
+                «DIAMOND BRAVE WORLD PHARM»
+              </Typography>{" "}
+              предлагает широкий ассортимент современных биологически активных добавок, обеспечивающих качественное и эффективное лечение. Сегодня продуктовый портфель{" "}
+              <Typography sx={{ fontWeight: 700, display: "inline" }}>
+                «DIAMOND BRAVE WORLD PHARM»
+              </Typography>{" "}
+              составляет более 30. Сбыт продукции организован во всех регионах Республики Узбекистан.
+            </Box>
+          )}
+        </Grid2>
+      </Grid2>
     </Container>
   );
 }
