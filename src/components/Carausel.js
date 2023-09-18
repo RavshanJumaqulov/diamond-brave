@@ -22,7 +22,8 @@ export default function Carausel() {
     <Box
       sx={{
         width: "100%",
-        maxHeight: { md: "50vh" },
+        height: {md: '60vh'},
+        maxHeight: { md: "70vh" },
         position: "relative",
         borderRadius: {xs: 3, md: 6},
         overflow: 'hidden',
@@ -30,7 +31,7 @@ export default function Carausel() {
         boxShadow:
             "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
         "& img": {
-          height: { md: "50vh" },
+          height: { md: "60vh" },
         },
         "& .slick-slider": {
           "& .slick-prev": {
@@ -96,16 +97,16 @@ export default function Carausel() {
           <ArrowForwardIosIcon sx={{ fontSize: { xs: 14, md: 18 } }} />
         </Fab>
       </Box>
-      <Slider ref={arrowRef} {...settings} style={{ width: "100%" }}>
+      <Slider ref={arrowRef} {...settings} style={{ width: "100%", height: '100%' }}>
         <CarauselItem
           index={1}
           title="Immunitet tizimini qo'llab-quvvatlash va mustahkamlash."
-          img="/img/fortres.jpg"
+          img="/slide1.jpg"
         />
         <CarauselItem
           index={2}
           title="Immunitet tizimini qo'llab-quvvatlash va mustahkamlash."
-          img="/img/diastozin.jpg"
+          img="/slide2.jpg"
         />
       </Slider>
     </Box>

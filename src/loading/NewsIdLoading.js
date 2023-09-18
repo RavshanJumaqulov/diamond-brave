@@ -12,7 +12,6 @@ export default function NewsIdLoading() {
       setBoxWidth(boxRef.current.clientWidth);
     }
   }, [boxRef, width]);
-  console.log((boxWidth * 9) / 16);
   return (
     <Container maxWidth="xl">
       <Box sx={{ mt: 10, width: "100%" }}>

@@ -8,6 +8,7 @@ import Certificate from "../components/Certificate";
 import Context from "../Context";
 import BlogLoading from "../loading/BlogLoading";
 import ProductsSliderLoading from "../loading/ProductsSliderLoading";
+import Sponsors from "../components/Sponsors";
 
 export default function Home() {
   const { lan } = useContext(Context);
@@ -16,6 +17,7 @@ export default function Home() {
     <Box sx={{ position: "relative" }}>
       <Container maxWidth="xl">
         <Carausel />
+        <Sponsors />
         <About />
         {productsLoading.status ? (
           productsLoading.error ? (

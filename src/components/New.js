@@ -3,11 +3,15 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import NewsIdLatestNews from "../components/NewsIdLatestNews";
 import Context from "../Context";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
+import { updateViews } from "../api";
+import { UPDATE_VIEWS } from "../redux/action";
 
 export default function New({ data }) {
+  const dispatch = useDispatch()
   const { width, lan } = useContext(Context);
+  const news = useSelector((state) => state.news);
   const relativeBoxRef = useRef(null);
   const [boxWidth, setBoxWidth] = useState(0);
 
@@ -16,7 +20,15 @@ export default function New({ data }) {
       setBoxWidth(relativeBoxRef.current.clientWidth);
     }
   }, [width]);
-  console.log(data);
+  useEffect(() => {
+    if (data.id !== undefined) {
+      const res = async () => {
+        const resData = await updateViews(data.id, data.views);
+      };
+      res();
+      dispatch({type: UPDATE_VIEWS, payload: {id: data.id, view: data.views + 2}})
+    }
+  }, []);
   return (
     <Container maxWidth="xl">
       <Box sx={{ mt: 10, width: "100%" }}>
@@ -73,10 +85,10 @@ export default function New({ data }) {
                 }}
               >
                 {lan == "uz"
-                  ? `${data.views} marta o'qildi`
+                  ? `${data.views + 1} marta o'qildi`
                   : lan == "en"
-                  ? `Read ${data.views} times`
-                  : `Прочтите ${data.views} раз`}
+                  ? `Read ${data.views + 1} times`
+                  : `Прочтите ${data.views + 1} раз`}
               </Typography>
             </Box>
             <Box sx={{}}>
@@ -95,6 +107,42 @@ export default function New({ data }) {
                 }}
               />
               <Box
+                sx={{
+                  width: "100%",
+                  overflow: "hidden",
+                  "& table": {
+                    border: "1px solid rgba(0, 0, 0, 0.23) !important",
+                    outline: "none",
+                    borderCollapse: "collapse",
+                    maxWidth: "100%",
+                    borderRadius: 3,
+                    "& td, & th": {
+                      border: "1px solid #dddddd3f",
+                      p: 1,
+                      cursor: "default",
+                    },
+                    "& th": {
+                      background: "rgba(0, 0, 0, 0.23)",
+                      color: "#011a41",
+                      cursor: "default",
+                    },
+                    "& tr": {
+                      "&:nth-of-type(even)": {
+                        background: "#dddddd3f",
+                        transition: "0.3s all",
+                        cursor: "default",
+                      },
+                      "&:hover": {
+                        background: "#dddddd3f",
+                        cursor: "default",
+                      },
+                    },
+                  },
+                  "& img": {
+                    borderRadius: 3,
+                    maxWidth: "100% !important",
+                  },
+                }}
                 dangerouslySetInnerHTML={{ __html: data[`text_${lan}`] }}
               ></Box>
             </Box>
@@ -113,7 +161,6 @@ export default function New({ data }) {
               sx={{
                 width: boxWidth - 16,
                 maxWidth: "100%",
-                // position: { xs: "static", md: "fixed" },
               }}
             >
               <Stack
@@ -157,30 +204,25 @@ export default function New({ data }) {
                 }}
               >
                 <Grid2 container spacing={2} sx={{ width: "100%" }}>
-                  <Grid2 xs={12} sm={6} md={12}>
-                    <NewsIdLatestNews />
-                  </Grid2>
-                  <Grid2 xs={12} sm={6} md={12}>
-                    <NewsIdLatestNews />
-                  </Grid2>
-                  <Grid2 xs={12} sm={6} md={12}>
-                    <NewsIdLatestNews />
-                  </Grid2>
-                  <Grid2 xs={12} sm={6} md={12}>
-                    <NewsIdLatestNews />
-                  </Grid2>
-                  <Grid2 xs={12} sm={6} md={12}>
-                    <NewsIdLatestNews />
-                  </Grid2>
-                  <Grid2 xs={12} sm={6} md={12}>
-                    <NewsIdLatestNews />
-                  </Grid2>
-                  <Grid2 xs={12} sm={6} md={12}>
-                    <NewsIdLatestNews />
-                  </Grid2>
-                  <Grid2 xs={12} sm={6} md={12}>
-                    <NewsIdLatestNews />
-                  </Grid2>
+                  {news.slice(0, 10).map((el, index) => {
+                    return (
+                      <Grid2 xs={12} sm={6} md={12} key={index}>
+                        <NewsIdLatestNews
+                          id={el.id}
+                          img={el.img}
+                          title={el[`title_${lan}`]}
+                          date={moment(el.created_at).fromNow()}
+                          views={
+                            lan == "uz"
+                              ? `${data.views} marta o'qildi`
+                              : lan == "en"
+                              ? `Read ${data.views} times`
+                              : `Прочтите ${data.views} раз`
+                          }
+                        />
+                      </Grid2>
+                    );
+                  })}
                 </Grid2>
               </Box>
             </Box>

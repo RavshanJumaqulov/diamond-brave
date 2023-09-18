@@ -9,6 +9,8 @@ import { useDispatch } from "react-redux";
 import { getCatalogs, getNews, getProducts } from "./api";
 import { GET_CATALOGS, GET_NEWS, GET_PRODUCTS } from "./redux/action";
 import Context from "./Context";
+import About from "./pages/About";
+import Album from "./pages/Album";
 
 export default function AllRoutes() {
   const dispatch = useDispatch();
@@ -103,6 +105,8 @@ export default function AllRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/album" element={<Album />} />
       <Route path="/products" element={<Products />} />
       <Route path="/products/:product" element={<Product />} />
       <Route path="/news" element={<News />} />

@@ -6,7 +6,7 @@ export default function CarauselItem(props) {
     <Box
       sx={{
         width: "100%",
-        height: "100%",
+        height: "60vh",
         position: "relative",
         "& img": { width: "100%", maxHeight: "100vh", objectFit: "cover" },
       }}

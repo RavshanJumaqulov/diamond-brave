@@ -3,6 +3,7 @@ import {
   GET_NEWS,
   GET_NEW_WITH_ID,
   GET_PRODUCTS,
+  UPDATE_VIEWS,
 } from "./action";
 
 const initialState = {
@@ -42,6 +43,13 @@ const reducer = (state = initialState, action) => {
           ...state,
           news: [...state.news, action.payload],
         };
+      }
+    }
+    case UPDATE_VIEWS: {
+      const data = {...state.news.find(el => el.id == action.payload.id), views: action.payload.view}
+      return{
+        ...state,
+        news: [...(state.news.filter(el => el.id !== action.payload.id)), data]
       }
     }
     default: {

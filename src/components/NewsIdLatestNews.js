@@ -1,7 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function NewsIdLatestNews() {
+export default function NewsIdLatestNews(props) {
+  const navigate = useNavigate()
   const [width, setWidth] = useState(0);
 
   window.addEventListener("resize", () => {
@@ -13,6 +15,7 @@ export default function NewsIdLatestNews() {
   const imgRef = useRef(null);
   return (
     <Box
+    onClick={() => navigate(`/news/${props.id}`)}
       sx={{
         display: "flex",
         flexDirection: "row",
@@ -27,7 +30,7 @@ export default function NewsIdLatestNews() {
       <Box
         component={"img"}
         ref={imgRef}
-        src="https://blogzine.webestica.com/assets/images/blog/4by3/01.jpg"
+        src={props.img}
         sx={{
           width: {
             xs: width > 450 ? 150 : 120,
@@ -81,7 +84,7 @@ export default function NewsIdLatestNews() {
             },
           }}
         >
-          The pros and const of busines agency lorem
+          {props.title}
         </Typography>
         <Box
           sx={{
@@ -105,7 +108,7 @@ export default function NewsIdLatestNews() {
               cursor: "default",
             }}
           >
-            102 users read
+            {props.date}
           </Typography>
           <Box
             sx={{
@@ -126,7 +129,7 @@ export default function NewsIdLatestNews() {
               cursor: "default",
             }}
           >
-            2 kun avval
+            {props.views}
           </Typography>
         </Box>
       </Box>
