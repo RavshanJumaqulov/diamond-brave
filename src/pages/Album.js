@@ -42,7 +42,7 @@ export default function Album() {
             <Box
               component="img"
               src="https://img.freepik.com/free-photo/flat-lay-natural-medicinal-spices-herbs_23-2148776507.jpg?size=626&ext=jpg&uid=R33141185&ga=GA1.2.1704063591.1694238238&semt=ais"
-              sx={{ width: "100%" }}
+              sx={{ width: "100%", borderRadius: 3, }}
             />
             <Fab
               size="medium"

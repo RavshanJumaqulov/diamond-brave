@@ -351,7 +351,7 @@ export default function About() {
           </Slider>
         </Grid2>
       </Grid2>
-      <Grid2 container spacing={2}>
+      <Grid2 container spacing={2} sx={{flexDirection: {xs: 'column-reverse', md: 'row'}}}>
         <Grid2 xs={12} md={6} sx={{ alignSelf: "center" }}>
           <Box
             component="img"

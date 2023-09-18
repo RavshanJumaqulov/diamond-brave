@@ -9,6 +9,7 @@ import Context from "../Context";
 import BlogLoading from "../loading/BlogLoading";
 import ProductsSliderLoading from "../loading/ProductsSliderLoading";
 import Sponsors from "../components/Sponsors";
+import Goals from "../components/Goals";
 
 export default function Home() {
   const { lan } = useContext(Context);
@@ -19,6 +20,7 @@ export default function Home() {
         <Carausel />
         <Sponsors />
         <About />
+        <Goals />
         {productsLoading.status ? (
           productsLoading.error ? (
             <Typography
