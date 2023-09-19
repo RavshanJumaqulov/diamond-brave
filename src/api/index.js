@@ -7,7 +7,7 @@ const getProducts = async () => {
       url: "https://nisbot.uz/en/product/",
       timeout: 30000,
       headers: {
-        Authorization: "Token 4813a5c55632002fdd65034cac3aaa198d417670",
+        Authorization: "Token 71d9d155d63688c827e0b6e241d7788d45f97372",
       },
     });
     return data;
@@ -23,7 +23,7 @@ const getCatalogs = async () => {
       url: "https://nisbot.uz/en/category/",
       timeout: 30000,
       headers: {
-        Authorization: "Token 4813a5c55632002fdd65034cac3aaa198d417670",
+        Authorization: "Token 71d9d155d63688c827e0b6e241d7788d45f97372",
       },
     });
     return data;
@@ -39,7 +39,7 @@ const getNews = async (page) => {
       url: `https://nisbot.uz/en/news/?page=${page}`,
       timeout: 30000,
       headers: {
-        Authorization: "Token 4813a5c55632002fdd65034cac3aaa198d417670",
+        Authorization: "Token 71d9d155d63688c827e0b6e241d7788d45f97372",
       },
     });
     return data;
@@ -55,7 +55,7 @@ const getNewsWithId = async (id) => {
       url: `https://nisbot.uz/en/news/${id}/`,
       timeout: 30000,
       headers: {
-        Authorization: "Token 4813a5c55632002fdd65034cac3aaa198d417670",
+        Authorization: "Token 71d9d155d63688c827e0b6e241d7788d45f97372",
       },
     });
     return data;
@@ -71,7 +71,7 @@ const updateViews = async (id, view) => {
       timeout: 30000,
       data: { views: view + 1 },
       headers: {
-        Authorization: "Token 4813a5c55632002fdd65034cac3aaa198d417670",
+        Authorization: "Token 71d9d155d63688c827e0b6e241d7788d45f97372",
       },
     });
     return data;
@@ -79,5 +79,27 @@ const updateViews = async (id, view) => {
     console.log(error);
   }
 };
+const getPhotoGalary = async (page) => {
+  try {
+    const data = await axios({
+      method: "GET",
+      url: `https://nisbot.uz/en/flayer?page=${page}`,
+      timeout: 30000,
+      headers: {
+        Authorization: "Token 71d9d155d63688c827e0b6e241d7788d45f97372",
+      },
+    });
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
 
-export { getProducts, getCatalogs, getNews, getNewsWithId, updateViews };
+export {
+  getProducts,
+  getCatalogs,
+  getNews,
+  getNewsWithId,
+  updateViews,
+  getPhotoGalary,
+};

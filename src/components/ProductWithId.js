@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Fade } from "react-awesome-reveal";
 import ProductList from "./ProductList";
+import { Stack } from "@mui/system";
+import moment from "moment";
 
 export default function ProductWithId() {
   const params = useParams();
@@ -40,7 +42,6 @@ export default function ProductWithId() {
     setTop(0);
     setLeft(0);
   };
-  console.log(data);
   return (
     <Box sx={{ mt: { xs: 8, md: 10 } }}>
       <Container maxWidth="xl">
@@ -80,9 +81,9 @@ export default function ProductWithId() {
                         objectFit: "contain",
                         position: "absolute",
                         bottom: top,
-                        right: left,
+                        right: left+20,
                         transform:
-                          top == 0 && left == 0 ? "scale(1)" : "scale(2.5)",
+                          top == 0 && left == 0 ? "scale(1)" : "scale(2)",
                         transition: "0.3s all",
                       }}
                     />
@@ -105,6 +106,8 @@ export default function ProductWithId() {
                         fontSize: { xs: 24, sm: 30 },
                         fontWeight: 600,
                         fontFamily: "Barlow, sans-serif",
+                        color: "#011a41",
+                        cursor: "pointer",
                       }}
                     >
                       {data[`title_${lan}`]}
@@ -118,62 +121,180 @@ export default function ProductWithId() {
                       }}
                     >
                       {data[`description_${lan}`]}
-                      Lorem ipsum, dolor sit amet consectetur adipisicing.
                     </Typography>
                     <Box
                       sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
                         mt: 2,
+                        border: "1px solid rgba(0, 0, 0, 0.23)",
+                        display: "flex",
+                        width: "100%",
+                        maxWidth: 400,
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        borderRadius: 3,
+                        p: 2,
                       }}
                     >
-                      <Typography
-                        sx={{
-                          mt: 1.5,
-                          fontSize: 16,
-                          fontWeight: 500,
-                          fontFamily: "Nunito, sans-serif",
-                          cursor: "default",
-                        }}
-                      >
-                        Qadoq turi: &nbsp; &nbsp;
-                      </Typography>
-                      <Typography
-                        sx={{
-                          mt: 1.5,
-                          fontSize: 16,
-                          fontWeight: 700,
-                          fontFamily: "Nunito, sans-serif",
-
-                          cursor: "default",
-                        }}
-                      >
-                        {data[`miqdori_${lan}`]}
-                      </Typography>
+                      <Stack direction="row" sx={{ mt: 1 }}>
+                        <Typography
+                          sx={{
+                            fontSize: 16,
+                            fontWeight: 500,
+                            fontFamily: "Nunito, sans-serif",
+                            cursor: "default",
+                            width: 150,
+                          }}
+                        >
+                          {lan == "uz"
+                            ? "Taqdim etiladi"
+                            : lan == "en"
+                            ? "Presented"
+                            : "Представлено"}
+                          :
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontSize: 16,
+                            fontWeight: 700,
+                            fontFamily: "Nunito, sans-serif",
+                            cursor: "default",
+                          }}
+                        >
+                          {lan == "uz"
+                            ? "Retseptsiz"
+                            : lan == "en"
+                            ? "Without a prescription"
+                            : "Без рецепта"}
+                        </Typography>
+                      </Stack>
+                      <Stack direction="row" sx={{ mt: 1 }}>
+                        <Typography
+                          sx={{
+                            fontSize: 16,
+                            fontWeight: 500,
+                            fontFamily: "Nunito, sans-serif",
+                            cursor: "default",
+                            width: 150,
+                          }}
+                        >
+                          {lan == "uz"
+                            ? "Turkumi"
+                            : lan == "en"
+                            ? "Category"
+                            : "Категория"}
+                          :
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontSize: 16,
+                            fontWeight: 700,
+                            fontFamily: "Nunito, sans-serif",
+                            cursor: "default",
+                          }}
+                        >
+                          {data[`category`][`title_${lan}`]}
+                        </Typography>
+                      </Stack>
+                      <Stack direction="row" sx={{ mt: 1 }}>
+                        <Typography
+                          sx={{
+                            fontSize: 16,
+                            fontWeight: 500,
+                            fontFamily: "Nunito, sans-serif",
+                            cursor: "default",
+                            width: 150,
+                          }}
+                        >
+                          {lan == "uz"
+                            ? "Qadoq turi"
+                            : lan == "en"
+                            ? "Type of packaging"
+                            : "Тип упаковки"}
+                          :
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontSize: 16,
+                            fontWeight: 700,
+                            fontFamily: "Nunito, sans-serif",
+                            cursor: "default",
+                          }}
+                        >
+                          {data[`miqdori_${lan}`]}
+                        </Typography>
+                      </Stack>
+                      <Stack direction="row" sx={{ mt: 1 }}>
+                        <Typography
+                          sx={{
+                            fontSize: 16,
+                            fontWeight: 500,
+                            fontFamily: "Nunito, sans-serif",
+                            cursor: "default",
+                            width: 150,
+                          }}
+                        >
+                          {lan == "uz"
+                            ? "Sahifaga joylandi"
+                            : lan == "en"
+                            ? "Posted on the page"
+                            : "Размещено на странице"}
+                          :
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontSize: 16,
+                            fontWeight: 700,
+                            fontFamily: "Nunito, sans-serif",
+                            cursor: "default",
+                          }}
+                        >
+                          {moment(data.created_at).fromNow()}
+                        </Typography>
+                      </Stack>
                     </Box>
-                    <Typography
-                      sx={{
-                        mt: 1.5,
-                        fontSize: 16,
-                        fontWeight: 700,
-                        fontFamily: "Nunito, sans-serif",
-                        cursor: "default",
-                      }}
-                    >
-                      {lan == "uz"
-                        ? `${data.views + 1} marta o'qildi`
-                        : lan == "en"
-                        ? `Read ${data.views + 1} times`
-                        : `Прочтите ${data.views + 1} раз`}
-                    </Typography>{" "}
+                      <Stack
+                        direction="row"
+                        sx={{
+                          mt: 2,
+                          mb: 2,
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          justifyContent: {xs: "center", md: "flex-start"},
+                          width: '100%',
+                          maxWidth: 400
+                        }}
+                      >
+                        <Button
+                          disableElevation
+                          variant="contained"
+                          sx={{
+                            py: 1,
+                            background: "#3BB77E",
+                            borderRadius: 3,
+                            fontFamily: "Nunito, sans-serif",
+                            textTransform: "capitalize",
+                            fontSize: 16,
+                            fontWeight: 700,
+                            "&:hover": {
+                              background: "#00aa67",
+                            },
+                          }}
+                        >
+                          ma'lumotlarni yuklash
+                        </Button>
+                      </Stack>
                   </Box>
+
                   <Box
                     sx={{
                       width: "100%",
                       display: "flex",
                       flexDirection: "row",
+                      justifyContent: { xs: "space-around", md: "flex-start" },
                       mt: 2,
+                      width: "100%",
+                      maxWidth: 400,
                     }}
                   >
                     <Box
@@ -183,7 +304,7 @@ export default function ProductWithId() {
                       sx={{
                         width: 88,
                         height: 88,
-                        objectFit: "contain",
+                        objectFit: "cover",
                         borderRadius: 3,
                         border:
                           data.img == presentImg
@@ -199,7 +320,7 @@ export default function ProductWithId() {
                       sx={{
                         width: 88,
                         height: 88,
-                        objectFit: "contain",
+                        objectFit: "cover",
                         borderRadius: 3,
                         border:
                           data.image1 == presentImg
@@ -215,7 +336,7 @@ export default function ProductWithId() {
                       sx={{
                         width: 88,
                         height: 88,
-                        objectFit: "contain",
+                        objectFit: "cover",
                         borderRadius: 3,
                         border:
                           data.image2 == presentImg

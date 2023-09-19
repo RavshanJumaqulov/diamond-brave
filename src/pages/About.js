@@ -1,12 +1,14 @@
 import { Box, Container, Stack, Typography } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Context from "../Context";
 import { Masonry } from "@mui/lab";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import Slider from "react-slick";
+import { useNavigate } from "react-router-dom";
 
 export default function About() {
   const { lan, width } = useContext(Context);
+  const navigate = useNavigate();
   const settings = {
     dots: false,
     arrows: false,
@@ -21,6 +23,12 @@ export default function About() {
     verticalSwiping: true,
     swipeToSlide: true,
   };
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      // behavior: "smooth",
+    });
+  }, [navigate]);
   return (
     <Container maxWidth="xl">
       <Box sx={{ mt: 10 }}>
@@ -351,7 +359,11 @@ export default function About() {
           </Slider>
         </Grid2>
       </Grid2>
-      <Grid2 container spacing={2} sx={{flexDirection: {xs: 'column-reverse', md: 'row'}}}>
+      <Grid2
+        container
+        spacing={2}
+        sx={{ flexDirection: { xs: "column-reverse", md: "row" } }}
+      >
         <Grid2 xs={12} md={6} sx={{ alignSelf: "center" }}>
           <Box
             component="img"
@@ -393,11 +405,14 @@ export default function About() {
               <Typography sx={{ fontWeight: 700, display: "inline" }}>
                 «DIAMOND BRAVE WORLD PHARM»
               </Typography>{" "}
-              offers a wide range of modern biologically active supplements that provide high-quality and effective treatment. Today, the product portfolio of{" "}
+              offers a wide range of modern biologically active supplements that
+              provide high-quality and effective treatment. Today, the product
+              portfolio of{" "}
               <Typography sx={{ fontWeight: 700, display: "inline" }}>
                 «DIAMOND BRAVE WORLD PHARM»
               </Typography>{" "}
-              is more than 30. Marketing of products is organized in all regions of the Republic of Uzbekistan.
+              is more than 30. Marketing of products is organized in all regions
+              of the Republic of Uzbekistan.
             </Box>
           ) : (
             <Box
@@ -411,11 +426,14 @@ export default function About() {
               <Typography sx={{ fontWeight: 700, display: "inline" }}>
                 «DIAMOND BRAVE WORLD PHARM»
               </Typography>{" "}
-              предлагает широкий ассортимент современных биологически активных добавок, обеспечивающих качественное и эффективное лечение. Сегодня продуктовый портфель{" "}
+              предлагает широкий ассортимент современных биологически активных
+              добавок, обеспечивающих качественное и эффективное лечение.
+              Сегодня продуктовый портфель{" "}
               <Typography sx={{ fontWeight: 700, display: "inline" }}>
                 «DIAMOND BRAVE WORLD PHARM»
               </Typography>{" "}
-              составляет более 30. Сбыт продукции организован во всех регионах Республики Узбекистан.
+              составляет более 30. Сбыт продукции организован во всех регионах
+              Республики Узбекистан.
             </Box>
           )}
         </Grid2>

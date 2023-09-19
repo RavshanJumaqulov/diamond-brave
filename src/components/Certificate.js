@@ -81,23 +81,23 @@ export default function Certificate() {
         <Grid2 container>
           <CertificateItem
             title="O'zbekiston Respublikasi Sog'liqni saqlash vazirligi ruxsatnomasi"
-            img="/img/certificates/certificate_1.jpg"
-            file="/img/certificates/certificate_1.pdf"
+            img="/certificates/certificate_1.jpg"
+            file="/certificates/certificate_1.pdf"
           />
           <CertificateItem
             title="O'zbekiston Respublikasi Sog'liqni saqlash vazirligi ruxsatnomasi"
-            img="/img/certificates/certificate_2.jpg"
-            file="/img/certificates/certificate_1.pdf"
+            img="/certificates/certificate_2.jpg"
+            file="/certificates/certificate_2.pdf"
           />
           <CertificateItem
             title="O'zbekiston Respublikasi Sog'liqni saqlash vazirligi ruxsatnomasi"
-            img="/img/certificates/certificate_3.jpg"
-            file="/img/certificates/certificate_1.pdf"
+            img="/certificates/certificate_3.jpg"
+            file="/certificates/certificate_3.pdf"
           />
           <CertificateItem
             title="O'zbekiston Respublikasi Sog'liqni saqlash vazirligi ruxsatnomasi"
-            img="/img/certificates/certificate_4.jpg"
-            file="/img/certificates/certificate_1.pdf"
+            img="/certificates/certificate_4.jpg"
+            file="/certificates/certificate_4.pdf"
           />
         </Grid2>
       </Box>

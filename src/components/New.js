@@ -1,4 +1,4 @@
-import { Box, Container, Skeleton, Stack, Typography } from "@mui/material";
+import { Box, Container, Fab, Skeleton, Stack, Typography, createSvgIcon } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import NewsIdLatestNews from "../components/NewsIdLatestNews";
@@ -7,9 +7,19 @@ import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { updateViews } from "../api";
 import { UPDATE_VIEWS } from "../redux/action";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+const FacebookIcon = createSvgIcon(
+  <svg height="1em" viewBox="0 0 320 512">
+    <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" />
+  </svg>,
+  "FacebookIcon"
+);
 
 export default function New({ data }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { width, lan } = useContext(Context);
   const news = useSelector((state) => state.news);
   const relativeBoxRef = useRef(null);
@@ -26,7 +36,10 @@ export default function New({ data }) {
         const resData = await updateViews(data.id, data.views);
       };
       res();
-      dispatch({type: UPDATE_VIEWS, payload: {id: data.id, view: data.views + 2}})
+      dispatch({
+        type: UPDATE_VIEWS,
+        payload: { id: data.id, view: data.views + 2 },
+      });
     }
   }, []);
   return (
@@ -42,6 +55,8 @@ export default function New({ data }) {
                 fontSize: { xs: 20, sm: 24, md: 32, lg: 32 },
                 fontWeight: 700,
                 fontFamily: "Nunito, sans-serif",
+                color: '#011a41',
+                cursor: 'default'
               }}
             >
               {data[`title_${lan}`]}
@@ -51,45 +66,104 @@ export default function New({ data }) {
                 display: "flex",
                 flexDirection: "row",
                 alignItems: "center",
-                mt: { sm: 2, md: 1, lg: 1 },
-                mb: 3,
+                justifyContent: "space-between",
               }}
             >
-              <Typography
-                sx={{
-                  fontSize: { xs: 14, sm: 16, md: 14, lg: 16 },
-                  fontWeight: "400",
-                  color: "text.secondary",
-                  fontFamily: "Nunito, sans-serif",
-                  cursor: "defalut",
-                }}
-              >
-                {moment(data.created_at).fromNow()}
-              </Typography>
               <Box
                 sx={{
-                  borderRadius: "50%",
-                  width: 4,
-                  height: 4,
-                  background: "#00000099",
-                  mx: 1,
-                }}
-              ></Box>
-              <Typography
-                sx={{
-                  fontSize: { xs: 14, sm: 16, md: 14, lg: 16 },
-                  fontWeight: "400",
-                  color: "text.secondary",
-                  fontFamily: "Nunito, sans-serif",
-                  cursor: "defalut",
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  mt: { sm: 2, md: 1, lg: 1 },
+                  mb: 3,
                 }}
               >
-                {lan == "uz"
-                  ? `${data.views + 1} marta o'qildi`
-                  : lan == "en"
-                  ? `Read ${data.views + 1} times`
-                  : `Прочтите ${data.views + 1} раз`}
-              </Typography>
+                <CalendarMonthIcon sx={{ fontSize: 16, mr: 0.4 }} />
+                <Typography
+                  sx={{
+                    fontSize: { xs: 14, sm: 16, md: 14, lg: 16 },
+                    fontWeight: "400",
+                    color: "text.secondary",
+                    fontFamily: "Nunito, sans-serif",
+                    cursor: "defalut",
+                  }}
+                >
+                  {moment(data.created_at).fromNow()}
+                </Typography>
+                <Box
+                  sx={{
+                    borderRadius: "50%",
+                    width: 4,
+                    height: 4,
+                    background: "#00000099",
+                    mx: 1,
+                  }}
+                ></Box>
+                <RemoveRedEyeIcon sx={{ fontSize: 16, mr: 0.4 }} />
+                <Typography
+                  sx={{
+                    fontSize: { xs: 14, sm: 16, md: 14, lg: 16 },
+                    fontWeight: "400",
+                    color: "text.secondary",
+                    fontFamily: "Nunito, sans-serif",
+                    cursor: "defalut",
+                  }}
+                >
+                  {lan == "uz"
+                    ? `${data.views + 1} marta o'qildi`
+                    : lan == "en"
+                    ? `Read ${data.views + 1} times`
+                    : `Прочтите ${data.views + 1} раз`}
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  width: 150,
+                }}
+              >
+                <Fab
+                  component="a"
+                  target="_blank"
+                  href="tel:+998997565684"
+                  elevation="0"
+                  size="small"
+                  sx={{ boxShadow: "none", background: "none" }}
+                >
+                  <FacebookIcon
+                    sx={{
+                      fontSize: 24,
+                      height: 24,
+                      color: "#011a41",
+                      fill: "#011a41",
+                    }}
+                  />
+                </Fab>
+                <Fab
+                  component="a"
+                  target="_blank"
+                  elevation="0"
+                  size="small"
+                  sx={{ boxShadow: "none", background: "none" }}
+                >
+                  <InstagramIcon
+                    sx={{ fontSize: 24, height: 24, color: "#011a41" }}
+                  />
+                </Fab>
+                <Fab
+                  component="a"
+                  target="_blank"
+                  elevation="0"
+                  size="small"
+                  sx={{ boxShadow: "none", background: "none" }}
+                >
+                  <YouTubeIcon
+                    sx={{ fontSize: 24, height: 24, color: "#011a41" }}
+                  />
+                </Fab>
+              </Box>
             </Box>
             <Box sx={{}}>
               <Box
@@ -142,6 +216,9 @@ export default function New({ data }) {
                     borderRadius: 3,
                     maxWidth: "100% !important",
                   },
+                  "& p":{
+                    textAlign: 'justify'
+                  }
                 }}
                 dangerouslySetInnerHTML={{ __html: data[`text_${lan}`] }}
               ></Box>

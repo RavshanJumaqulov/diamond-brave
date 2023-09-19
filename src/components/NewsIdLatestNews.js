@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function NewsIdLatestNews(props) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [width, setWidth] = useState(0);
 
   window.addEventListener("resize", () => {
@@ -15,7 +15,7 @@ export default function NewsIdLatestNews(props) {
   const imgRef = useRef(null);
   return (
     <Box
-    onClick={() => navigate(`/news/${props.id}`)}
+      onClick={() => navigate(`/news/${props.id}`)}
       sx={{
         display: "flex",
         flexDirection: "row",
@@ -72,16 +72,7 @@ export default function NewsIdLatestNews(props) {
             display: "-webkit-box",
             WebkitLineClamp: 2,
             WebkitBoxOrient: "vertical",
-            background: "linear-gradient(to right, #3bb77e 0%, #3bb77e 100%)",
-            backgroundSize: "100px 6%",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "left 100%",
-            WebkitTransitionDuration: "0.5s",
-            transitionDuration: "0.5s",
-            cursor: "pointer",
-            "&:hover": {
-              backgroundSize: "100% 6%",
-            },
+            cursor: 'default',
           }}
         >
           {props.title}
@@ -92,10 +83,11 @@ export default function NewsIdLatestNews(props) {
               xs: width < 450 ? "none" : "flex",
               sm: width > 750 ? "flex" : "none",
               md: "none",
+              lg: "flex",
             },
             flexDirection: "row",
             alignItems: "center",
-            mt: { sm: 2, md: 1, lg: 2 },
+            mt: { sm: 2, md: 1, lg: 1 },
           }}
         >
           <Typography

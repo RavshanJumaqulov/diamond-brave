@@ -2,6 +2,7 @@ import {
   GET_CATALOGS,
   GET_NEWS,
   GET_NEW_WITH_ID,
+  GET_PHOTO_GALLARY,
   GET_PRODUCTS,
   UPDATE_VIEWS,
 } from "./action";
@@ -10,6 +11,7 @@ const initialState = {
   products: [],
   catalogs: [],
   news: [],
+  photoGallary: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -37,6 +39,17 @@ const reducer = (state = initialState, action) => {
         news: data,
       };
     }
+    case GET_PHOTO_GALLARY: {
+      const data = [...state.photoGallary, ...action.payload].filter(
+        (obj, index, self) => {
+          return index === self.findIndex((o) => o.id === obj.id);
+        }
+      );
+      return {
+        ...state,
+        photoGallary: data,
+      };
+    }
     case GET_NEW_WITH_ID: {
       if (state.news.filter((el) => el.id == action.payload.id).length == 0) {
         return {
@@ -46,11 +59,14 @@ const reducer = (state = initialState, action) => {
       }
     }
     case UPDATE_VIEWS: {
-      const data = {...state.news.find(el => el.id == action.payload.id), views: action.payload.view}
-      return{
+      const data = {
+        ...state.news.find((el) => el.id == action.payload.id),
+        views: action.payload.view,
+      };
+      return {
         ...state,
-        news: [...(state.news.filter(el => el.id !== action.payload.id)), data]
-      }
+        news: [...state.news.filter((el) => el.id !== action.payload.id), data],
+      };
     }
     default: {
       return state;

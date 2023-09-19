@@ -23,7 +23,7 @@ export default function Carausel() {
       sx={{
         width: "100%",
         height: {md: '60vh'},
-        maxHeight: { md: "70vh" },
+        maxHeight: { xs: '40vh', sm: '60vh', md: "70vh" },
         position: "relative",
         borderRadius: {xs: 3, md: 6},
         overflow: 'hidden',
@@ -31,7 +31,9 @@ export default function Carausel() {
         boxShadow:
             "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
         "& img": {
-          height: { md: "60vh" },
+          width: '100%',
+          height: '100%',
+          objectFit:'cover',
         },
         "& .slick-slider": {
           "& .slick-prev": {
@@ -107,6 +109,16 @@ export default function Carausel() {
           index={2}
           title="Immunitet tizimini qo'llab-quvvatlash va mustahkamlash."
           img="/slide2.jpg"
+        />
+        <CarauselItem
+          index={2}
+          title="Immunitet tizimini qo'llab-quvvatlash va mustahkamlash."
+          img="/slide3.jpg"
+        />
+        <CarauselItem
+          index={2}
+          title="Immunitet tizimini qo'llab-quvvatlash va mustahkamlash."
+          img="/slide4.jpg"
         />
       </Slider>
     </Box>

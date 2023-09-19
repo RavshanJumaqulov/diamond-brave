@@ -6,19 +6,20 @@ import News from "./pages/News";
 import NewsId from "./pages/NewsId";
 import Products from "./pages/Products";
 import { useDispatch } from "react-redux";
-import { getCatalogs, getNews, getProducts } from "./api";
-import { GET_CATALOGS, GET_NEWS, GET_PRODUCTS } from "./redux/action";
+import { getCatalogs, getNews, getPhotoGalary, getProducts } from "./api";
+import { GET_CATALOGS, GET_NEWS, GET_PHOTO_GALLARY, GET_PRODUCTS } from "./redux/action";
 import Context from "./Context";
 import About from "./pages/About";
 import Album from "./pages/Album";
 
 export default function AllRoutes() {
   const dispatch = useDispatch();
-  const { setProductsLoading, setNewsLoading, setCatalogsLoading } =
+  const { setProductsLoading, setNewsLoading, setCatalogsLoading, setPhotoGalaryLoading } =
     useContext(Context);
   useEffect(() => {
     const res = async () => {
       const data = await getProducts();
+      console.log(data)
       if (Object.keys(data).includes("code")) {
         setProductsLoading({
           status: true,
@@ -97,6 +98,35 @@ export default function AllRoutes() {
             message: "",
           });
           dispatch({ type: GET_NEWS, payload: data.data.results });
+        }
+      }
+    };
+    res();
+  }, []);
+
+  useEffect(() => {
+    const res = async () => {
+      const data = await getPhotoGalary(1);
+      if (Object.keys(data).includes("code")) {
+        setPhotoGalaryLoading({
+          status: true,
+          error: true,
+          message: data.message,
+        });
+      } else {
+        if (data.data.results.length == 0) {
+          setPhotoGalaryLoading({
+            status: true,
+            error: true,
+            message: "Yangiliklar mavjud emas",
+          });
+        } else if (data.data.results.length > 0) {
+          setPhotoGalaryLoading({
+            status: true,
+            error: false,
+            message: "",
+          });
+          dispatch({ type: GET_PHOTO_GALLARY, payload: data.data.results });
         }
       }
     };

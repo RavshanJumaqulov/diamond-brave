@@ -41,9 +41,11 @@ export default function CreativeCarausel(props) {
       }}
     >
       <Slider ref={arrowRef} {...settings}>
-        {catalogs.map((el, index) => {
-          return <CreativeCarauselItem img={el.img} title={el.name} key={index} />;
-        })}
+        <CreativeCarauselItem img="/catalogs/category1.jpg" />
+        <CreativeCarauselItem img="/catalogs/category2.jpg" />
+        <CreativeCarauselItem img="/catalogs/category3.jpg" />
+        <CreativeCarauselItem img="/catalogs/category4.jpg" />
+        <CreativeCarauselItem img="/catalogs/category5.jpg" />
       </Slider>
     </Box>
   );

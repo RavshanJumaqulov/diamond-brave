@@ -1,5 +1,5 @@
 import { Box, Container, Typography } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Carausel from "../components/Carausel";
 import About from "../components/About";
 import Blog from "../components/Blog";
@@ -10,10 +10,17 @@ import BlogLoading from "../loading/BlogLoading";
 import ProductsSliderLoading from "../loading/ProductsSliderLoading";
 import Sponsors from "../components/Sponsors";
 import Goals from "../components/Goals";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const { lan } = useContext(Context);
   const { productsLoading, newsLoading } = useContext(Context);
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      // behavior: "smooth",
+    });
+  }, [useNavigate()]);
   return (
     <Box sx={{ position: "relative" }}>
       <Container maxWidth="xl">

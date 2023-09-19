@@ -17,6 +17,7 @@ import Catalogs from "../components/Catalogs";
 import { useSelector } from "react-redux";
 import ProductsItemLoading from "../loading/ProductsItemLoading";
 import Carausel from "../components/Carausel";
+import { useNavigate } from "react-router-dom";
 
 export default function Products() {
   const products = useSelector((state) => state.products);
@@ -50,6 +51,12 @@ export default function Products() {
   const handleSort = (event) => {
     setSort(event.target.value);
   };
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      // behavior: "smooth",
+    });
+  }, [useNavigate()]);
 
   data.sort((a, b) => {
     if (sort == "a-z") {

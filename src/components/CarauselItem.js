@@ -38,16 +38,16 @@ export default function CarauselItem(props) {
             color: "#011a41",
           }}
         >
-          {props.title}
+          {/* {props.title} */}
         </Typography>
-        <Button
+        {/* <Button
           variant="contained"
           color="success"
           sx={{ borderRadius: 3, px: 2 }}
           disableElevation
         >
           Batafsil
-        </Button>
+        </Button> */}
       </Box>
     </Box>
   );

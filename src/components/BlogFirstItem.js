@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import Context from "../Context"
 export default function BlogFirstItem({ el }) {
   moment.locale('uz-latn')
-  console.log(moment(el.created_at).fromNow())
   const { lan } = useContext(Context)
   const navigate = useNavigate()
   return (

@@ -36,6 +36,11 @@ function App() {
     error: false,
     message: "",
   });
+  const [photoGalaryLoading, setPhotoGalaryLoading] = useState({
+    status: false,
+    error: false,
+    message: "",
+  });
 
   window.addEventListener("resize", () => {
     setWidth(window.innerWidth);
@@ -54,6 +59,8 @@ function App() {
         setCatalogsLoading,
         newsLoading,
         setNewsLoading,
+        photoGalaryLoading,
+        setPhotoGalaryLoading
       }}
     >
       <Provider store={store}>

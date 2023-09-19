@@ -13,8 +13,8 @@ import {
   createSvgIcon,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import React, { useContext, useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import Context from "../Context";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
@@ -25,11 +25,11 @@ const FacebookIcon = createSvgIcon(
   "FacebookIcon"
 );
 
-const navItems = ["Home", "About", "Contact"];
 export default function Header() {
   const { lan, setLan, width } = useContext(Context);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [scrollY, setScrollY] = useState(window.scrollY);
+  const navigate = useNavigate()
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -42,6 +42,10 @@ export default function Header() {
   const handleLanguage = (event) => {
     setLan(event.target.value);
   };
+
+  useEffect(()=>{
+    setMobileOpen(false)
+  },[navigate])
 
   return (
     <AppBar

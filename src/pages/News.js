@@ -1,5 +1,5 @@
 import { Box, Container, Typography } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import TopNews from "../components/TopNews";
 import BestNews from "../components/BestNews";
 import AllNews from "../components/AllNews";
@@ -8,10 +8,17 @@ import TopNewsLoading from "../loading/TopNewsLoading";
 import BestNewsLoading from "../loading/BestNewsLoading";
 import AllNewsLoading from "../loading/AllNewsLoading";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function News() {
   const { newsLoading, setNewsLoading } = useContext(Context);
   const news = useSelector((state) => state.news);
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      // behavior: "smooth",
+    });
+  }, [useNavigate()]);
   return (
     <Container maxWidth="xl">
       <Box sx={{ mt: 10, minHeight: "calc(100vh - 80px)" }}>

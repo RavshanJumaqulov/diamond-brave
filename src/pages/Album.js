@@ -1,11 +1,28 @@
-import { Box, Button, Container, Fab, Stack, Typography } from "@mui/material";
-import React, { useContext } from "react";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Container,
+  Fab,
+  Stack,
+  Typography,
+} from "@mui/material";
+import React, { useContext, useEffect } from "react";
 import Context from "../Context";
 import { Masonry } from "@mui/lab";
 import DownloadIcon from "@mui/icons-material/Download";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 export default function Album() {
-  const { lan, width } = useContext(Context);
-
+  const { lan, width, photoGalaryLoading } = useContext(Context);
+  const photoGallary = useSelector((state) => state.photoGallary);
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      // behavior: "smooth",
+    });
+  }, [useNavigate()]);
+  
   return (
     <Container maxWidth="xl">
       <Box sx={{ mt: 10 }}>
@@ -37,28 +54,47 @@ export default function Album() {
               : "Фотогалерея"}
           </Typography>
         </Stack>
-        <Masonry columns={{ xs: 2, md: 3 }}>
-          <Box sx={{ position: "relative" }}>
-            <Box
-              component="img"
-              src="https://img.freepik.com/free-photo/flat-lay-natural-medicinal-spices-herbs_23-2148776507.jpg?size=626&ext=jpg&uid=R33141185&ga=GA1.2.1704063591.1694238238&semt=ais"
-              sx={{ width: "100%", borderRadius: 3, }}
-            />
-            <Fab
-              size="medium"
-              sx={{
-                borderRadius: 3,
-                boxShadow: "none",
-                position: "absolute",
-                right: 20,
-                bottom: 20,
-                background: "#fff",
-              }}
-            >
-              <DownloadIcon />
-            </Fab>
+
+        {photoGalaryLoading.status ? (
+          <Masonry columns={{ xs: 2, md: 3 }}>
+            {photoGallary.map((el) => {
+              return (
+                <Box sx={{ position: "relative" }} key={el.id}>
+                  <Box
+                    component="img"
+                    src={el.flayer}
+                    sx={{ width: "100%", borderRadius: 3 }}
+                  />
+                  <Fab
+                    size="medium"
+                    sx={{
+                      borderRadius: 3,
+                      boxShadow: "none",
+                      position: "absolute",
+                      right: 20,
+                      bottom: 20,
+                      background: "#fff",
+                    }}
+                  >
+                    <DownloadIcon />
+                  </Fab>
+                </Box>
+              );
+            })}
+          </Masonry>
+        ) : (
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <CircularProgress />
           </Box>
-        </Masonry>
+        )}
       </Box>
     </Container>
   );

@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import Context from "../Context";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import NewsIdLoading from "../loading/NewsIdLoading";
 import New from "../components/New";
@@ -18,7 +18,12 @@ export default function NewsId() {
     error: false,
     message: "",
   });
-
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      // behavior: "smooth",
+    });
+  }, [useNavigate()]);
   useEffect(() => {
     const res = async () => {
       const data = await getNewsWithId(1);
