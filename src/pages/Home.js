@@ -23,9 +23,9 @@ export default function Home() {
   }, [useNavigate()]);
   return (
     <Box sx={{ position: "relative" }}>
+      <Carausel />
+
       <Container maxWidth="xl">
-        <Carausel />
-        <Sponsors />
         <About />
         <Goals />
         {productsLoading.status ? (
@@ -76,9 +76,9 @@ export default function Home() {
         ) : (
           <BlogLoading />
         )}
-
         <Certificate />
       </Container>
+      <Sponsors />
     </Box>
   );
 }

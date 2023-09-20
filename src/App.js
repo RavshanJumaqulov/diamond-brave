@@ -18,6 +18,7 @@ const theme = () =>
     },
   });
 function App() {
+  const [mobileOpen, setMobileOpen] = React.useState(false);
   const [width, setWidth] = useState(window.innerWidth);
   const [height, setHeight] = useState(window.innerHeight);
   const [lan, setLan] = useState("uz");
@@ -53,6 +54,8 @@ function App() {
         setLan,
         width,
         height,
+        mobileOpen,
+        setMobileOpen,
         productsLoading,
         setProductsLoading,
         catalogsLoading,
@@ -60,13 +63,13 @@ function App() {
         newsLoading,
         setNewsLoading,
         photoGalaryLoading,
-        setPhotoGalaryLoading
+        setPhotoGalaryLoading,
       }}
     >
       <Provider store={store}>
         <ThemeProvider theme={theme()}>
           <Box sx={{ position: "relative" }}>
-            <Background />
+            {/* <Background /> */}
             <BrowserRouter>
               <CssBaseline />
               <Header />

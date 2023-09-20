@@ -43,9 +43,14 @@ export default function ProductWithId() {
     setLeft(0);
   };
   return (
-    <Box sx={{ mt: { xs: 8, md: 10 } }}>
+    <Box>
+      <Box
+        component={"img"}
+        src={width < 900 ? "/topxs.jpg" : "/top.jpg"}
+        sx={{ width: "100%", minHeight: 200, objectFit: "cover" }}
+      />
       <Container maxWidth="xl">
-        <Grid2 container sx={{ width: "100%" }}>
+        <Grid2 container sx={{ width: "100%", mt: { xs: 8, md: 10 } }}>
           <Grid2 xs={12} lg={9}>
             <Box sx={{ width: "100%" }}>
               <Grid2 container sx={{ width: "100%" }}>
@@ -81,7 +86,7 @@ export default function ProductWithId() {
                         objectFit: "contain",
                         position: "absolute",
                         bottom: top,
-                        right: left+20,
+                        right: left + 20,
                         transform:
                           top == 0 && left == 0 ? "scale(1)" : "scale(2)",
                         transition: "0.3s all",
@@ -252,38 +257,38 @@ export default function ProductWithId() {
                         </Typography>
                       </Stack>
                     </Box>
-                      <Stack
-                        direction="row"
+                    <Stack
+                      direction="row"
+                      sx={{
+                        mt: 2,
+                        mb: 2,
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: { xs: "center", md: "flex-start" },
+                        width: "100%",
+                        maxWidth: 400,
+                      }}
+                    >
+                      <Button
+                        disableElevation
+                        variant="contained"
                         sx={{
-                          mt: 2,
-                          mb: 2,
-                          display: "flex",
-                          flexDirection: "row",
-                          alignItems: "center",
-                          justifyContent: {xs: "center", md: "flex-start"},
-                          width: '100%',
-                          maxWidth: 400
+                          py: 1,
+                          background: "#3BB77E",
+                          borderRadius: 3,
+                          fontFamily: "Nunito, sans-serif",
+                          textTransform: "capitalize",
+                          fontSize: 16,
+                          fontWeight: 700,
+                          "&:hover": {
+                            background: "#00aa67",
+                          },
                         }}
                       >
-                        <Button
-                          disableElevation
-                          variant="contained"
-                          sx={{
-                            py: 1,
-                            background: "#3BB77E",
-                            borderRadius: 3,
-                            fontFamily: "Nunito, sans-serif",
-                            textTransform: "capitalize",
-                            fontSize: 16,
-                            fontWeight: 700,
-                            "&:hover": {
-                              background: "#00aa67",
-                            },
-                          }}
-                        >
-                          ma'lumotlarni yuklash
-                        </Button>
-                      </Stack>
+                        ma'lumotlarni yuklash
+                      </Button>
+                    </Stack>
                   </Box>
 
                   <Box

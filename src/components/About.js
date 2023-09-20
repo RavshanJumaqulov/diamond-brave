@@ -50,7 +50,11 @@ export default function About() {
               mt: 2,
             }}
           >
-            {lan == "uz" ? "Bizning kompaniya" : lan == "en" ? "Our company" : "Наша компания"}
+            {lan == "uz"
+              ? "Bizning kompaniya"
+              : lan == "en"
+              ? "Our company"
+              : "Наша компания"}
           </Typography>
           <Button
             onClick={() => navigate(`/about`)}
@@ -73,7 +77,7 @@ export default function About() {
       <Grid2 container spacing={2}>
         <Grid2 xs={12} md={6} lg={6}>
           {lan == "uz" ? (
-            <Typography
+            <Box
               sx={{
                 mt: 1.5,
                 fontSize: 16,
@@ -81,14 +85,17 @@ export default function About() {
                 fontWeight: 500,
                 color: "#011a41",
                 textIndent: 30,
+                textAlign: "justify",
               }}
             >
-              <b>DIAMOND BRAVE WORLD PHARM</b> kompaniyasiga 2022 - yil
-              G'ayratov Qo'rg'on Qo'chqorovich hamda turmush o'rtog'i Muxtorova
-              Shaxnoza Baxronovna tomonidan asos solingan.
-            </Typography>
+              <Typography sx={{ fontWeight: 700, display: "inline" }}>
+                «DIAMOND BRAVE WORLD PHARM»{" "}
+              </Typography>
+              kompaniyasiga 2022 - yil G'ayratov Qo'rg'on Qo'chqorovich hamda
+              Muxtorova Shaxnoza Baxronovna tomonidan asos solingan.
+            </Box>
           ) : lan == "en" ? (
-            <Typography
+            <Box
               sx={{
                 mt: 1.5,
                 fontSize: 16,
@@ -96,14 +103,18 @@ export default function About() {
                 fontWeight: 500,
                 color: "#011a41",
                 textIndent: 30,
+                textAlign: "justify",
               }}
             >
-              <b>DIAMOND BRAVE WORLD PHARM</b> company was founded in 2022 by
-              Gairatov Korgon Kochkarovich and his wife Mukhtorova Shakhnoza
-              Bakhronovna.
-            </Typography>
+              The company
+              <Typography sx={{ fontWeight: 700, display: "inline" }}>
+                «DIAMOND BRAVE WORLD PHARM»{" "}
+              </Typography>
+              was founded in 2022 by Ghairatov Kurgan Kochkarovich and
+              Mukhtorova Shakhnoza Bakhronovna.
+            </Box>
           ) : (
-            <Typography
+            <Box
               sx={{
                 mt: 1.5,
                 fontSize: 16,
@@ -111,12 +122,16 @@ export default function About() {
                 fontWeight: 500,
                 color: "#011a41",
                 textIndent: 30,
+                textAlign: "justify",
               }}
             >
-              Компания <b>DIAMOND BRAVE WORLD PHARM</b> основана в 2022 году
-              Гайратовым Коргоном Кочкаровичем и его женой Мухторовой Шахнозой
-              Бахроновной.
-            </Typography>
+              Компания{" "}
+              <Typography sx={{ fontWeight: 700, display: "inline" }}>
+                «DIAMOND BRAVE WORLD PHARM»
+              </Typography>{" "}
+              основана в 2022 году Гайратовым Кургоном Кочкаровичем и Мухторовой
+              Шахнозой Бахроновной.
+            </Box>
           )}
           {lan == "uz" ? (
             <Typography
@@ -127,6 +142,7 @@ export default function About() {
                 fontWeight: 500,
                 color: "#011a41",
                 textIndent: 30,
+                textAlign: "justify",
               }}
             >
               O'zbekiston Respublikasida keyingi yillardagi dorivor
@@ -143,6 +159,7 @@ export default function About() {
                 fontWeight: 500,
                 color: "#011a41",
                 textIndent: 30,
+                textAlign: "justify",
               }}
             >
               Medicinal plants of the following years in the Republic of
@@ -159,6 +176,7 @@ export default function About() {
                 fontWeight: 500,
                 color: "#011a41",
                 textIndent: 30,
+                textAlign: "justify",
               }}
             >
               Лекарственные растения последующих лет в Республике Узбекистан
@@ -168,53 +186,74 @@ export default function About() {
             </Typography>
           )}
           {lan == "uz" ? (
-            <Typography
+            <Box
               sx={{
-                mt: 1.5,
-                fontSize: 16,
-                fontFamily: "Nunito, sans-serif",
-                fontWeight: 500,
-                color: "#011a41",
+                mt: 1,
                 textIndent: 30,
+                fontSize: 16,
+                fontWeight: 400,
+                fontFamily: "Nunito, sans-serif",
+                textAlign: "justify",
+                textJustify: "inter-word",
               }}
             >
-              O'zbekiston Respublikasida keyingi yillardagi dorivor
-              o'simliklarni yetishtirish va qayta ishlab chiqarish sohasidagi
-              faol islohotlar hamda keng imkoniyatlar sababli kompaniya
-              farmaseftika bozoriga faol kirib bormoqda!
-            </Typography>
+              <Typography sx={{ fontWeight: 700, display: "inline" }}>
+                «DIAMOND BRAVE WORLD PHARM»{" "}
+              </Typography>
+              sifatli hamda samarali davolashni ta’minlovchi zamonaviy biologik
+              faol qo’shimchalarning keng turini taklif etadi. Bugungi kunda{" "}
+              <Typography sx={{ fontWeight: 700, display: "inline" }}>
+                «DIAMOND BRAVE WORLD PHARM»
+              </Typography>
+              ning mahsulot portfeli 30 dan ortiq. Mahsulotlarni O’zbekiston
+              respublikasining barcha hududlarida marketingi tashkil etilgan.
+            </Box>
           ) : lan == "en" ? (
-            <Typography
+            <Box
               sx={{
-                mt: 1.5,
-                fontSize: 16,
-                fontFamily: "Nunito, sans-serif",
-                fontWeight: 500,
-                color: "#011a41",
+                mt: 1,
                 textIndent: 30,
+                fontSize: 16,
+                fontWeight: 400,
+                fontFamily: "Nunito, sans-serif",
+                textAlign: "justify",
               }}
             >
-              Medicinal plants of the following years in the Republic of
-              Uzbekistan active reforms in the field of production and
-              reproduction and due to wide opportunities, the company is active
-              in the pharmaceutical market coming in!
-            </Typography>
+              <Typography sx={{ fontWeight: 700, display: "inline" }}>
+                «DIAMOND BRAVE WORLD PHARM»
+              </Typography>{" "}
+              offers a wide range of modern biologically active supplements that
+              provide high-quality and effective treatment. Today, the product
+              portfolio of{" "}
+              <Typography sx={{ fontWeight: 700, display: "inline" }}>
+                «DIAMOND BRAVE WORLD PHARM»
+              </Typography>{" "}
+              is more than 30. Marketing of products is organized in all regions
+              of the Republic of Uzbekistan.
+            </Box>
           ) : (
-            <Typography
+            <Box
               sx={{
-                mt: 1.5,
-                fontSize: 16,
-                fontFamily: "Nunito, sans-serif",
-                fontWeight: 500,
-                color: "#011a41",
+                mt: 1,
                 textIndent: 30,
+                fontSize: 16,
+                fontWeight: 400,
+                fontFamily: "Nunito, sans-serif",
+                textAlign: "justify",
               }}
             >
-              Лекарственные растения последующих лет в Республике Узбекистан
-              активные реформы в сфере производства и воспроизводства и
-              благодаря широким возможностям компания активно работает на
-              фармацевтическом рынке в ближайшие!
-            </Typography>
+              <Typography sx={{ fontWeight: 700, display: "inline" }}>
+                «DIAMOND BRAVE WORLD PHARM»
+              </Typography>{" "}
+              предлагает широкий ассортимент современных биологически активных
+              добавок, обеспечивающих качественное и эффективное лечение.
+              Сегодня продуктовый портфель{" "}
+              <Typography sx={{ fontWeight: 700, display: "inline" }}>
+                «DIAMOND BRAVE WORLD PHARM»
+              </Typography>{" "}
+              составляет более 30. Сбыт продукции организован во всех регионах
+              Республики Узбекистан.
+            </Box>
           )}
         </Grid2>
         <Grid2 xs={12} md={6} lg={6}>
@@ -253,24 +292,6 @@ export default function About() {
           </Box>
         </Grid2>
       </Grid2>
-      {/* <Grid2 container spacing={2}>
-        <Grid2 xs={12} md={6}>
-          <Box
-            sx={{
-              width: "100%",
-              borderRadius: 3,
-              boxShadow:
-                "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 10px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
-            }}
-          >
-            <Box
-              component="img"
-              src="/img/maqsad.jpg"
-              sx={{ width: "100%", minHeight: "100%", objectFit: "cover" }}
-            />
-          </Box>
-        </Grid2>
-      </Grid2> */}
       <Box
         sx={{
           width: "100%",
@@ -286,7 +307,7 @@ export default function About() {
           disableElevation
           endIcon={<KeyboardArrowRightIcon />}
           sx={{
-            my: { xs: 3, md: 0 },
+            my: { xs: 1, md: 0 },
             display: { xs: "flex", md: "none" },
             fontFamily: "Nunito, sans-serif",
             textTransform: "capitalize",

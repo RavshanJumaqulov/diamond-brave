@@ -87,7 +87,7 @@ export default function BlogFirstItem({ el }) {
             fontFamily: "Barlow, sans-serif",
             fontWeight: 700,
             fontSize: { xs: 24, sm: 26, md: 30, lg: 32 },
-            cursor: "default",
+            cursor: "pointer",
             width: "auto",
             overflow: "hidden",
             textOverflow: "ellipsis",

@@ -7,19 +7,28 @@ import NewsId from "./pages/NewsId";
 import Products from "./pages/Products";
 import { useDispatch } from "react-redux";
 import { getCatalogs, getNews, getPhotoGalary, getProducts } from "./api";
-import { GET_CATALOGS, GET_NEWS, GET_PHOTO_GALLARY, GET_PRODUCTS } from "./redux/action";
+import {
+  GET_CATALOGS,
+  GET_NEWS,
+  GET_PHOTO_GALLARY,
+  GET_PRODUCTS,
+} from "./redux/action";
 import Context from "./Context";
 import About from "./pages/About";
 import Album from "./pages/Album";
 
 export default function AllRoutes() {
   const dispatch = useDispatch();
-  const { setProductsLoading, setNewsLoading, setCatalogsLoading, setPhotoGalaryLoading } =
-    useContext(Context);
+  const {
+    setProductsLoading,
+    setNewsLoading,
+    setCatalogsLoading,
+    setPhotoGalaryLoading,
+    setMobileOpen,
+  } = useContext(Context);
   useEffect(() => {
     const res = async () => {
       const data = await getProducts();
-      console.log(data)
       if (Object.keys(data).includes("code")) {
         setProductsLoading({
           status: true,
@@ -133,7 +142,7 @@ export default function AllRoutes() {
     res();
   }, []);
   return (
-    <Routes>
+    <Routes onClick={() => setMobileOpen(false)}>
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/album" element={<Album />} />

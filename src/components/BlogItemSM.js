@@ -46,10 +46,10 @@ export default function BlogItemSM({index, item}) {
               display: "-webkit-box",
               WebkitLineClamp: 2,
               WebkitBoxOrient: "vertical",
-              cursor: 'default',
+              cursor: 'pointer',
             }}
           >
-            {item[`title_${'uz'}`]}
+            {item[`title_${lan}`]}
           </Typography>
           <Stack
             direction={"row"}

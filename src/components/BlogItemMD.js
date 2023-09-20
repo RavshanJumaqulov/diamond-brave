@@ -76,7 +76,7 @@ export default function BlogItemMD(props) {
           display: "-webkit-box",
           WebkitLineClamp: 2,
           WebkitBoxOrient: "vertical",
-          cursor: 'default',
+          cursor: 'pointer',
         }}
       >
         {props['item'][`title_${lan}`]}

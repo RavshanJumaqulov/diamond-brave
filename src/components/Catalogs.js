@@ -19,7 +19,7 @@ export default function Catalogs({ sortByCatalogs, setSortByCatalogs }) {
       <CatalogsItem
         value={"Barchasi"}
         sortByCatalogs={sortByCatalogs}
-        title="Barchasi"
+        title={lan=="uz" ? "Barchasi" : lan=="en" ? "All Products" : "Все продукты"}
         setSortByCatalogs={setSortByCatalogs}
       />
       {catalogs.map((el, index) => {

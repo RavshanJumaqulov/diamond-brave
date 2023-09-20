@@ -44,8 +44,9 @@ export default function NewsId() {
     };
     res();
   }, []);
-
-  if (
+  if (news.find((el) => el.id == +params.new) == undefined) {
+    return <NewsIdLoading />;
+  } else if (
     news.length > 0 &&
     news.filter((el) => el.id == +params.new).length == 1
   ) {

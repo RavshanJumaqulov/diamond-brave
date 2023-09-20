@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  Fab,
-  Rating,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Fab, Rating, Stack, Typography } from "@mui/material";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import StarIcon from "@mui/icons-material/Star";
@@ -208,7 +201,7 @@ export default function ProductsItem(props) {
                   textAlign: "right",
                 }}
               >
-                10 Tabletka
+                {props.miqdori}
               </Typography>
             </Stack>
           </Box>

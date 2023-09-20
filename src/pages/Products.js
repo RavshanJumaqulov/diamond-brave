@@ -1,5 +1,4 @@
 import {
-  Autocomplete,
   Box,
   Container,
   FormControl,
@@ -11,15 +10,15 @@ import {
   Typography,
 } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ProductsItem from "../components/ProductsItem";
 import Catalogs from "../components/Catalogs";
 import { useSelector } from "react-redux";
-import ProductsItemLoading from "../loading/ProductsItemLoading";
-import Carausel from "../components/Carausel";
 import { useNavigate } from "react-router-dom";
+import Context from "../Context";
 
 export default function Products() {
+  const { productsLoading, width, lan } = useContext(Context);
   const products = useSelector((state) => state.products);
   const catalogs = useSelector((state) => state.catalogs);
   const [sort, setSort] = React.useState("a-z");
@@ -30,7 +29,6 @@ export default function Products() {
   const handleCatalog = (event) => {
     setSortByCatalogs(event.target.value);
   };
-
   useEffect(() => {
     if (search == "") {
       if (sortByCatalogs === "Barchasi") {
@@ -42,7 +40,7 @@ export default function Products() {
       setSortByCatalogs("Barchasi");
       setData(
         products.filter((el) =>
-          el[`title_${"uz"}`].toLowerCase().includes(search.toLocaleLowerCase())
+          el[`title_${lan}`].toLowerCase().includes(search.toLocaleLowerCase())
         )
       );
     }
@@ -54,7 +52,6 @@ export default function Products() {
   useEffect(() => {
     window.scrollTo({
       top: 0,
-      // behavior: "smooth",
     });
   }, [useNavigate()]);
 
@@ -76,9 +73,13 @@ export default function Products() {
     }
   });
   return (
-    <Box sx={{ mt: 10 }}>
-      <Container maxWidth="xl">
-        <Carausel />
+    <Box>
+      <Box
+        component={"img"}
+        src={width < 900 ? "/topxs.jpg" : "/top.jpg"}
+        sx={{ width: "100%", minHeight: 200, objectFit: "cover" }}
+      />
+      <Container maxWidth="xl" sx={{ mt: 10 }}>
         <Typography
           sx={{
             fontSize: { xs: "calc(1.3125rem + 0.75vw)", lg: 30 },
@@ -89,7 +90,7 @@ export default function Products() {
             mt: 2,
           }}
         >
-          Mahsulotlar
+          {lan == "uz" ? "Mahsulotlar" : lan == "en" ? "Products" : "Продукты"}
         </Typography>
         <Box
           sx={{
@@ -97,6 +98,7 @@ export default function Products() {
             display: { xs: "flex", md: "none" },
             flexDirection: "row",
             justifyContent: "space-between",
+            alignItems: "center",
             my: { xs: 2, md: 0 },
           }}
         >
@@ -110,50 +112,29 @@ export default function Products() {
               mt: 2,
             }}
           >
-            Mahsulotlar
+            {lan == "uz"
+              ? "Mahsulotlar"
+              : lan == "en"
+              ? "Products"
+              : "Продукты"}
           </Typography>
-          <Autocomplete
+          <TextField
+            label={lan == "uz" ? "Qidiruv" : lan == "en" ? "Search" : "Поиск"}
+            variant="outlined"
+            onChange={(e) => setSearch(e.target.value)}
+            value={search}
             sx={{
-              width: 250,
+              ml: 1,
+              display: { xs: "flex", md: "none" },
               "& .MuiInputBase-root": { borderRadius: 3 },
               "& .Mui-focused": {
-                color: "#3bb77f !important",
+                color: "#3bb77e !important",
                 "& fieldset": {
-                  borderColor: "#3bb77f !important",
+                  borderColor: "#3bb77e !important",
+                  borderWidth: 2,
                 },
               },
             }}
-            options={products}
-            autoHighlight
-            getOptionLabel={(option) => option.title}
-            renderOption={(props, option) => (
-              <Box
-                component="li"
-                sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-                {...props}
-              >
-                <img
-                  loading="lazy"
-                  width="20"
-                  src={option.img}
-                  srcSet={option.img}
-                  alt=""
-                />
-                {option[`title_${"uz"}`]}
-              </Box>
-            )}
-            renderInput={(params) => (
-              <TextField
-                sx={{ borderRadius: 3 }}
-                {...params}
-                label="Qidiruv"
-                type="search"
-                inputProps={{
-                  ...params.inputProps,
-                  autoComplete: "false",
-                }}
-              />
-            )}
           />
         </Box>
         <Box
@@ -171,66 +152,42 @@ export default function Products() {
               fontWeight: 700,
               fontFamily: "Nunito, sans-serif",
               color: "#011a41",
+              display: { xs: "none", sm: "flex" },
             }}
           >
             Filter
           </Typography>
           <Box
             sx={{
+              width: { xs: "100%", sm: "auto" },
               display: "flex",
               flexDirection: "row",
               alignItems: "center",
+              justifyContent: "space-between",
             }}
           >
-            <Autocomplete
+            <TextField
+              label={lan == "uz" ? "Qidiruv" : lan == "en" ? "Search" : "Поиск"}
+              variant="outlined"
+              onChange={(e) => setSearch(e.target.value)}
+              value={search}
               sx={{
-                width: 250,
+                ml: 0,
                 display: { xs: "none", md: "flex" },
                 "& .MuiInputBase-root": { borderRadius: 3 },
                 "& .Mui-focused": {
-                  color: "#3bb77f !important",
+                  color: "#3bb77e !important",
                   "& fieldset": {
-                    borderColor: "#3bb77f !important",
+                    borderColor: "#3bb77e !important",
+                    borderWidth: 2,
                   },
                 },
               }}
-              options={products}
-              autoHighlight
-              getOptionLabel={(option) => option.title}
-              renderOption={(props, option) => (
-                <Box
-                  component="li"
-                  sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-                  {...props}
-                >
-                  <img
-                    loading="lazy"
-                    width="20"
-                    src={option.img}
-                    srcSet={option.img}
-                    alt=""
-                  />
-                  {option[`title_${"uz"}`]}
-                </Box>
-              )}
-              renderInput={(params) => (
-                <TextField
-                  onChange={(el) => setSearch(el.target.value)}
-                  sx={{ borderRadius: 3 }}
-                  {...params}
-                  label="Qidiruv"
-                  type="search"
-                  inputProps={{
-                    ...params.inputProps,
-                    autoComplete: "false",
-                  }}
-                />
-              )}
             />
 
             <FormControl
               sx={{
-                ml: 1,
+                ml: { xs: 0, md: 1 },
                 minWidth: 200,
                 "& fieldset": { borderRadius: 3 },
                 "& .Mui-focused": {
@@ -241,11 +198,17 @@ export default function Products() {
               }}
             >
               <Select value={sortByCatalogs} onChange={handleCatalog}>
-                <MenuItem value={"Barchasi"}>Barchasi</MenuItem>
+                <MenuItem value={"Barchasi"}>
+                  {lan == "uz"
+                    ? "Barchasi"
+                    : lan == "en"
+                    ? "All Products"
+                    : "Все продукты"}
+                </MenuItem>
                 {catalogs.map((el, index) => {
                   return (
                     <MenuItem key={index} value={el.id}>
-                      {el[`title_${"uz"}`]}
+                      {el[`title_${lan}`]}
                     </MenuItem>
                   );
                 })}
@@ -265,8 +228,14 @@ export default function Products() {
                 }}
               >
                 <Select value={sort} onChange={handleSort}>
-                  <MenuItem value={"a-z"}>Nomi A &#10140; Z</MenuItem>
-                  <MenuItem value={"z-a"}>Nomi Z &#10140; A</MenuItem>
+                  <MenuItem value={"a-z"}>
+                    {lan == "uz" ? "Nomi" : lan == "en" ? "Name" : "Имя"} A
+                    &#10140; Z
+                  </MenuItem>
+                  <MenuItem value={"z-a"}>
+                    {lan == "uz" ? "Nomi" : lan == "en" ? "Name" : "Имя"} Z
+                    &#10140; A
+                  </MenuItem>
                 </Select>
               </FormControl>
             </Stack>
@@ -283,7 +252,7 @@ export default function Products() {
           <Grid2 xs={12} md={9}>
             <Box sx={{ width: "100%", mt: 2 }}>
               <Grid2 container spacing={2}>
-                {data.length == 0 ? (
+                {productsLoading.status && data.length == 0 ? (
                   <Typography
                     sx={{
                       fontSize: 14,
@@ -293,15 +262,20 @@ export default function Products() {
                     }}
                     color="error.main"
                   >
-                    Mahsulot mavjud emas!
+                    {lan == "uz"
+                      ? "Mahsulot mavjud emas!"
+                      : lan == "en"
+                      ? "Product not available!"
+                      : "Товар недоступен!"}
                   </Typography>
                 ) : (
                   data.map((el, index) => {
                     return (
                       <Grid2 xs={12} sm={6} md={4} lg={3} key={index}>
                         <ProductsItem
-                          title={el[`title_${"uz"}`]}
-                          category={el["category"][`title_${"uz"}`]}
+                          title={el[`title_${lan}`]}
+                          category={el["category"][`title_${lan}`]}
+                          miqdori={el[`miqdori_${lan}`]}
                           img={el.img}
                           id={el.id}
                         />

@@ -26,10 +26,9 @@ const FacebookIcon = createSvgIcon(
 );
 
 export default function Header() {
-  const { lan, setLan, width } = useContext(Context);
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const { lan, setLan, width, mobileOpen, setMobileOpen } = useContext(Context);
   const [scrollY, setScrollY] = useState(window.scrollY);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -43,17 +42,17 @@ export default function Header() {
     setLan(event.target.value);
   };
 
-  useEffect(()=>{
-    setMobileOpen(false)
-  },[navigate])
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [navigate]);
 
   return (
     <AppBar
       component="nav"
       sx={{
         background: {
-          xs: mobileOpen ? "rgba(255, 255, 255, 0.2)" : "none",
-          md: "none",
+          xs: mobileOpen ? "rgba(255, 255, 255, 0.2)" : "#ffffff4f",
+          md: "#ffffff3f",
         },
         backdropFilter: {
           xs: mobileOpen || scrollY > 10 ? "blur(20px)" : "none",
@@ -62,7 +61,9 @@ export default function Header() {
         transition: "0.3s all linear",
         minWidth: "100%",
         boxShadow:
-          "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
+          scrollY > 10
+            ? "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)"
+            : "none",
       }}
     >
       <Container maxWidth="xl">
@@ -86,7 +87,12 @@ export default function Header() {
               transition: "0.3s all linear",
             }}
           >
-            <img src="/img/logo.png" alt="" style={{ height: 50 }} />
+            <img
+              onClick={() => navigate("/")}
+              src="/img/logo.png"
+              alt=""
+              style={{ height: 50 }}
+            />
             <IconButton
               onClick={handleDrawerToggle}
               size="large"
@@ -95,7 +101,7 @@ export default function Header() {
               aria-label="menu"
               sx={{ display: { md: "none" }, ml: 2, color: "text.primary" }}
             >
-              <MenuIcon />
+              <MenuIcon sx={{ color: "#011a41" }} />
             </IconButton>
           </Box>
           <Box
@@ -118,7 +124,7 @@ export default function Header() {
                 "& .MuiTypography-root": {
                   fontFamily: "Nunito, sans-serif",
                   fontWeight: 700,
-                  color: "#011a41",
+                  color: { xs: "#011a41", md: "#011a41" },
                 },
                 "&:hover": {
                   "& .MuiTypography-root": {
@@ -139,7 +145,6 @@ export default function Header() {
                 sx={{
                   fontSize: { xs: 18, md: 16 },
                   display: { xs: "block", md: "block" },
-                  color: "text.primary",
                 }}
               >
                 {lan == "uz" ? "Bosh sahifa" : lan == "en" ? "Home" : "Главный"}
@@ -148,7 +153,7 @@ export default function Header() {
                 sx={{
                   fontSize: { xs: 18, md: 16 },
                   display: { xs: "block", md: "inline-block" },
-                  color: "text.primary",
+                  color: scrollY > 10 ? "text.primary" : "#fff",
                 }}
               >
                 {lan == "uz" ? "Bosh sahifa" : lan == "en" ? "Home" : "Главный"}
@@ -265,53 +270,53 @@ export default function Header() {
                     </Select>
                   </FormControl>
                   <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    width: 150,
-                  }}
-                >
-                  <Fab
-                    component="a"
-                    target="_blank"
-                    href="tel:+998997565684"
-                    elevation="0"
-                    size="small"
-                    sx={{ boxShadow: "none", background: 'none',  }}
+                    sx={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      width: 150,
+                    }}
                   >
-                    <FacebookIcon
-                      sx={{
-                        fontSize: 24,
-                        height: 24,
-                        color: "#3bb77e",
-                        fill: "#3bb77e",
-                      }}
-                    />
-                  </Fab>
-                  <Fab
-                    component="a"
-                    target="_blank"
-                    elevation="0"
-                    size="small"
-                    sx={{ boxShadow: "none", background: 'none',  }}
-                  >
-                    <InstagramIcon
-                      sx={{ fontSize: 24, height: 24, color: "#3bb77e" }}
-                    />
-                  </Fab>
-                  <Fab
-                    component="a"
-                    target="_blank"
-                    elevation="0"
-                    size="small"
-                    sx={{ boxShadow: "none", background: 'none',  }}
-                  >
-                    <YouTubeIcon
-                      sx={{ fontSize: 24, height: 24, color: "#3bb77e" }}
-                    />
-                  </Fab>
-                </Box>
+                    <Fab
+                      component="a"
+                      target="_blank"
+                      href="tel:+998997565684"
+                      elevation="0"
+                      size="small"
+                      sx={{ boxShadow: "none", background: "none" }}
+                    >
+                      <FacebookIcon
+                        sx={{
+                          fontSize: 24,
+                          height: 24,
+                          color: "#3bb77e",
+                          fill: "#3bb77e",
+                        }}
+                      />
+                    </Fab>
+                    <Fab
+                      component="a"
+                      target="_blank"
+                      elevation="0"
+                      size="small"
+                      sx={{ boxShadow: "none", background: "none" }}
+                    >
+                      <InstagramIcon
+                        sx={{ fontSize: 24, height: 24, color: "#3bb77e" }}
+                      />
+                    </Fab>
+                    <Fab
+                      component="a"
+                      target="_blank"
+                      elevation="0"
+                      size="small"
+                      sx={{ boxShadow: "none", background: "none" }}
+                    >
+                      <YouTubeIcon
+                        sx={{ fontSize: 24, height: 24, color: "#3bb77e" }}
+                      />
+                    </Fab>
+                  </Box>
                   <Button
                     component="a"
                     target="_blank"
@@ -360,6 +365,9 @@ export default function Header() {
                       "& fieldset": {
                         border: "none !important",
                       },
+                    },
+                    "& svg": {
+                      color: "#011a41",
                     },
                   }}
                 >

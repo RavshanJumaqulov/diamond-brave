@@ -29,6 +29,8 @@ export default function CertificateItem(props) {
           justifyContent: "center",
           zIndex: 10000000,
           transition: "0.3s all !important",
+          cursor: show ? "default" : "-webkit-zoom-in",
+          cursor: show ? "default" : "zoom-in",
         }}
       >
         <Box
@@ -66,6 +68,7 @@ export default function CertificateItem(props) {
                 flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "center",
+                cursor: "zoom-out",
                 "&:hover": {
                   background: "red",
                   "& svg": {

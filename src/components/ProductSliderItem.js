@@ -1,8 +1,6 @@
 import {
-  Backdrop,
   Box,
   Button,
-  CircularProgress,
   Fab,
   Rating,
   Stack,
@@ -134,7 +132,7 @@ export default function ProductSliderItem({ width, setImg, el }) {
             }}
           >
             <Rating
-              defaultValue={4.7}
+              defaultValue={4+Math.random()}
               precision={0.1}
               readOnly
               emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="16px" />}
@@ -153,7 +151,7 @@ export default function ProductSliderItem({ width, setImg, el }) {
                 textAlign: "right",
               }}
             >
-              {el[`miqdori${lan}`]}
+              {el[`miqdori_${lan}`]}
             </Typography>
           </Stack>
         </Box>

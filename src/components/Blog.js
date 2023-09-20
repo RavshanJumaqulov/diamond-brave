@@ -10,8 +10,8 @@ import Context from "../Context";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 export default function Blog() {
-  const navigate = useNavigate()
-  const { lan } = useContext(Context);
+  const navigate = useNavigate();
+  const { width, lan } = useContext(Context);
   const news = useSelector((state) => state.news);
   return (
     <Box
@@ -58,22 +58,31 @@ export default function Blog() {
               mt: 2,
             }}
           >
-            {lan == 'uz' ? "So'nggi yangiliklar" : lan == 'en' ?  "Latest news" : "Последние новости"}
+            {lan == "uz"
+              ? "So'nggi yangiliklar"
+              : lan == "en"
+              ? "Latest news"
+              : "Последние новости"}
           </Typography>
           <Button
-          onClick={()=>navigate('/news')}
+            onClick={() => navigate("/news")}
             variant="light"
             disableElevation
             endIcon={<KeyboardArrowRightIcon />}
             sx={{
+              my: { xs: 3, md: 0 },
               display: { xs: "none", md: "flex" },
               fontFamily: "Nunito, sans-serif",
               textTransform: "capitalize",
               fontSize: 16,
+              fontWeight: 700,
             }}
           >
-            {lan == 'uz' ? "Barchasi" : lan == 'en' ?  "All news" : "Все новости"}
-            
+            {lan == "uz"
+              ? "Barchasi"
+              : lan == "en"
+              ? "All news"
+              : "Все новости"}
           </Button>
         </Stack>
       </Stack>
@@ -84,33 +93,36 @@ export default function Blog() {
           minWidth: "100%",
         }}
       >
-        <Grid2 container sx={{ display: { xs: "none", md: "flex" } }}>
-          <Grid2 xs={12} sm={6}>
-            <BlogFirstItem el={news[0]} />
+        {width > 900 ? (
+          <Grid2 container>
+            <Grid2 xs={12} sm={6}>
+              <BlogFirstItem el={news[0]} />
+            </Grid2>
+            <Grid2 sm={12} md={6}>
+              <Masonry
+                columns={2}
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  flexFlow: "column wrap",
+                  alignContent: "flex-start",
+                  boxSizing: "border-box",
+                  mt: "-8px !important",
+                }}
+              >
+                {news.slice(1, 5).map((el, index) => {
+                  return <BlogItemMD order={index + 1} key={index} item={el} />;
+                })}
+              </Masonry>
+            </Grid2>
           </Grid2>
-          <Grid2 sm={12} md={6}>
-            <Masonry
-              columns={2}
-              sx={{
-                width: "100%",
-                display: "flex",
-                flexFlow: "column wrap",
-                alignContent: "flex-start",
-                boxSizing: "border-box",
-                mt: "-8px !important",
-              }}
-            >
-              {news.slice(1, 5).map((el, index) => {
-                return <BlogItemMD order={index + 1} key={index} item={el} />;
-              })}
-            </Masonry>
+        ) : (
+          <Grid2 container>
+            {news.slice(0, 4).map((el, index) => {
+              return <BlogItemSM index={index + 1} key={index} item={el} />;
+            })}
           </Grid2>
-        </Grid2>
-        <Grid2 container sx={{ display: { xs: "flex", md: "none" } }}>
-          {news.slice(0, 4).map((el, index) => {
-            return <BlogItemSM index={index + 1} key={index} item={el} />;
-          })}
-        </Grid2>
+        )}
         <Box
           sx={{
             width: "100%",
@@ -118,16 +130,26 @@ export default function Blog() {
             flexDirection: "row",
             justifyContent: "center",
             alignItems: "center",
-            my: 3,
+            my: 1,
           }}
         >
           <Button
             variant="light"
             disableElevation
             endIcon={<KeyboardArrowRightIcon />}
-            sx={{ display: { xs: "flex", md: "none" } }}
+            sx={{
+              display: { xs: "flex", md: "none" },
+              fontFamily: "Nunito, sans-serif",
+              textTransform: "capitalize",
+              fontSize: 16,
+              fontWeight: 700,
+            }}
           >
-            {lan == 'uz' ? "Barchasi" : lan == 'en' ?  "All news" : "Все новости"}
+            {lan == "uz"
+              ? "Barchasi"
+              : lan == "en"
+              ? "All news"
+              : "Все новости"}
           </Button>
         </Box>
       </Box>
