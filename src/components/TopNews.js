@@ -7,11 +7,19 @@ import CampaignIcon from "@mui/icons-material/Campaign";
 import { useSelector } from "react-redux";
 import moment from "moment";
 import Context from "../Context";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function TopNews({ items }) {
-  const navigate = useNavigate()
+  const params = useParams();
+  const navigate = useNavigate();
   const { lan } = useContext(Context);
+  const navigatsiya = () => {
+    if (Object.keys(params).length == 0)
+      navigate(`/news/page_1/${items[0].id}`);
+    else {
+      navigate(`/news/${params.page}/${items[0].id}`);
+    }
+  };
   return (
     <Box sx={{ width: "100%" }}>
       <Stack
@@ -76,7 +84,7 @@ export default function TopNews({ items }) {
           }}
         >
           <Box
-          onClick={()=> navigate(`/news/${items[0].id}`)}
+            onClick={navigatsiya}
             sx={{
               display: "block",
               overflow: "hidden",

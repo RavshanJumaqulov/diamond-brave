@@ -6,12 +6,14 @@ import { Stack, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import moment from "moment";
 import Context from "../Context";
+import { useParams } from "react-router-dom";
 
 export default function AllNews() {
   const news = useSelector((state) => state.news);
   const { lan } = useContext(Context);
+  const params = useParams()
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%", mt:5 }}>
       <Stack
         direction="column"
         sx={{
@@ -64,7 +66,22 @@ export default function AllNews() {
         </Typography>
       </Stack>
       <Grid2 container spacing={2}>
-        {news.map((el, index) => {
+        {Object.keys(params).length == 0 || params.page == "page_1" ? news['page_1'].slice(5).map((el, index) => {
+          return (
+            <Grid2 xs={12} md={6} key={index}>
+              <Box sx={{ display: "flex", flexDirection: "column" }}>
+                <TopNewsItem
+                  id={el.id}
+                  item={el}
+                  img={el.img}
+                  title={el[`title_${lan}`]}
+                  date={moment(el.created_at).fromNow()}
+                  views={el.views}
+                />
+              </Box>
+            </Grid2>
+          );
+        }) : news[params.page] !== undefined && news[params.page].map((el, index) => {
           return (
             <Grid2 xs={12} md={6} key={index}>
               <Box sx={{ display: "flex", flexDirection: "column" }}>

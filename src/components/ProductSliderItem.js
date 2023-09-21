@@ -132,7 +132,7 @@ export default function ProductSliderItem({ width, setImg, el }) {
             }}
           >
             <Rating
-              defaultValue={4+Math.random()}
+              defaultValue={5}
               precision={0.1}
               readOnly
               emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="16px" />}

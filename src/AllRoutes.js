@@ -10,7 +10,9 @@ import { getCatalogs, getNews, getPhotoGalary, getProducts } from "./api";
 import {
   GET_CATALOGS,
   GET_NEWS,
+  GET_NEWS_LENGTH,
   GET_PHOTO_GALLARY,
+  GET_PHOTO_GALLARY_LENGTH,
   GET_PRODUCTS,
 } from "./redux/action";
 import Context from "./Context";
@@ -107,6 +109,10 @@ export default function AllRoutes() {
             message: "",
           });
           dispatch({ type: GET_NEWS, payload: data.data.results });
+          dispatch({
+            type: GET_NEWS_LENGTH,
+            payload: data.data.count,
+          });
         }
       }
     };
@@ -136,6 +142,10 @@ export default function AllRoutes() {
             message: "",
           });
           dispatch({ type: GET_PHOTO_GALLARY, payload: data.data.results });
+          dispatch({
+            type: GET_PHOTO_GALLARY_LENGTH,
+            payload: data.data.count,
+          });
         }
       }
     };
@@ -146,10 +156,12 @@ export default function AllRoutes() {
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/album" element={<Album />} />
+      <Route path="/album/:page" element={<Album />} />
       <Route path="/products" element={<Products />} />
       <Route path="/products/:product" element={<Product />} />
       <Route path="/news" element={<News />} />
-      <Route path="/news/:new" element={<NewsId />} />
+      <Route path="/news/:page" element={<News />} />
+      <Route path="/news/:page/:new" element={<NewsId />} />
     </Routes>
   );
 }

@@ -1,5 +1,5 @@
 import { Box, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Header from "./components/Header";
 import { BrowserRouter } from "react-router-dom";
 import AllRoutes from "./AllRoutes";
@@ -22,6 +22,7 @@ function App() {
   const [width, setWidth] = useState(window.innerWidth);
   const [height, setHeight] = useState(window.innerHeight);
   const [lan, setLan] = useState("uz");
+  const boxRef = useRef(null);
   const [productsLoading, setProductsLoading] = useState({
     status: false,
     error: false,
@@ -47,6 +48,9 @@ function App() {
     setWidth(window.innerWidth);
     setHeight(window.innerHeight);
   });
+
+
+
   return (
     <Context.Provider
       value={{
@@ -68,8 +72,8 @@ function App() {
     >
       <Provider store={store}>
         <ThemeProvider theme={theme()}>
-          <Box sx={{ position: "relative" }}>
-            {/* <Background /> */}
+          <Box ref={boxRef} sx={{ position: "relative", background: {xs: 'url(/background.jpg)', md: 'none'} }}>
+            {width > 900 ? <Background /> : ""}
             <BrowserRouter>
               <CssBaseline />
               <Header />

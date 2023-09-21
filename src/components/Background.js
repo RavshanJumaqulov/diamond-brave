@@ -20,7 +20,7 @@ export default function Background() {
         top: 0,
         left: 0,
         zIndex: -1,
-        background: "#ffffff !important",
+        background: {xs: "url(/background.jpg)", md: "#ffffff !important"},
         backdropFilter: "blur(20px)",
         display: "flex",
         flexDirection: "row",
@@ -46,7 +46,7 @@ export default function Background() {
           backdropFilter: "blur(200px)",
           filter: "blur(300px)",
           transform: "translateY(400px)",
-          animation: `animation1 15s infinite alternate`,
+          // animation: `animation1 15s infinite alternate`,
         }}
       ></Box>
       <Box

@@ -25,11 +25,7 @@ export default function Carausel() {
         height: {md: '100vh'},
         maxHeight: { xs: '40vh', sm: '60vh', md: "100vh" },
         position: "relative",
-        // borderRadius: {xs: 3, md: 6},
         overflow: 'hidden',
-        // mt: 12,
-        // boxShadow:
-        //     "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
         "& img": {
           width: '100%',
           height: '100%',
@@ -112,9 +108,14 @@ export default function Carausel() {
           img="/slide2.jpg"
         />
         <CarauselItem
-          index={2}
+          index={3}
           title="Immunitet tizimini qo'llab-quvvatlash va mustahkamlash."
           img="/slide3.jpg"
+        />
+        <CarauselItem
+          index={4}
+          title="Immunitet tizimini qo'llab-quvvatlash va mustahkamlash."
+          img="/slide4.jpg"
         />
       </Slider>
     </Box>

@@ -20,6 +20,18 @@ export default function ProductWithId() {
   const [left, setLeft] = useState(0);
   const [content, setContent] = useState("tarkib");
   const [presentImg, setPresentImg] = useState("");
+  const [randomData, setRandomData] = useState([]);
+
+  useEffect(() => {
+    setRandomData(
+      products
+        .filter((el) => el.id !== +params.product)
+        .sort(function () {
+          return 0.5 - Math.random();
+        })
+        .slice(0, 10)
+    );
+  }, []);
 
   const data = products.find((el) => el.id == +params.product);
 
@@ -42,6 +54,7 @@ export default function ProductWithId() {
     setTop(0);
     setLeft(0);
   };
+
   return (
     <Box>
       <Box
@@ -51,7 +64,7 @@ export default function ProductWithId() {
       />
       <Container maxWidth="xl">
         <Grid2 container sx={{ width: "100%", mt: { xs: 8, md: 10 } }}>
-          <Grid2 xs={12} lg={9}>
+          <Grid2 xs={12} lg={8}>
             <Box sx={{ width: "100%" }}>
               <Grid2 container sx={{ width: "100%" }}>
                 <Grid2
@@ -271,6 +284,9 @@ export default function ProductWithId() {
                       }}
                     >
                       <Button
+                        component="a"
+                        href={data.file}
+                        download
                         disableElevation
                         variant="contained"
                         sx={{
@@ -286,7 +302,7 @@ export default function ProductWithId() {
                           },
                         }}
                       >
-                        ma'lumotlarni yuklash
+                        Ma'lumotlarni yuklash
                       </Button>
                     </Stack>
                   </Box>
@@ -569,7 +585,7 @@ export default function ProductWithId() {
               ""
             )}
           </Grid2>
-          <Grid2 xs={12} lg={3}>
+          <Grid2 xs={12} lg={4} sx={{ mt: { xs: 5, lg: 0 } }}>
             <Typography
               sx={{
                 fontSize: { xs: "calc(1.3125rem + 0.75vw)", lg: 30 },
@@ -588,18 +604,19 @@ export default function ProductWithId() {
             </Typography>
             <Box sx={{ width: "100%" }}>
               <Grid2 container spacing={2}>
-                <Grid2 xs={12} sm={6}>
-                  <ProductList />
-                </Grid2>
-                <Grid2 xs={12} sm={6}>
-                  <ProductList />
-                </Grid2>
-                <Grid2 xs={12} sm={6}>
-                  <ProductList />
-                </Grid2>
-                <Grid2 xs={12} sm={6}>
-                  <ProductList />
-                </Grid2>
+                {randomData.map((el) => {
+                  return (
+                    <Grid2 xs={12} sm={6} lg={12} key={el.id}>
+                      <ProductList
+                        id={el.id}
+                        title={el[`title_${lan}`]}
+                        img={el.img}
+                        catalog={el[`category`][`title_${lan}`]}
+                        type={el[`miqdori_${lan}`]}
+                      />
+                    </Grid2>
+                  );
+                })}
               </Grid2>
             </Box>
           </Grid2>

@@ -4,10 +4,10 @@ const getProducts = async () => {
   try {
     const data = await axios({
       method: "GET",
-      url: "https://nisbot.uz/en/product/",
+      url: "https://api.diamondbrave.uz/en/product/",
       timeout: 30000,
       headers: {
-        Authorization: "Token 71d9d155d63688c827e0b6e241d7788d45f97372",
+        Authorization: "Token f6cefd731a3d620d1a5a6f7e5a7e240e3a38f031",
       },
     });
     return data;
@@ -20,10 +20,10 @@ const getCatalogs = async () => {
   try {
     const data = await axios({
       method: "GET",
-      url: "https://nisbot.uz/en/category/",
+      url: "https://api.diamondbrave.uz/en/category/",
       timeout: 30000,
       headers: {
-        Authorization: "Token 71d9d155d63688c827e0b6e241d7788d45f97372",
+        Authorization: "Token f6cefd731a3d620d1a5a6f7e5a7e240e3a38f031",
       },
     });
     return data;
@@ -36,10 +36,10 @@ const getNews = async (page) => {
   try {
     const data = await axios({
       method: "GET",
-      url: `https://nisbot.uz/en/news/?page=${page}`,
+      url: `https://api.diamondbrave.uz/en/news/?page=${page}`,
       timeout: 30000,
       headers: {
-        Authorization: "Token 71d9d155d63688c827e0b6e241d7788d45f97372",
+        Authorization: "Token f6cefd731a3d620d1a5a6f7e5a7e240e3a38f031",
       },
     });
     return data;
@@ -52,10 +52,10 @@ const getNewsWithId = async (id) => {
   try {
     const data = await axios({
       method: "GET",
-      url: `https://nisbot.uz/en/news/${id}/`,
+      url: `https://api.diamondbrave.uz/en/news/${id}/`,
       timeout: 30000,
       headers: {
-        Authorization: "Token 71d9d155d63688c827e0b6e241d7788d45f97372",
+        Authorization: "Token f6cefd731a3d620d1a5a6f7e5a7e240e3a38f031",
       },
     });
     return data;
@@ -67,11 +67,11 @@ const updateViews = async (id, view) => {
   try {
     const data = await axios({
       method: "PATCH",
-      url: `https://nisbot.uz/en/news/${id}/`,
+      url: `https://api.diamondbrave.uz/en/news/${id}/`,
       timeout: 30000,
       data: { views: view + 1 },
       headers: {
-        Authorization: "Token 71d9d155d63688c827e0b6e241d7788d45f97372",
+        Authorization: "Token f6cefd731a3d620d1a5a6f7e5a7e240e3a38f031",
       },
     });
     return data;
@@ -83,10 +83,10 @@ const getPhotoGalary = async (page) => {
   try {
     const data = await axios({
       method: "GET",
-      url: `https://nisbot.uz/en/flayer?page=${page}`,
+      url: `https://api.diamondbrave.uz/en/flayer?page=${page}`,
       timeout: 30000,
       headers: {
-        Authorization: "Token 71d9d155d63688c827e0b6e241d7788d45f97372",
+        Authorization: "Token f6cefd731a3d620d1a5a6f7e5a7e240e3a38f031",
       },
     });
     return data;

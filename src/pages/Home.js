@@ -11,6 +11,8 @@ import ProductsSliderLoading from "../loading/ProductsSliderLoading";
 import Sponsors from "../components/Sponsors";
 import Goals from "../components/Goals";
 import { useNavigate } from "react-router-dom";
+import Album from "../components/Album";
+import Contact from "../components/Contact";
 
 export default function Home() {
   const { lan } = useContext(Context);
@@ -79,6 +81,8 @@ export default function Home() {
         <Certificate />
       </Container>
       <Sponsors />
+      <Album />
+      <Contact />
     </Box>
   );
 }

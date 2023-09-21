@@ -96,7 +96,7 @@ export default function Blog() {
         {width > 900 ? (
           <Grid2 container>
             <Grid2 xs={12} sm={6}>
-              <BlogFirstItem el={news[0]} />
+              <BlogFirstItem el={news["page_1"][0]} />
             </Grid2>
             <Grid2 sm={12} md={6}>
               <Masonry
@@ -110,7 +110,7 @@ export default function Blog() {
                   mt: "-8px !important",
                 }}
               >
-                {news.slice(1, 5).map((el, index) => {
+                {news["page_1"].slice(1, 5).map((el, index) => {
                   return <BlogItemMD order={index + 1} key={index} item={el} />;
                 })}
               </Masonry>
@@ -118,7 +118,7 @@ export default function Blog() {
           </Grid2>
         ) : (
           <Grid2 container>
-            {news.slice(0, 4).map((el, index) => {
+            {news["page_1"].slice(0, 4).map((el, index) => {
               return <BlogItemSM index={index + 1} key={index} item={el} />;
             })}
           </Grid2>
@@ -134,6 +134,7 @@ export default function Blog() {
           }}
         >
           <Button
+            onClick={() => navigate("/news")}
             variant="light"
             disableElevation
             endIcon={<KeyboardArrowRightIcon />}

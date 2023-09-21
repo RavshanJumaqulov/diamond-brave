@@ -9,7 +9,7 @@ export default function BlogFirstItem({ el }) {
   const navigate = useNavigate()
   return (
     <Stack
-    onClick = {() => navigate(`/news/${el.id}`)}
+    onClick = {() => navigate(`/news/page_1/${el.id}`)}
       direction="column"
       sx={{
         borderRadius: 4,

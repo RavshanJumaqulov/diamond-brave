@@ -21,12 +21,11 @@ export default function NewsId() {
   useEffect(() => {
     window.scrollTo({
       top: 0,
-      // behavior: "smooth",
     });
   }, [useNavigate()]);
   useEffect(() => {
     const res = async () => {
-      const data = await getNewsWithId(1);
+      const data = await getNewsWithId(params.new);
       if (Object.keys(data).includes("code")) {
         setLoading({
           status: true,
@@ -39,42 +38,59 @@ export default function NewsId() {
           error: false,
           message: "",
         });
-        dispatch({ type: GET_NEW_WITH_ID, payload: data.data });
+        dispatch({
+          type: GET_NEW_WITH_ID,
+          payload: { page: params.page, value: data.data },
+        });
       }
     };
     res();
   }, []);
-  if (news.find((el) => el.id == +params.new) == undefined) {
+
+  if (news[params.page] == undefined) {
     return <NewsIdLoading />;
-  } else if (
-    news.length > 0 &&
-    news.filter((el) => el.id == +params.new).length == 1
-  ) {
-    return <New data={news.find((el) => el.id == +params.new)} />;
-  } else if (news.filter((el) => el.id == +params.new).length == 0) {
-    if (loading.status && !loading.error) {
-      return <New data={news.find((el) => el.id == +params.new)} />;
-    } else if (loading.status && loading.error) {
-      return (
-        <Typography
-          sx={{
-            fontSize: 14,
-            fontWeight: 700,
-            fontFamily: "Nunito, sans-serif",
-            textAlign: "left",
-          }}
-          color="error.main"
-        >
-          {loading.message + " "}
-          {lan == "uz"
-            ? "Serverda xatolik sodir bo'ldi!"
-            : lan == "en"
-            ? "A server error has occurred!"
-            : "Произошла ошибка сервера!"}
-        </Typography>
-      );
-    } else {
-      return <NewsIdLoading />;
-    }
+  }else{
+    console.log('lores')
+    return <New data={news[params.page].find(el => el.id == +params.new)} />
   }
+
+
+
+
+
+
+  // } else if (
+  //   news[params.page].filter((el) => el.id == +params.new).length == 1
+  // ) {
+  //   return <New data={news[params.page].find((el) => el.id == +params.new)} />;
+  // } else if (
+  //   news[params.page].filter((el) => el.id == +params.new).length == 0
+  //   ) {
+  //     if (loading.status && !loading.error) {
+  //     console.log('lorem')
+  //     return (
+  //       <New data={news[params.page].find((el) => el.id == +params.new)} />
+  //     );
+  //   } else if (loading.status && loading.error) {
+  //     return (
+  //       <Typography
+  //         sx={{
+  //           fontSize: 14,
+  //           fontWeight: 700,
+  //           fontFamily: "Nunito, sans-serif",
+  //           textAlign: "left",
+  //         }}
+  //         color="error.main"
+  //       >
+  //         {loading.message + " "}
+  //         {lan == "uz"
+  //           ? "Serverda xatolik sodir bo'ldi!"
+  //           : lan == "en"
+  //           ? "A server error has occurred!"
+  //           : "Произошла ошибка сервера!"}
+  //       </Typography>
+  //     );
+  //   } else {
+  //     return <NewsIdLoading />;
+  //   }
 }

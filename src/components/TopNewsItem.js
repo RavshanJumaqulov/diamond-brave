@@ -1,14 +1,23 @@
 import { Box, Typography } from "@mui/material";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import Context from "../Context";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function TopNewsItem(props) {
+  const params = useParams()
   const {width, lan} = useContext(Context)
   const navigate = useNavigate()
+
+  const navigatsiya = () => {
+    if (Object.keys(params).length == 0)
+      navigate(`/news/page_1/${props.id}`);
+    else {
+      navigate(`/news/${params.page}/${props.id}`);
+    }
+  };
   return (
     <Box
-    onClick={()=> navigate(`/news/${props.id}`)}
+    onClick={navigatsiya}
       sx={{
         display: "flex",
         flexDirection: "row",

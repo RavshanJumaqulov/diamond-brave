@@ -1,11 +1,15 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductList(props) {
+  const navigate = useNavigate();
   return (
     <Box
+      onClick={() => navigate(`/products/${props.id}`)}
       sx={{
-        pb: 0,
+        py: 0.5,
+        px: 1,
         borderRadius: 3,
         border: "1px solid transparent",
         display: "flex",
@@ -25,7 +29,7 @@ export default function ProductList(props) {
         src={props.img}
         sx={{
           width: 120,
-          height: 120,
+          height: 100,
           objectFit: "contain",
           borderRadius: 3,
           mb: 0,
@@ -53,7 +57,7 @@ export default function ProductList(props) {
         </Typography>
         <Typography
           sx={{
-            mt: 1,
+            mt: 0.5,
             color: "text.secondary",
             fontSize: 17,
             fontWeight: 500,
@@ -71,7 +75,7 @@ export default function ProductList(props) {
         >
           <Typography
             sx={{
-              mt: 1.5,
+              mt: 1,
               fontSize: 16,
               fontWeight: 500,
               fontFamily: "Nunito, sans-serif",

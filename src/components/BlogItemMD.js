@@ -15,7 +15,7 @@ export default function BlogItemMD(props) {
   }, []);
   return (
     <Stack
-    onClick={()=>navigate(`/news/${props.item.id}`)}
+    onClick={()=>navigate(`/news/page_1/${props.item.id}`)}
       direction="column"
       order={props.order}
       sx={{

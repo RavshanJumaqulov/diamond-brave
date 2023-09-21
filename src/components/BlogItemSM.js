@@ -11,7 +11,7 @@ export default function BlogItemSM({index, item}) {
   return (
     <Grid2 xs={12} sm={6}>
       <Box
-      onClick={()=>navigate(`/news/${item.id}`)}
+      onClick={()=>navigate(`/news/page_1/${item.id}`)}
         sx={{
           width: "100%",
           pl: {xs: 0, sm: index%2 == 0 ? 1.5 : 0},

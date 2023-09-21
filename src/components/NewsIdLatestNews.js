@@ -15,7 +15,7 @@ export default function NewsIdLatestNews(props) {
   const imgRef = useRef(null);
   return (
     <Box
-      onClick={() => navigate(`/news/${props.id}`)}
+      onClick={() => navigate(`/news/page_1/${props.id}`)}
       sx={{
         display: "flex",
         flexDirection: "row",

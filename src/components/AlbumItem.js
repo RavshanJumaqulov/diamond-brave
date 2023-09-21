@@ -1,4 +1,4 @@
-import { Box, Fab } from "@mui/material";
+import { Box, Fab, Typography } from "@mui/material";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import DownloadIcon from "@mui/icons-material/Download";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
@@ -91,6 +91,9 @@ export default function AlbumItem({ title, img }) {
             sx={{
               width: width / height > imgWidth / imgHeight ? "auto" : "90%",
               height: width / height > imgWidth / imgHeight ? "95vh" : "auto",
+              maxHeight: "95vh",
+              maxWidth: "95vw",
+              objectFit: 'contain',
               borderRadius: 3,
             }}
           />
@@ -102,6 +105,19 @@ export default function AlbumItem({ title, img }) {
         src={img}
         sx={{ width: "100%", borderRadius: 3 }}
       />
+      <Typography
+        sx={{
+          color: "#fff",
+          fontFamily: "Nunito, sans-serif",
+          fontSize: 18,
+          fontWeight: 500,
+          position: "absolute",
+          top: 10,
+          left: 10,
+        }}
+      >
+        {title}
+      </Typography>
       <Fab
         onClick={() => setFull(true)}
         size="medium"

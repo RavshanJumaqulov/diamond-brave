@@ -28,6 +28,7 @@ const FacebookIcon = createSvgIcon(
 );
 
 export default function New({ data }) {
+  const params = useParams();
   const dispatch = useDispatch();
   const { width, lan } = useContext(Context);
   const news = useSelector((state) => state.news);
@@ -38,22 +39,21 @@ export default function New({ data }) {
       setBoxWidth(relativeBoxRef.current.clientWidth);
     }
   }, [width]);
-  console.log(news);
   useEffect(() => {
     if (data.id !== undefined) {
       const res = async () => {
         const resData = await updateViews(data.id, data.views);
-        console.log(resData.data.views);
         if (typeof resData.data.views == "number") {
           dispatch({
             type: UPDATE_VIEWS,
-            payload: { id: data.id, view: resData.data.views },
+            payload: { page: params.page, id: data.id, data: resData.data },
           });
         }
       };
       res();
     }
   }, [useParams()]);
+  console.log(params);
   return (
     <Box sx={{ width: "100%" }}>
       <Box
@@ -302,7 +302,7 @@ export default function New({ data }) {
                   }}
                 >
                   <Grid2 container spacing={2} sx={{ width: "100%" }}>
-                    {news
+                    {news["page_1"]
                       .filter((el) => el.id !== data.id)
                       .slice(0, 10)
                       .map((el, index) => {
