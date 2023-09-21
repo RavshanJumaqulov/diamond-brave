@@ -46,11 +46,9 @@ export default function CreativeCarausel(props) {
         <CreativeCarauselItem img="/catalogs/category3.jpg" />
         <CreativeCarauselItem img="/catalogs/category4.jpg" />
         <CreativeCarauselItem img="/catalogs/category5.jpg" />
-        <CreativeCarauselItem img="/catalogs/category6.jpg" />
         <CreativeCarauselItem img="/catalogs/category7.jpg" />
         <CreativeCarauselItem img="/catalogs/category8.jpg" />
         <CreativeCarauselItem img="/catalogs/category9.jpg" />
-        <CreativeCarauselItem img="/catalogs/category10.jpg" />
       </Slider>
     </Box>
   );
