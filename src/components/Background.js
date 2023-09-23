@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import React, { useState } from "react";
 import Lottie from "lottie-react";
 import bg from "../lottie/bg2.json";
@@ -20,14 +20,21 @@ export default function Background() {
         top: 0,
         left: 0,
         zIndex: -1,
-        background: {xs: "url(/background.jpg)", md: "#ffffff !important"},
-        backdropFilter: "blur(20px)",
+        background: "url(/bg1.jpg) 100% 100%",
+        backgroundSize: 'cover !important',
+        backgroundRepeat: 'no-repeat',
+        // backdropFilter: "blur(20px)",
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
+        opacity: 0.2,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
-      <Box
+      {/* <Box
         sx={{
           position: "absolute",
           width: "100%",
@@ -36,8 +43,8 @@ export default function Background() {
           backdropFilter: "blur(80px)",
           zIndex: 1,
         }}
-      ></Box>
-      <Box
+      ></Box> */}
+      {/* <Box
         sx={{
           minWidth: "500px",
           minHeight: "500px",
@@ -46,10 +53,9 @@ export default function Background() {
           backdropFilter: "blur(200px)",
           filter: "blur(300px)",
           transform: "translateY(400px)",
-          // animation: `animation1 15s infinite alternate`,
         }}
-      ></Box>
-      <Box
+      ></Box> */}
+      {/* <Box
         sx={{
           minWidth: "300px",
           minHeight: "300px",
@@ -58,8 +64,8 @@ export default function Background() {
           backdropFilter: "blur(100px)",
           filter: "blur(300px)",
         }}
-      ></Box>
-      <Box
+      ></Box> */}
+      {/* <Box
         sx={{
           position: 'absolute',
           top: top - 100,
@@ -72,7 +78,8 @@ export default function Background() {
           backdropFilter: "blur(200px)",
           filter: "blur(200px)",
         }}
-      ></Box>
+      ></Box> */}
+      <Container maxWidth="xl" sx={{background: '#ffffff20', backdropFilter: 'blur(10px)', position: 'absolute', width: '100%', height: '100vh'}} />
     </Box>
   );
 }

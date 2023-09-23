@@ -119,9 +119,10 @@ export default function ProductSliderItem({ width, setImg, el }) {
               display: "-webkit-box",
               WebkitLineClamp: 2,
               WebkitBoxOrient: "vertical",
+              textTransform: 'capitalize'
             }}
           >
-            {el[`title_${lan}`]}
+            {el[`title_${lan}`].toLowerCase()}
           </Typography>
           <Stack
             direction={"row"}

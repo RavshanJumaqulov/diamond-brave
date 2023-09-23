@@ -3,19 +3,22 @@ import moment from "moment";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Context from "../Context";
+import { Fade, Slide } from "react-awesome-reveal";
 
 export default function BlogItemMD(props) {
-  const { lan } = useContext(Context)
-  const navigate = useNavigate()
+  const { lan } = useContext(Context);
+  const navigate = useNavigate();
   const [imgWidth, setImgWidth] = useState(0);
   const imgRef = useRef(null);
 
   useEffect(() => {
-    setImgWidth(imgRef.current.clientWidth);
+    if (imgRef.current !== null) {
+      setImgWidth(imgRef.current.clientWidth);
+    }
   }, []);
   return (
     <Stack
-    onClick={()=>navigate(`/news/page_1/${props.item.id}`)}
+      onClick={() => navigate(`/news/page_1/${props.item.id}`)}
       direction="column"
       order={props.order}
       sx={{
@@ -48,7 +51,7 @@ export default function BlogItemMD(props) {
           fontSize: 12,
           fontFamily: "Nunito, sans-serif",
           fontWeight: "700",
-          cursor: 'default',
+          cursor: "default",
         }}
       >
         {moment(props.item.created_at).fromNow()}
@@ -59,11 +62,15 @@ export default function BlogItemMD(props) {
             height: 4,
             borderRadius: "50%",
             backgroundColor: "currentColor",
-            cursor: 'default',
-            textTransform: 'lowercase'
+            cursor: "default",
+            textTransform: "lowercase",
           }}
         ></Box>
-        {lan == 'uz' ? `${props.item.views} marta o'qildi` : lan == 'en' ? `Read ${props.item.views} times` : `Прочтите ${props.item.views} раз`}
+        {lan == "uz"
+          ? `${props.item.views} marta o'qildi`
+          : lan == "en"
+          ? `Read ${props.item.views} times`
+          : `Прочтите ${props.item.views} раз`}
       </Stack>
       <Typography
         sx={{
@@ -76,10 +83,10 @@ export default function BlogItemMD(props) {
           display: "-webkit-box",
           WebkitLineClamp: 2,
           WebkitBoxOrient: "vertical",
-          cursor: 'pointer',
+          cursor: "pointer",
         }}
       >
-        {props['item'][`title_${lan}`]}
+        {props["item"][`title_${lan}`]}
       </Typography>
     </Stack>
   );

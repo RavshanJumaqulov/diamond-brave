@@ -52,6 +52,12 @@ export default function Carausel() {
             boxShadow: "0 0 3px #0000003f",
           },
         },
+        "& .slick-active":{
+          "& img":{
+            transition: '0.3s all',
+            animation: 'slick 7s  !important',
+          }
+        }
       }}
     >
       <Box
@@ -97,11 +103,6 @@ export default function Carausel() {
         </Fab>
       </Box>
       <Slider ref={arrowRef} {...settings} style={{ width: "100%", height: '100%' }}>
-        <CarauselItem
-          index={1}
-          title="Immunitet tizimini qo'llab-quvvatlash va mustahkamlash."
-          img="/slide1.jpg"
-        />
         <CarauselItem
           index={2}
           title="Immunitet tizimini qo'llab-quvvatlash va mustahkamlash."

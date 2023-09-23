@@ -2,7 +2,6 @@ import {
   Box,
   Container,
   FormControl,
-  InputLabel,
   MenuItem,
   Select,
   Stack,
@@ -155,7 +154,12 @@ export default function Products() {
               display: { xs: "none", sm: "flex" },
             }}
           >
-            Filter
+            {lan == "uz"
+              ? "Filter"
+              : lan == "en"
+              ? "Filter"
+              : "Фильтр"}
+            
           </Typography>
           <Box
             sx={{

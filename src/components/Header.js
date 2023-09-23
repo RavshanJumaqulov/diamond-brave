@@ -229,6 +229,24 @@ export default function Header() {
                   : "О нас"}
               </Typography>
             </NavLink>
+            <NavLink to="/contact">
+              <Typography
+                sx={{
+                  fontSize: { xs: 18, md: 16 },
+                  color: "text.primary",
+                }}
+              >
+                {lan == "uz" ? "Kontakt" : lan == "en" ? "Contact us" : "Контакт"}
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: { xs: 18, md: 16 },
+                  color: "text.primary",
+                }}
+              >
+                {lan == "uz" ? "Kontakt" : lan == "en" ? "Contact us" : "Контакт"}
+              </Typography>
+            </NavLink>
 
             {width < 900 ? (
               mobileOpen ? (
@@ -320,6 +338,7 @@ export default function Header() {
                   <Button
                     component="a"
                     target="_blank"
+                    href="tel:+998973951945"
                     variant={"contained"}
                     disableElevation
                     sx={{
@@ -435,7 +454,7 @@ export default function Header() {
                     />
                   </Fab>
                 </Box> */}
-                <Button
+                {/* <Button
                   component="a"
                   target="_blank"
                   variant={"contained"}
@@ -458,7 +477,7 @@ export default function Header() {
                     : lan == "en"
                     ? "Call phone"
                     : "ЗВОНИТЕ"}
-                </Button>
+                </Button> */}
               </>
             )}
           </Box>

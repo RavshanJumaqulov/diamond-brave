@@ -80,24 +80,43 @@ export default function Certificate() {
       <Box sx={{ width: "100%" }}>
         <Grid2 container>
           <CertificateItem
-            title="O'zbekiston Respublikasi Sog'liqni saqlash vazirligi ruxsatnomasi"
+            title={
+              lan == "uz"
+                ? "O'zbekiston Respublikasi Sog'liqni saqlash vazirligi ruxsatnomasi"
+                : lan == "en"
+                ? "Permit of the Ministry of Health of the Republic of Uzbekistan"
+                : "Разрешение Министерства здравоохранения Республики Узбекистан"
+            }
             img="/certificates/certificate_1.jpg"
             file="/certificates/certificate_1.pdf"
+            index={1}
           />
           <CertificateItem
-            title="O'zbekiston Respublikasi Sog'liqni saqlash vazirligi ruxsatnomasi"
+            title={
+              lan == "uz"
+                ? "Sanitariya-Epidemiologiya xulosasi"
+                : lan == "en"
+                ? "Sanitary and Epidemiological Conclusion"
+                : "Санитарно-Эпидемиологическое заключение"
+            }
             img="/certificates/certificate_2.jpg"
             file="/certificates/certificate_2.pdf"
+            index={2}
           />
           <CertificateItem
-            title="O'zbekiston Respublikasi Sog'liqni saqlash vazirligi ruxsatnomasi"
+            title={lan=="uz" ? "Yuridik shaxsning davlat ro'yxatidan o'tkazilganlik to'g'risidagi guvohnoma" : lan=="en" ? "Certificate of state registration of legal entity" : "Свидетельство о государственной регистрации юридического лица"}
             img="/certificates/certificate_3.jpg"
             file="/certificates/certificate_3.pdf"
+            index={3}
           />
           <CertificateItem
-            title="O'zbekiston Respublikasi Sog'liqni saqlash vazirligi ruxsatnomasi"
+            title={
+              lan == "uz" ?
+              "Muvofiqlik sertifikati" : lan =="en" ? "Certificate of conformity" : "Сертификат соответствия"
+            }
             img="/certificates/certificate_4.jpg"
             file="/certificates/certificate_4.pdf"
+            index={4}
           />
         </Grid2>
       </Box>

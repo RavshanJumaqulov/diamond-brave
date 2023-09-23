@@ -9,6 +9,7 @@ import BlogItemMD from "./BlogItemMD";
 import Context from "../Context";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Fade, Slide } from "react-awesome-reveal";
 export default function Blog() {
   const navigate = useNavigate();
   const { width, lan } = useContext(Context);
@@ -96,7 +97,9 @@ export default function Blog() {
         {width > 900 ? (
           <Grid2 container>
             <Grid2 xs={12} sm={6}>
-              <BlogFirstItem el={news["page_1"][0]} />
+              <Fade style={{ height: "100%" }}>
+                <BlogFirstItem el={news["page_1"][0]} />
+              </Fade>
             </Grid2>
             <Grid2 sm={12} md={6}>
               <Masonry

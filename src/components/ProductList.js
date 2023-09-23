@@ -1,9 +1,11 @@
 import { Box, Typography } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import Context from "../Context";
 
 export default function ProductList(props) {
   const navigate = useNavigate();
+  const { lan } = useContext(Context)
   return (
     <Box
       onClick={() => navigate(`/products/${props.id}`)}
@@ -11,7 +13,7 @@ export default function ProductList(props) {
         py: 0.5,
         px: 1,
         borderRadius: 3,
-        border: "1px solid transparent",
+        border: "1px solid rgba(0, 0, 0, 0.23)",
         display: "flex",
         flexDirection: "row",
         justifyContent: "flex-start",
@@ -62,6 +64,7 @@ export default function ProductList(props) {
             fontSize: 17,
             fontWeight: 500,
             fontFamily: "Nunito, sans-serif",
+            cursor: 'default'
           }}
         >
           {props.catalog}
@@ -82,7 +85,7 @@ export default function ProductList(props) {
               cursor: "default",
             }}
           >
-            Qadoq turi: &nbsp; &nbsp;
+            {lan=="uz" ? "Qadoq turi" : lan == "en" ? "Type of packaging" : "Тип упаковкиu"}: &nbsp; &nbsp;
           </Typography>
           <Typography
             sx={{

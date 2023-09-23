@@ -13,16 +13,69 @@ code {
     monospace;
 }
 
+@keyframes slick {
+  0% {
+    transform: scale(1)
+  }
+
+  100% {
+    transform: scale(1.1);
+  }
+}
+
 @keyframes animation1 {
   0% {
     transform: translate(0px, 0px) rotate(0);
   }
+
   100% {
     transform: translate(500px, 100vh) rotate(90deg);
-    
   }
-  /* 50% {
-    transform: translateY(100vh);
-    transform: translatex(100%);
-  } */
+}
+
+@keyframes logo {
+  0% {
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+  40%{
+    opacity: 1;
+  }
+  50%{
+    opacity: 0.5;
+  }
+  60%{
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  95% {
+    opacity: 0;
+  }
+
+  96% {
+    display: none;
+  }
+}
+
+@keyframes box {
+  0% {
+    display: flex;
+  }
+
+  95% {
+    display: flex;
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    display: none !important;
+  }
 }

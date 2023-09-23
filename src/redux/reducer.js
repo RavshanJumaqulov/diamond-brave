@@ -1,4 +1,6 @@
 import {
+  GET_BEST_NEWS,
+  GET_BEST_NEW_WITH_ID,
   GET_CATALOGS,
   GET_NEWS,
   GET_NEWS_LENGTH,
@@ -8,6 +10,7 @@ import {
   GET_PHOTO_GALLARY_LENGTH,
   GET_PHOTO_GALLARY_NEXT_PAGE,
   GET_PRODUCTS,
+  UPDATE_BEST_VIEWS,
   UPDATE_VIEWS,
 } from "./action";
 
@@ -15,6 +18,7 @@ const initialState = {
   products: [],
   catalogs: [],
   news: {},
+  bestNews: [],
   photoGallary: {},
   photoGallaryLength: 0,
   newsLength: 0,
@@ -86,17 +90,57 @@ const reducer = (state = initialState, action) => {
       data[action.payload.page] = [
         ...data[action.payload.page].filter(
           (el) => el.id !== action.payload.value.id
-        ), action.payload.value
-      ];  
+        ),
+        action.payload.value,
+      ];
       return {
         ...state,
         news: data,
       };
     }
 
+    case GET_BEST_NEWS: {
+      return {
+        ...state,
+        bestNews: action.payload,
+      };
+    }
+
+    case GET_BEST_NEW_WITH_ID: {
+      if (state.bestNews.length == 0) {
+        return {
+          ...state,
+          bestNews: [action.payload],
+        };
+      } else {
+        return {
+          ...state,
+          bestNews: [
+            ...state.bestNews.filter((el) => el.id !== action.payload.id),
+            action.payload,
+          ],
+        };
+      }
+    }
+
+    case UPDATE_BEST_VIEWS: {
+      return {
+        ...state,
+        bestNews: [
+          ...state.bestNews.filter((el) => el.id !== action.payload.id),
+          action.payload.data,
+        ],
+      };
+    }
+
     case UPDATE_VIEWS: {
-      const data = {...state.news}
-      data[action.payload.page] = [...data[action.payload.page].filter(el => el.id !== action.payload.id), action.payload.data]
+      const data = { ...state.news };
+      data[action.payload.page] = [
+        ...data[action.payload.page].filter(
+          (el) => el.id !== action.payload.id
+        ),
+        action.payload.data,
+      ];
       return {
         ...state,
         news: data,

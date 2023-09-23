@@ -4,7 +4,6 @@ import BestNewsContainer from "./BestNewsContainer";
 import Context from "../Context";
 
 export default function BestNews() {
-  
   const { lan } = useContext(Context);
 
   return (

@@ -205,7 +205,7 @@ export default function ProductsSlider() {
         </Fab>
       </Box>
       <Slider ref={arrowRef} {...settings} style={{ width: "100%" }}>
-        {products.map((el, index) => {
+        {products.slice(0, 9).map((el, index) => {
           return (
             <ProductSliderItem
               key={index}

@@ -164,10 +164,10 @@ export default function ProductWithId() {
                           }}
                         >
                           {lan == "uz"
-                            ? "Taqdim etiladi"
+                            ? "Tavsiya etiladi"
                             : lan == "en"
-                            ? "Presented"
-                            : "Представлено"}
+                            ? "Recommended"
+                            : "Рекомендуемые"}
                           :
                         </Typography>
                         <Typography
@@ -181,7 +181,7 @@ export default function ProductWithId() {
                           {lan == "uz"
                             ? "Retseptsiz"
                             : lan == "en"
-                            ? "Without a prescription"
+                            ? "Without a recipe"
                             : "Без рецепта"}
                         </Typography>
                       </Stack>

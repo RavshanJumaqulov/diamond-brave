@@ -7,6 +7,7 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
+import { useNavigate } from "react-router-dom";
 const FacebookIcon = createSvgIcon(
   <svg height="1em" viewBox="0 0 320 512">
     <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" />
@@ -16,14 +17,13 @@ const FacebookIcon = createSvgIcon(
 
 export default function Footer() {
   const { lan } = useContext(Context);
-
+  const navigate = useNavigate();
   return (
     <Box
       sx={{
+        py: 4,
         mt: 10,
         width: "100%",
-        py: 4,
-        // background: "#3bb77e",
         backdropFilter: "blur(20px)",
         boxShadow:
           "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 10px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
@@ -45,10 +45,14 @@ export default function Footer() {
                 fontSize: 16,
                 fontWeight: 400,
                 fontFamily: "Nunito, sans-serif",
+                textAlign: "justify",
               }}
             >
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad
-              voluptatibus deleniti officiis rem maiores,.
+              {lan == "uz"
+                ? "Diamond Brave World Farm kompaniyasi o'zining yaqin ta'rixi davomida insonlarning dardlariga davo bo'luvchi mahsulotlarni yaratish va yetkazib berish bilan shu'illanib kelmoqda!"
+                : lan == "en"
+                ? "Diamond Brave World Farm has been creating and delivering products that cure human ailments throughout its recent history!"
+                : "Diamond Brave World Farm на протяжении всей своей недавней истории создавала и поставляла продукты, которые лечат человеческие недуги!"}
             </Typography>
             <Box
               sx={{
@@ -113,62 +117,138 @@ export default function Footer() {
               }}
               color="text.primary"
             >
-              Havolalar
+              {lan == "uz" ? "Havolalar" : lan == "en" ? "Links" : "Ссылки"}
             </Typography>
             <Grid2 container sx={{ width: "100%" }}>
               <Grid2 xs={6} sx={{ width: "50%" }}>
-                {[
-                  "Bosh sahifa",
-                  "Mahsulotlar",
-                  "Yangiliklar",
-                  "Kataloglar",
-                  "Biz haqimizda",
-                ].map((el, index) => (
-                  <Typography
-                    key={index}
-                    sx={{
-                      mb: 1,
-                      fontSize: 16,
-                      fontFamily: "Nunito, sans-serif",
-                      fontWeight: 400,
-                      cursor: "default",
-                      transition: "0.3s all",
-                      "&:hover": {
-                        color: "#3bb77e",
-                      },
-                    }}
-                    color="text.secondary"
-                  >
-                    {el}
-                  </Typography>
-                ))}
+                <Typography
+                  onClick={() => navigate("/")}
+                  sx={{
+                    mb: 1,
+                    fontSize: 16,
+                    fontFamily: "Nunito, sans-serif",
+                    fontWeight: 400,
+                    cursor: "default",
+                    transition: "0.3s all",
+                    "&:hover": {
+                      color: "#3bb77e",
+                    },
+                  }}
+                  color="text.secondary"
+                >
+                  {lan == "uz"
+                    ? "Bosh sahifa"
+                    : lan == "en"
+                    ? "Home"
+                    : "Главный"}
+                </Typography>
+                <Typography
+                  onClick={() => navigate("/products")}
+                  sx={{
+                    mb: 1,
+                    fontSize: 16,
+                    fontFamily: "Nunito, sans-serif",
+                    fontWeight: 400,
+                    cursor: "default",
+                    transition: "0.3s all",
+                    "&:hover": {
+                      color: "#3bb77e",
+                    },
+                  }}
+                  color="text.secondary"
+                >
+                  {lan == "uz"
+                    ? "Mahsulotlar"
+                    : lan == "en"
+                    ? "Products"
+                    : "Продукты"}
+                </Typography>
+                <Typography
+                  onClick={() => navigate("/news")}
+                  sx={{
+                    mb: 1,
+                    fontSize: 16,
+                    fontFamily: "Nunito, sans-serif",
+                    fontWeight: 400,
+                    cursor: "default",
+                    transition: "0.3s all",
+                    "&:hover": {
+                      color: "#3bb77e",
+                    },
+                  }}
+                  color="text.secondary"
+                >
+                  {lan == "uz"
+                    ? "Yangiliklar"
+                    : lan == "en"
+                    ? "News"
+                    : "Новости"}
+                </Typography>
+                <Typography
+                  onClick={() => navigate("/about")}
+                  sx={{
+                    mb: 1,
+                    fontSize: 16,
+                    fontFamily: "Nunito, sans-serif",
+                    fontWeight: 400,
+                    cursor: "default",
+                    transition: "0.3s all",
+                    "&:hover": {
+                      color: "#3bb77e",
+                    },
+                  }}
+                  color="text.secondary"
+                >
+                  {lan == "uz"
+                    ? "Biz haqimizda"
+                    : lan == "en"
+                    ? "About us"
+                    : "О нас"}
+                </Typography>
               </Grid2>
               <Grid2 xs={6}>
-                {[
-                  "Bosh sahifa",
-                  "Mahsulotlar",
-                  "Yangiliklar",
-                  "Kataloglar",
-                  "Biz haqimizda",
-                ].map((el, index) => (
-                  <Typography
-                    key={index}
-                    sx={{
-                      mb: 1,
-                      fontSize: 16,
-                      fontFamily: "Nunito, sans-serif",
-                      fontWeight: 400,
-                      cursor: "default",
-                      transition: "0.3s all",
-                      "&:hover": {
-                        color: "#3bb77e",
-                      },
-                    }}
-                    color="text.secondary"
-                  >
-                    {el}
-                  </Typography>
-                ))}
+                <Typography
+                  onClick={() => navigate("/album")}
+                  sx={{
+                    mb: 1,
+                    fontSize: 16,
+                    fontFamily: "Nunito, sans-serif",
+                    fontWeight: 400,
+                    cursor: "default",
+                    transition: "0.3s all",
+                    "&:hover": {
+                      color: "#3bb77e",
+                    },
+                  }}
+                  color="text.secondary"
+                >
+                  {lan == "uz"
+                    ? "Fotogalareya"
+                    : lan == "en"
+                    ? "Photo gallery"
+                    : "Фотогалерея"}
+                </Typography>
+                <Typography
+                  onClick={() => navigate("/contact")}
+                  sx={{
+                    mb: 1,
+                    fontSize: 16,
+                    fontFamily: "Nunito, sans-serif",
+                    fontWeight: 400,
+                    cursor: "default",
+                    transition: "0.3s all",
+                    "&:hover": {
+                      color: "#3bb77e",
+                    },
+                  }}
+                  color="text.secondary"
+                >
+                  {lan == "uz"
+                    ? "Aloqa"
+                    : lan == "en"
+                    ? "Contact us"
+                    : "Контакт"}
+                </Typography>
               </Grid2>
             </Grid2>
           </Grid2>
@@ -182,7 +262,7 @@ export default function Footer() {
               }}
               color="text.primary"
             >
-              Aloqa
+              {lan == "uz" ? "Aloqa" : lan == "en" ? "Contact us" : "Контакт"}
             </Typography>
             <Box
               sx={{
@@ -204,7 +284,11 @@ export default function Footer() {
                   cursor: "default",
                 }}
               >
-                Samarqand sh. Mirzo Bedil ko'chasi 19-A uy
+                {lan == "uz"
+                  ? "Samarqand viloyati, Samarqand sh. Al Farobiy mahallasi, Ibn Xoldun ko'chasi, 1-uy"
+                  : lan == "en"
+                  ? "Samarkand region, Samarkand sh. Al Farabi quarter, Ibn Khaldoun street, 1 house"
+                  : "Самаркандская область, Самаркандское ш. квартал Аль-Фараби, улица Ибн Халдуна, дом 1"}
               </Typography>
             </Box>
             <Box
@@ -225,7 +309,7 @@ export default function Footer() {
               }}
             >
               <PhoneIcon sx={{ mr: 1, color: "#3bb77e" }} />
-              <a href="tel:+9989997565684">+998 99 756 56 84</a>
+              <a href="tel:+998973951945">+998 97 395 19 45</a>
             </Box>
             <Box
               sx={{
@@ -244,8 +328,8 @@ export default function Footer() {
               }}
             >
               <EmailIcon sx={{ mr: 1, color: "#3bb77e" }} />
-              <a href="mailto:@contact@diamondbrave.uz">
-                contact@diamondbrave.uz
+              <a href="mailto:shoxrux@mail.com">
+                shoxrux@mail.com
               </a>
             </Box>
           </Grid2>
@@ -259,7 +343,11 @@ export default function Footer() {
               }}
               color="text.primary"
             >
-              Yo'nalish
+              {lan == "uz"
+                ? "Yo'nalish"
+                : lan == "en"
+                ? "Location"
+                : "Направление"}
             </Typography>
             <Box style={{ position: "relative", overflow: "hidden" }}>
               <a

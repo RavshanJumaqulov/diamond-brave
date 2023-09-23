@@ -9,7 +9,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import moment from "moment";
 
 export default function BestNewsSlider() {
-  const news = useSelector((state) => state.news);
+  const bestNews = useSelector(state => state.bestNews)
   const { width, height, lan } = useContext(Context);
   const [img, setImg] = useState("");
   const arrowRef = useRef(null);
@@ -191,7 +191,7 @@ export default function BestNewsSlider() {
         </Fab>
       </Box>
       <Slider ref={arrowRef} {...settings} style={{ width: "100%" }}>
-        {news.map((el, index) => {
+        {bestNews.map((el, index) => {
           return (
             <BestNewsSliderItem
               width={width}

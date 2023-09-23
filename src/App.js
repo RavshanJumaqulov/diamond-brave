@@ -1,5 +1,11 @@
-import { Box, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
-import React, { useRef, useState } from "react";
+import {
+  Box,
+  CssBaseline,
+  ThemeProvider,
+  Typography,
+  createTheme,
+} from "@mui/material";
+import React, { useEffect, useRef, useState } from "react";
 import Header from "./components/Header";
 import { BrowserRouter } from "react-router-dom";
 import AllRoutes from "./AllRoutes";
@@ -21,6 +27,7 @@ function App() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [width, setWidth] = useState(window.innerWidth);
   const [height, setHeight] = useState(window.innerHeight);
+  const [logoAnime, setLogoAnime] = useState(true);
   const [lan, setLan] = useState("uz");
   const boxRef = useRef(null);
   const [productsLoading, setProductsLoading] = useState({
@@ -38,6 +45,11 @@ function App() {
     error: false,
     message: "",
   });
+  const [bestNewsLoading, setBestNewsLoading] = useState({
+    status: false,
+    error: false,
+    message: "",
+  });
   const [photoGalaryLoading, setPhotoGalaryLoading] = useState({
     status: false,
     error: false,
@@ -49,8 +61,13 @@ function App() {
     setHeight(window.innerHeight);
   });
 
-
-
+  useEffect(() => {
+    if (logoAnime) {
+      setTimeout(() => {
+        setLogoAnime(false);
+      }, 3000);
+    }
+  }, []);
   return (
     <Context.Provider
       value={{
@@ -66,16 +83,53 @@ function App() {
         setCatalogsLoading,
         newsLoading,
         setNewsLoading,
+        bestNewsLoading,
+        setBestNewsLoading,
         photoGalaryLoading,
         setPhotoGalaryLoading,
       }}
     >
       <Provider store={store}>
         <ThemeProvider theme={theme()}>
-          <Box ref={boxRef} sx={{ position: "relative", background: {xs: 'url(/background.jpg)', md: 'none'} }}>
+          <Box
+            ref={boxRef}
+            sx={{
+              position: "relative",
+              background: { xs: "url(/background.jpg)", md: "none" },
+            }}
+          >
             {width > 900 ? <Background /> : ""}
             <BrowserRouter>
               <CssBaseline />
+              {logoAnime && (
+                <Box
+                  sx={{
+                    width: "100%",
+                    height: "100vh",
+                    top: 0,
+                    left: 0,
+                    position: "absolute",
+                    zIndex: 100000,
+                    background: "#fff",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    transition: "0.3s all",
+                    animation: "box 3s linear forwards",
+                  }}
+                >
+                  <Box
+                    component="img"
+                    src="/img/logo.png"
+                    sx={{
+                      width: { xs: "90%", xs: "80%", md: 400 },
+                      opacity: 0,
+                      transition: "0.3s all",
+                      animation: "logo 3s linear",
+                    }}
+                  />
+                </Box>
+              )}
               <Header />
               <AllRoutes />
               <Footer />

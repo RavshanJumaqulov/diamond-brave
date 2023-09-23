@@ -180,7 +180,7 @@ export default function BestNewsSliderItem({
           </Box>
         </Box>
         <Button
-        onClick={() => navigate(`/news/${id}`)}
+        onClick={() => navigate(`/best_news/${id}`)}
           variant={"contained"}
           disableElevation
           sx={{

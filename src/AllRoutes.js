@@ -6,8 +6,9 @@ import News from "./pages/News";
 import NewsId from "./pages/NewsId";
 import Products from "./pages/Products";
 import { useDispatch } from "react-redux";
-import { getCatalogs, getNews, getPhotoGalary, getProducts } from "./api";
+import { getBestNews, getCatalogs, getNews, getPhotoGalary, getProducts } from "./api";
 import {
+  GET_BEST_NEWS,
   GET_CATALOGS,
   GET_NEWS,
   GET_NEWS_LENGTH,
@@ -18,12 +19,16 @@ import {
 import Context from "./Context";
 import About from "./pages/About";
 import Album from "./pages/Album";
+import PageNotFound from "./pages/PageNotFound";
+import BestNew from "./pages/BestNew";
+import Contact from "./pages/Contact";
 
 export default function AllRoutes() {
   const dispatch = useDispatch();
   const {
     setProductsLoading,
     setNewsLoading,
+    setBestNewsLoading,
     setCatalogsLoading,
     setPhotoGalaryLoading,
     setMobileOpen,
@@ -121,6 +126,38 @@ export default function AllRoutes() {
 
   useEffect(() => {
     const res = async () => {
+      const data = await getBestNews();
+      if (Object.keys(data).includes("code")) {
+        setBestNewsLoading({
+          status: true,
+          error: true,
+          message: data.message,
+        });
+      } else {
+        if (data.data.length == 0) {
+          setBestNewsLoading({
+            status: true,
+            error: true,
+            message: "Yangiliklar mavjud emas",
+          });
+        } else if (data.data.length > 0) {
+          setBestNewsLoading({
+            status: true,
+            error: false,
+            message: "",
+          });
+          dispatch({
+            type: GET_BEST_NEWS,
+            payload: data.data,
+          });
+        }
+      }
+    };
+    res();
+  }, []);
+
+  useEffect(() => {
+    const res = async () => {
       const data = await getPhotoGalary(1);
       if (Object.keys(data).includes("code")) {
         setPhotoGalaryLoading({
@@ -153,6 +190,7 @@ export default function AllRoutes() {
   }, []);
   return (
     <Routes onClick={() => setMobileOpen(false)}>
+      <Route path="*" element={<PageNotFound />} />
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/album" element={<Album />} />
@@ -160,8 +198,11 @@ export default function AllRoutes() {
       <Route path="/products" element={<Products />} />
       <Route path="/products/:product" element={<Product />} />
       <Route path="/news" element={<News />} />
+      <Route path="/best_news" element={<PageNotFound />} />
+      <Route path="/best_news/:new" element={<BestNew />} />
       <Route path="/news/:page" element={<News />} />
       <Route path="/news/:page/:new" element={<NewsId />} />
+      <Route path="/contact" element={<Contact />} />
     </Routes>
   );
 }

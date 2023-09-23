@@ -143,11 +143,13 @@ export default function About() {
             )}
             <Box
               component="img"
-              src="/img/about_page_2.png"
+              src="/img/about_page_1.jpg"
               sx={{
                 width: "50%",
-                height: 400,
                 objectFit: "contain",
+                borderRadius: 3,
+                boxShadow:
+                  "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 10px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
               }}
             />
 
@@ -155,11 +157,13 @@ export default function About() {
               <>
                 <Box
                   component="img"
-                  src="/img/about_page_1.png"
+                  src="/img/about_page_2.jpg"
                   sx={{
                     width: "50%",
-                    height: 400,
                     objectFit: "contain",
+                    borderRadius: 3,
+                    boxShadow:
+                      "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 10px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
                   }}
                 />
                 <Box
@@ -348,18 +352,38 @@ export default function About() {
           </Grid2>
           <Grid2 xs={12} md={6} sx={{ alignSelf: "center" }}>
             <Slider {...settings} style={{ maxHeight: 400, minHeight: 400 }}>
-              <Box sx={{ width: "50%" }}>
+              <Box
+                sx={{
+                  width: "50%",
+                  boxShadow:
+                    "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 10px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
+                }}
+              >
                 <Box
                   component="img"
-                  src="/maqsad.svg"
-                  sx={{ width: "100%", maxHeight: 400, objectFit: "contain" }}
+                  src="/bizning_vaz.jpg"
+                  sx={{
+                    width: "100%",
+                    borderRadius: 3,
+                    objectFit: "contain",
+                  }}
                 />
               </Box>
-              <Box sx={{ width: "50%" }}>
+              <Box
+                sx={{
+                  width: "50%",
+                  boxShadow:
+                    "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 10px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
+                }}
+              >
                 <Box
                   component="img"
-                  src="/vazifa.svg"
-                  sx={{ width: "100%", maxHeight: 400, objectFit: "contain" }}
+                  src="/bizning_maq.jpg"
+                  sx={{
+                    width: "100%",
+                    borderRadius: 3,
+                    objectFit: "contain",
+                  }}
                 />
               </Box>
             </Slider>
@@ -373,8 +397,9 @@ export default function About() {
           <Grid2 xs={12} md={6} sx={{ alignSelf: "center" }}>
             <Box
               component="img"
-              src="/company.svg"
-              sx={{ width: "100%", maxHeight: 400, objectFit: "contain" }}
+              src="/company.jpg"
+              sx={{ width: "100%", borderRadius: 3, objectFit: "contain", boxShadow:
+              "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 10px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)", }}
             />
           </Grid2>
           <Grid2 xs={12} md={6} sx={{ alignSelf: "center" }}>

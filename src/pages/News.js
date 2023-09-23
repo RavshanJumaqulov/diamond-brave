@@ -15,8 +15,8 @@ import { GET_NEWS_NEXT_PAGE } from "../redux/action";
 export default function News() {
   const navigate = useNavigate();
   const params = useParams();
-  const dispatch = useDispatch()
-  const { newsLoading, setNewsLoading } = useContext(Context);
+  const dispatch = useDispatch();
+  const { newsLoading, setNewsLoading, bestNewsLoading } = useContext(Context);
   const news = useSelector((state) => state.news);
   const newsLength = useSelector((state) => state.newsLength);
   const [page, setPage] = React.useState(1);
@@ -50,12 +50,11 @@ export default function News() {
       }
     }
   }, [params.page]);
-console.log(news)
   return (
     <Box sx={{ width: "100%" }}>
       <Box component="img" src="/top.jpg" sx={{ width: "100%" }} />
       <Container maxWidth="xl">
-        <Box sx={{ mt: 10, }}>
+        <Box sx={{ mt: 10 }}>
           {newsLoading.status ? (
             newsLoading.error ? (
               <Typography
@@ -69,16 +68,16 @@ console.log(news)
               >
                 {newsLoading.message}
               </Typography>
+            ) : Object.keys(params).length == 0 || params.page == "page_1" ? (
+              <TopNews items={news["page_1"].slice(0, 5)} />
             ) : (
-              Object.keys(params).length == 0 || params.page == "page_1" ?
-              <TopNews items={news["page_1"].slice(0, 5)} /> : ""
-            
+              ""
             )
           ) : (
             <TopNewsLoading />
           )}
-          {newsLoading.status ? (
-            newsLoading.error ? (
+          {bestNewsLoading.status ? (
+            bestNewsLoading.error ? (
               <Typography
                 sx={{
                   fontSize: 14,
@@ -88,11 +87,10 @@ console.log(news)
                 }}
                 color="error.main"
               >
-                {newsLoading.message}
+                {bestNewsLoading.message}
               </Typography>
             ) : (
-              ""
-              // <BestNews />
+              (params.page == "page_1" || Object.keys(params).length == 0) && <BestNews />
             )
           ) : (
             <BestNewsLoading />
@@ -124,7 +122,7 @@ console.log(news)
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "center",
-              mt: 5
+              mt: 5,
             }}
           >
             <Pagination

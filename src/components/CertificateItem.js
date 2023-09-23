@@ -1,18 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import CloseIcon from "@mui/icons-material/Close";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
+import { Slide } from "react-awesome-reveal";
+import Context from "../Context";
 
 export default function CertificateItem(props) {
   const [show, setShow] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-  window.addEventListener("resize", () => {
-    setWindowHeight(window.innerHeight);
-    setWindowWidth(window.innerWidth);
-  });
+  const { width, height } = useContext(Context);
 
   return (
     <Grid2 xs={12} sm={6} md={3} sx={{ p: 1 }}>
@@ -92,16 +89,8 @@ export default function CertificateItem(props) {
           sx={{
             boxShadow:
               "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 10px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
-            width: show
-              ? windowHeight / windowWidth < 16 / 9
-                ? "auto"
-                : "100%"
-              : "100%",
-            height: show
-              ? windowHeight / windowWidth < 16 / 9
-                ? "95vh"
-                : "auto"
-              : "auto",
+            width: show ? (height / width < 16 / 9 ? "auto" : "100%") : "100%",
+            height: show ? (height / width < 16 / 9 ? "95vh" : "auto") : "auto",
             transition: "0.3s all !important",
           }}
         />
